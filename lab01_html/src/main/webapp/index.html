@@ -1,19 +1,30 @@
 <!--
 HTML(Hyper-Text Markup Language):
-  - HTML 요소: 태그, 속성, 컨텐트
+  - HTML 요소: 태그(tag), 속성(attribute), 컨텐트
   - HTML 문법: <태그 속성1="값1" 속성2="값2" ...>컨텐트</태그>
   - HTML 태그 이름은 대소문자를 구분하지 않지만, 모두 소문자로 쓰는 것을 권장.
-
+  - HTML 요소(element)
+    o. block 요소: 자동으로 줄바꿈되는 요소. 다른 요소의 아래쪽으로 배치.
+       (예) h1, h2, ..., h6, div, form, ul, ...
+    o. inline 요소: 자동으로 줄바꿈되지 않는 요소. 다른 요소의 오른쪽에 배치.
+       (예) a, span, img, ...
 -->
 
-<!DOCTYPE html> <!-- DTD(Document Type Definition): 문서 타입 정의 -->
+<!DOCTYPE html> <!-- DTD(Document Type Declaration): 문서 타입 선언 -->
 <html>
-<head>
-<meta charset="UTF-8" />
-<title>Insert title here</title>
-</head>
-<body>
-    <h1>안녕하세요!</h1>
-    <h2>Hello!</h2>
-</body>
+    <head> <!-- 웹 페이지의 설정: 인코딩, CSS, 자바스크립트 포함 -->
+        <meta charset="UTF-8" /> <!-- HTML 파일 인코딩 -->
+        <title>HTML</title> <!-- 웹 브라우저 탭 타이틀 -->
+    </head>
+    <body> <!-- 화면에 보여지는 부분 -->
+        <!-- heading 태그: h1 ~ h6. 문서 제목. -->
+        <h1>안녕하세요!</h1>
+        <h2>Hello!</h2>
+        
+        <!-- anchor 태그: 링크 -->
+        <a href="https://www.naver.com">네이버</a>
+        <br /> <!-- line break: 줄바꿈 -->
+        <a href="https://www.daum.net">다음</a>
+        
+    </body>
 </html>
