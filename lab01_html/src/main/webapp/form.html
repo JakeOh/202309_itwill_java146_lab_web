@@ -37,5 +37,38 @@
             <input type="submit" value="검색" />
         </form>
         
+        <h2>POST 방식 전송</h2>
+        <form action="result.html" method="post">
+            <input type="text" name="userid" placeholder="아이디" />
+            <input type="password" name="password" placeholder="비밀번호" />
+            <input type="submit" value="로그인" />
+        </form>
+        
+        <h2>여러가지 입력 타입</h2>
+        <form action="result.html"> <!-- form 태그의 method 속성을 생략하면 GET 방식 -->
+            <input type="text" name="id" placeholder="아이디" />
+            <br />
+            <input type="password" name="pwd" placeholder="비밀번호" />
+            <br />
+            <input type="email" name="email" placeholder="abc@test.com" />
+            <br />
+            <input type="number" name="age" placeholder="나이" />
+            <br />
+            <input type="date" name="birthday" />
+            <br />
+            <input type="datetime-local" name="createdTime" />
+            <br />
+            
+            <!-- 라디오 버튼 -->
+            <input type="radio" name="accept" value="T" id="radio1" />
+            <label for="radio1">수신 동의</label>
+            <input type="radio" name="accept" value="F" id="radio2" />
+            <label for="radio2">수신 거부</label>
+            <br/>
+            
+            <input type="submit" value="저장" />
+            <input type="reset" value="취소" />
+        </form>
+        
     </body>
 </html>
