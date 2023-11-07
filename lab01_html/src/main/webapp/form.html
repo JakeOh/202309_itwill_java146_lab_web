@@ -46,7 +46,7 @@
         
         <h2>여러가지 입력 타입</h2>
         <form action="result.html"> <!-- form 태그의 method 속성을 생략하면 GET 방식 -->
-            <input type="text" name="id" placeholder="아이디" />
+            <input type="text" name="id" placeholder="아이디" required />
             <br />
             <input type="password" name="pwd" placeholder="비밀번호" />
             <br />
@@ -62,12 +62,35 @@
             <!-- 라디오 버튼 -->
             <input type="radio" name="accept" value="T" id="radio1" />
             <label for="radio1">수신 동의</label>
-            <input type="radio" name="accept" value="F" id="radio2" />
+            <input type="radio" name="accept" value="F" id="radio2" checked />
             <label for="radio2">수신 거부</label>
             <br/>
             
-            <input type="submit" value="저장" />
-            <input type="reset" value="취소" />
+            <!-- 체크박스 -->
+            <input type="checkbox" name="hobby" value="1" id="cb1" />
+            <label for="cb1">영화</label>
+            <input type="checkbox" name="hobby" value="2" id="cb2" />
+            <label for="cb2">코딩</label>
+            <input type="checkbox" name="hobby" value="3" id="cb3" />
+            <label for="cb3">잠</label>
+            
+            <br />
+            
+            <!-- 콤보박스, 목록 상자(drop-down list) -->
+            <select name="domain">
+                <option value="naver.com">네이버</option>
+                <option value="kakao.com">카카오</option>
+                <option value="google.com">구글</option>
+            </select>
+            
+            <br />
+            
+            <!-- 여러 줄 입력 상자 -->
+            <textarea rows="5" cols="40" name="memo"></textarea>
+            
+            <br />
+            <input type="submit" value="저장" /> <!-- 서버로 입력 데이터드를 전송 -->
+            <input type="reset" value="취소" /> <!-- 입력 필드의 입력값들을 지움 -->
         </form>
         
     </body>
