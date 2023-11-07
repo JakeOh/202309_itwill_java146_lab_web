@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS selector</title>
+        <style>
+            /* 모든 section 요소들에 테두리선과 마진을 설정 */
+            section {
+                border: 2px solid darkgray;
+                margin: 16px;
+            }
+            
+            /*
+              자식(child), 자손(descendent) 요소를 찾는 선택자:
+              1. 자식 요소: HTML 문서 구조에서 "바로 아래"에 있는 요소들. 
+                 parent > child
+              2. 자손 요소: HTML 문서 구조에서 아래에 있는 모든 요소들.
+                 ancestor(조상) descendent(자손)
+            */
+            
+            /* section 태그 중 id 값이 "sec-1"인 요소의 자식 요소 p 태그를 찾음 */
+            section#sec-1 > p {
+                color: red;
+            }
+            
+            /* section 태그 중 id 값이 "sec-2"인 요소의 자손 요소 p 태그를 찾음 */
+            section#sec-2 p {
+                color: blue;
+            }
+            
+            /* selector들을 쉼표로 구분 -> 공통된 스타일을 적용할 요소들을 나열. */
+            section#sec-3, p {
+                border: 1px solid darkgreen;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>CSS Selector 2</h1>
+        
+        <section id="sec-1">
+            <p>Section 1 &gt; Paragraph 1</p>
+            <p>Section 1 &gt; Paragraph 2</p>
+            <article>
+                <p>Section 1 &gt; Article &gt; Paragraph</p>
+            </article>
+        </section>
+        
+        <section id="sec-2">
+            <p>Section 2 &gt; Paragraph 1</p>
+            <p>Section 2 &gt; Paragraph 2</p>
+            <article>
+                <p>Section 2 &gt; Article &gt; Paragraph</p>
+            </article>
+        </section>
+        
+        <section id="sec-3">
+            <p>Section 3 &gt; Paragraph 1</p>
+            <p>Section 3 &gt; Paragraph 2</p>
+            <article>
+                <p>Section 3 &gt; Article &gt; Paragraph</p>
+            </article>
+        </section>
+    </body>
+</html>
