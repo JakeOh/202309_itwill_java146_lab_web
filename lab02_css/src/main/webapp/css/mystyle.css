@@ -1,0 +1,11 @@
+@charset "UTF-8"; /* CSS 파일의 인코딩 설정 */
+
+body {
+    background-color: aqua; /* 바탕색 */
+}
+
+div {
+    border: 2px solid white; /* 테두리선 두께(width), 종류(style), 색깔(color) */
+    margin: 8px; /* 테두리선(border) 바깥 여백 */
+    padding: 16px; /* 테두리선 안쪽 여백 */
+}
