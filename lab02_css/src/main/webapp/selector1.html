@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS Selector</title>
+        
+        <style>
+            /* 1. tag selector */
+            div {
+                border: 1px solid black;
+                margin: 16px;
+                padding: 8px;
+                background-color: slateblue;
+                color: black; /* 글자색 */
+            }
+            
+            /* 2. class selector */
+            .color-white {
+                color: white;
+            }
+            
+            /* 3. id selector */
+            #id-1 {
+                color: gray;
+            }
+            
+            /* tag.class#id */
+            p.color-white { /* p 태그 요소들 중에서 class 속성 값이 color-white인 요소들 */
+                background-color: darkgray;
+                color: white;
+            }
+            
+            p#id-1 {
+                color: red;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h1>CSS 선택자(selector)</h1>
+        <h2>스타일을 적용할 HTML 요소를 선택하는 방법</h2>
+        <!--
+          CSS 기본 문법: selector { property: value; ... }
+          selector: HTML 요소를 선택하는 방법.
+          1. 태그(tag selector): body, div, span, table, ...
+          2. 클래스 속성(class selector): .class-name
+             - HTML 태그 안에서 class 속성(attribute)에 설정한 이름(값).
+             - 여러 개의 요소를 함께 선택할 때 주로 사용.
+          3. 아이디 속성(id selector): #id
+             - HTML 태그 안에서 id 속성에 설정한 이름(값).
+             - HTML 파일 안에서 유일한 요소를 선택할 때 주로 사용.
+          4. *: 모든 HTML 요소
+          5. pseudo selector: 마우스 위치, 이벤트, ...
+          6. 자식 요소(child element)
+        -->
+        <div class="color-white">Division 1</div>
+        <div class="color-white">Division 2</div>
+        <div id="id-1">Division 3</div>
+        
+        <p class="color-white">Paragraph 1</p>
+        <p class="color-white">Paragraph 2</p>
+        <p id="id-1">Paragraph 3</p>
+    </body>
+</html>
