@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Insert title here</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+            rel="stylesheet" 
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+            crossorigin="anonymous">
+        
+        <style>
+            #box1, #box2 {
+                border: 2px solid gray;
+                margin: 16px;
+                padding: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>자바스크립트 소개</h1>
+        
+        <h2>HTML 요소의 컨텐트 변경</h2>
+        <div id="box1" onclick="changeContent()">
+            여기는 box 1 입니다.
+        </div>
+        
+        <h2>HTML 요소의 속성(attribute) 변경</h2>
+        <div id="box2" onclick="changeAttrs()">
+            여기는 box 2 입니다.
+        </div>
+        
+        <!-- 자바스크립트 작성 -->
+        <script>
+            const content1 = '여기는 box 1 입니다.';
+            const content2 = '안녕하세요, <strong>자바스크립트</strong>!';
+            let toggle = true;
+            
+            function changeContent() {
+                const box1 = document.getElementById('box1');
+                if (toggle) {
+                    box1.innerHTML = content2;
+                    toggle = false;
+                } else {
+                    box1.innerHTML = content1;
+                    toggle = true;
+                }
+            }
+            
+            function changeAttrs() {
+                const box2 = document.getElementById('box2');
+                
+                box2.style.backgroundColor = 'crimson';
+                box2.style.color = 'white';
+                box2.style.fontSize = '200%';
+            }
+        </script>
+        
+        <!-- 외부 자바스크립트 파일 포함(링크) -->
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+    	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+    	    crossorigin="anonymous"></script>
+    </body>
+</html>
