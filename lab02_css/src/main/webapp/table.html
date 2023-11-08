@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS Table</title>
+        <style>
+            table#tbl-member, table#tbl-member th, table#tbl-member td {
+                border: 1px solid darkgray;
+                border-collapse: collapse;
+            }
+            
+            table#tbl-blog {
+                width: 100%; /* 브라우저에서 사용 가능한 가로 길이의 100%를 사용 */
+            }
+            
+            table#tbl-blog, table#tbl-blog th, table#tbl-blog td {
+                border-bottom: 1px solid darkgray;
+                border-collapse: collapse;
+            }
+            
+            table#tbl-blog th {
+                background-color: darkseagreen;
+                color: white;
+                text-align: left;
+            }
+            
+            table#tbl-blog > tbody > tr:nth-child(even) {
+                background-color: #efefef;
+            }
+            
+            table#tbl-blog > tbody > tr:hover {
+                background-color: darkgray;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Table Style</h1>
+        
+        <table id="tbl-member">
+            <caption>회원 정보</caption>
+            <thead>
+                <tr>
+                    <th>아이디</th>
+                    <th>닉네임</th>
+                    <th>이메일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>admin</td>
+                    <td>관리자</td>
+                    <td>admin@itwill.com</td>
+                </tr>
+                <tr>
+                    <td>guest</td>
+                    <td>손님</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>test</td>
+                    <td>테스트</td>
+                    <td>test@naver.com</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <hr/>
+        
+        <table id="tbl-blog">
+            <caption>블로그</caption>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성시간</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>안녕하세요</td>
+                    <td>관리자</td>
+                    <td>2023-11-08</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>네...</td>
+                    <td>손님</td>
+                    <td>2023-11-08</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>곧 점심시간이네요</td>
+                    <td>테스트</td>
+                    <td>2023-11-08</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>공지사항</td>
+                    <td>관리자</td>
+                    <td>2023-11-08</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </body>
+</html>
