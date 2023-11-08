@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>pseudo selector</title>
+        <style>
+            /*
+              pseudo selector(가상 선택자): 이벤트 또는 특정 조건을 만족하는 요소를 찾을 때 사용.
+              - 문법: selector:peseudo-selector
+              - pseudo selector 종류:
+                o. visited: 방문했었던 사이트.
+                o. link: 방문하지 않았던 사이트.
+                o. hover: 마우스가 요소 위에 있을 때.
+                o. active: 마우스 버튼을 누르고 있을 때.
+                o. nth-child(arg): 조건을 만족하는 자식 요소를 찾을 때.
+                o. ...
+            */
+            a#link-naver {
+                color: black;
+                text-decoration: none; /* 링크 텍스트의 밑줄을 제거 */
+            }
+            
+            /* a 태그 중 아이디가 link-naver인 요소 위에 마우스가 위치했을 때 */
+            a#link-naver:hover {
+                color: blue;
+                font-weight: bold;
+            }
+            
+            /* a 태그 중 아이디가 link-naver인 요소를 마우스로 클릭하고 있을 때 */
+            a#link-naver:active {
+                color: red;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h1>Pseudo Selector</h1>
+        <h2>Link Style</h2>
+        
+        <a id="link-naver" href="https://www.naver.com">네이버</a>
+        
+        <br/>
+        
+        <a id="link-daum" href="https://www.daum.net">다음</a>
+        
+    </body>
+</html>
