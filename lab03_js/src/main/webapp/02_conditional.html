@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>JS</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+            rel="stylesheet" 
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+            crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>JavaScript 조건문</h1>
+        
+        <script>
+            // inline comment
+            /* block comment */
+            
+            // 변수 선언: 자바스크립트는 변수의 타입을 명시하지 않음.
+            // (1) 상수 선언: const 변수이름 = 값;
+            // (2) 값을 바꿀 수 있는 변수 선언: let 변수이름 = 값;
+            // (3) 전역 변수 선언: var 변수이름 = 값;
+            const x = 1;
+            console.log('x =', x);
+            // x = 2; //-> 실행 중에 에러 발생: 상수 변수에는 새로운 값을 재할당(저장)할 수 없음.
+            
+            let y = 100;
+            console.log('y =', y);
+            y = 'hello'; // let으로 선언한 변수는 값을 재할당할 수 있음.
+            // 자바스크립트 문자열은 작은따옴표, 큰따옴표를 모두 사용할 수 있음.
+            console.log('y =', y);
+            
+            // 컴파일 언어: 코드를 컴파일해서 실행가능 한 바이너리를 만들고 실행하는 언어.
+            // (예) Java: *.java --- compile ---> *.class (바이너리) --- 실행 ---> 결과
+            // (예) C, C++, C#, Kotlin, Swift, ...
+            // 인터프리터 언어: 코드를 한 줄씩 해석해서 실행하는 언어.
+            // (예) JavaScript, Python, ...
+            
+            // 정적 타이핑(static typing) 언어:
+            //   - 변수를 선언할 때 변수의 타입이 결정되고, 타입을 바꿀 수 없는 언어.
+            //   - Java, C, C++, C#, ...
+            // 동적 타이핑(dynamic typing) 언어:
+            //   - 변수를 선언할 때 변수 타입이 결정되지 않고, 값을 할당할 때 타입이 동적으로 결정되는 언어.
+            //   - JavaScript, Python, ...
+            
+        </script>
+        
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+    	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+    	    crossorigin="anonymous"></script>
+    </body>
+</html>
