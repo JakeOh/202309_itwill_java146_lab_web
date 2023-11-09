@@ -12,6 +12,13 @@
     <body>
         <h1>JavaScript 조건문</h1>
         
+        <input type="number" id="numInput" placeholder="정수 입력" />
+        <button onclick="checkEven()">짝수? 홀수?</button>
+        <button onclick="checkPositive()">양수? 음수?</button>
+        <button onclick="checkEven2()">삼항연산자</button>
+        
+        <div id="result">결과</div>
+        
         <script>
             // inline comment
             /* block comment */
@@ -43,6 +50,58 @@
             //   - 변수를 선언할 때 변수 타입이 결정되지 않고, 값을 할당할 때 타입이 동적으로 결정되는 언어.
             //   - JavaScript, Python, ...
             
+            // input#numInput 요소를 찾음:
+            const numInput = document.getElementById('numInput');
+            
+            // div#result 요소를 찾음:
+            const result = document.getElementById('result');
+            
+            function checkEven() {
+                // input에 입력된 값을 읽고, 짝수/홀수 여부를 div에 출력.
+                const number = numInput.value; // input 요소에 입력된 값.
+                console.log('number =', number);
+                
+                if (number % 2 === 0) {
+                    // input에 입력된 문자열(value)을 숫자 타입으로 자동 변환 후 나머지 계산을 수행.
+                    result.innerHTML = '짝수';
+                } else {
+                    result.innerHTML = '홀수';
+                }
+            }
+            
+            function checkPositive() {
+                const number = numInput.value;
+                if (number > 0) {
+                    result.innerHTML = '양수';
+                } else if (number < 0) {
+                    result.innerHTML = '음수';
+                } else {
+                    result.innerHTML = '영';
+                }
+            }
+            
+            function checkEven2() {
+                const number = numInput.value;
+                // result.innerHTML = (number % 2 === 0) ? '짝수' : '홀수';
+                result.innerHTML = (number % 2) ? '홀수' : '짝수';
+            }
+            
+            /*
+              비교 연산자: ==, ===, !=, !==, >, >=, <, <=
+              o. ==, !=: 피연산자들의 타입을 자동으로 변환해서 값이 같은 지 다른 지를 비교.
+                 (예) '1' == 1 -> true
+              o. ===, !==: 피연산자들의 타입을 변환하지 않고, 타입과 값이 모두 같은 지 다른 지를 비교.
+                 (예) '1' === 1 -> false
+              
+              - 자바는 조건식의 결과는 반드시 true/false이어야만 함.
+                (예) if (x % 2 == 0)
+              - 자바스크립트는 falsy value(false로 취급하는 값)이 있음.
+                (1) 숫자(number) 0
+                (2) 문자열(string) ''(빈 문자열)
+                (3) 빈 배열([])
+                (4) null 객체
+                (5) undefined(값이 할당되지 않은 변수)
+            */
         </script>
         
     	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
