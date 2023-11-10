@@ -68,3 +68,35 @@ const minus = function (x, y) {
 };
 
 console.log(minus(1, 2));
+
+// 함수를 아규먼트로 갖는 함수:
+function calculate(x, y, op) {
+    return op(x, y);
+}
+
+console.log('plus =', calculate(1, 2, plus));
+console.log('minus =', calculate(1, 2, minus));
+console.log('didive =', calculate(1, 2, function (x, y) {
+    return x / y;
+}));
+
+// 콜백(callback): (나중에 호출하기 위해서) 다른 함수의 아규먼트로 전달하는 함수.
+// 이벤트 리스너(listener), 핸들러(handler), 콜백.
+
+function increase(n) {
+    // 지역(내부) 함수: 함수 내부에서 선언하는 함수.
+    function addN(x) {
+        return x + n;
+    }
+    
+    return addN; // 함수 객체를 리턴.
+}
+
+const increaseTwo = increase(2);
+console.log(increaseTwo);
+console.log('increaseTwo =', increaseTwo(10));
+
+const increaseFive = increase(5);
+console.log('increaseFive =', increaseFive(10));
+
+console.log(increase(10)(10));
