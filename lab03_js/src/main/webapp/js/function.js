@@ -100,3 +100,13 @@ const increaseFive = increase(5);
 console.log('increaseFive =', increaseFive(10));
 
 console.log(increase(10)(10));
+
+// 화살표 함수(arrow function)
+// (파라미터, ...) => { 실행코드; }
+// (파라미터, ...) => 리턴값
+
+const multiply = (x, y) => { return x * y; };
+const multiply2 = (x, y) => x * y;
+
+console.log(multiply(2, 3));
+console.log(multiply2(3, 4));
