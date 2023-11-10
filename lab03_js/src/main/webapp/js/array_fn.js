@@ -17,9 +17,32 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(numbers);
     
     // numbers에서 홀수들만 찾아서 저장하는 배열을 만들고, 콘솔 로그 출력.
+    let odds = []; // 홀수들을 저장하기 위한 빈 배열.
+    for (let x of numbers) {
+        if (x % 2) { // x % 2 === 1
+            odds = odds.concat(x);
+        }
+    }
+    console.log(odds);
     
+    odds = numbers.filter(function (x) {
+        return x % 2;
+    });
+    //odds = numbers.filter((x) => x % 2);
+    console.log(odds);
     
     // numbers 원소들의 제곱을 저장하는 배열을 만들고, 콘솔 로그 출력.
+    let squares = []; // 제곱을 저장할 빈 배열.
+    for (let x of numbers) {
+        squares = squares.concat(x ** 2); // 거듭제곱 연산자: x ** 2 = x * x, x ** 3 = x * x * x
+    }
+    console.log(squares);
+    
+    squares = numbers.map((x) => x ** 2);
+    console.log(squares);
+    
     // numbers에서 홀수들의 제곱을 저장하는 배열을 만들고, 콘솔 로그 출력.
+    const oddSquares = numbers.filter((x) => x % 2).map((x) => x ** 2);
+    console.log(oddSquares);
     
 });
