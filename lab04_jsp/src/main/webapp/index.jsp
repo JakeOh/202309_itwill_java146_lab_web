@@ -10,5 +10,11 @@
     <body>
         <h1>인덱스 페이지</h1>
         <h2><%= LocalDateTime.now() %></h2>
+        
+        <ul>
+            <li>
+                <a href="ex1">첫번째 서블릿</a>
+            </li>
+        </ul>
     </body>
 </html>
