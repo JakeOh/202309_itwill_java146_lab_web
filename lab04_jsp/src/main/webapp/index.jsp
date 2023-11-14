@@ -24,6 +24,9 @@
             <li>
                 <a href="ex4">리다이렉트(Redirect)</a>
             </li>
+            <li>
+                <a href="intro.jsp">JSP 소개</a>
+            </li>
         </ul>
     </body>
 </html>
