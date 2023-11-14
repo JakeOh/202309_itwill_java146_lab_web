@@ -10,6 +10,21 @@
   2. JSP(Java/Jakarta Server Page)
      - 서블릿은 순수 자바 클래스 코드이기 때문에 HTML을 작성하기가 힘듦.
      - HTML 형식의 파일에서 자바 코드들이 실행될 수 있도록 만든 server-side 문법.
+     - 동작 원리: jsp -> java 변환 -> class 컴파일 -> 객체 생성 -> 메서드 호출 -> 응답
+       o. 최초 요청 -> jsp를 java로 변환 -> java를 class로 컴파일 -> 객체 생성 -> 메서드 호출 -> 응답
+       o. 요청 -> 생성된 객체에서 메서드 호출 -> 응답
+  3. JSP 구성 요소(문법)
+     (1) 주석(comment): JSP가 Java로 변환될 때 무시되는 코드.
+     (2) 지시문(directive): <%@ ... %>
+         예: <%@ page ... %>, <%@ include ... %>, <%@ taglib ... %>
+     (3) 선언문(declaration): <%! ... %>
+         JSP가 Java로 변환될 때, 클래스의 필드, 메서드를 선언하는 부분.
+     (4) 스크립트릿(scriptlet): <% ... %>
+         JSP가 Java로 변환될 때, _jspService(req, res) 메서드 안에 포함되는 자바 코드.
+         지역 변수 선언 & 초기화, 메서드 호출, 조건문, 반복문, ...
+     (5) 식, 표현식(expression): <%= ... %>
+         JSP가 Java로 변환될 때, out.write("") 메서드의 아규먼트로 전달되는 값.
+         HTML 코드에 문자열이 삽입.
 --%>
 
 <!DOCTYPE html>
