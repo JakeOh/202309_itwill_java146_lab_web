@@ -25,7 +25,7 @@
          JSP가 Java로 변환될 때, _jspService(req, res) 메서드 안에 포함되는 자바 코드.
          지역 변수 선언 & 초기화, 메서드 호출, 조건문, 반복문, ...
      (5) 식, 표현식(expression): <%= ... %>
-         JSP가 Java로 변환될 때, out.write("") 메서드의 아규먼트로 전달되는 값.
+         JSP가 Java로 변환될 때, out.write(arg) 메서드의 아규먼트로 전달되는 값.
          HTML 코드에 문자열이 삽입.
 --%>
 
