@@ -1,5 +1,7 @@
+<%-- 페이지 지시문(page directive): JSP 페이지 설정. 컨텐트 타입, 인코딩, ... --%>
+<%@ page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 
 <%-- JSP 주석
   1. Servlet(Server + Applet)의 동작 방식:
@@ -27,6 +29,25 @@
          HTML 코드에 문자열이 삽입.
 --%>
 
+<%! /* JSP declaration(선언문) */
+private static final String NAME = "scott"; // sttic 상수 필드 선언.
+
+// 메서드 선언.
+private void myLog(String msg) {
+    System.out.println(msg);
+}
+%>
+
+<% // JSP scriptlet
+myLog("intro.jsp 실행"); // 메서드 호출
+
+LocalDateTime now = LocalDateTime.now(); // 지역 변수 선언, 초기화
+String dateStr = String.format("%d-%d-%d", 
+        now.getYear(), now.getMonthValue(), now.getDayOfMonth());
+String timeStr = String.format("%d:%d:%d",
+        now.getHour(), now.getMinute(), now.getSecond());
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,5 +56,8 @@
     </head>
     <body>
         <h1>JSP 소개</h1>
+        <h2>날짜: <%= dateStr %></h2> <%-- 식(expression) --%>
+        <h2>시간: <%= timeStr %></h2>
+        <h3>이름: <%= NAME %></h3>
     </body>
 </html>
