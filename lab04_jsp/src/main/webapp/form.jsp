@@ -14,7 +14,7 @@
 	<body>
 		<h1>Form</h1>
         
-        <form action="form_result.jsp" method="get">
+        <form action="form_result.jsp" method="post">
             <input type="text" name="username" placeholder="사용자 이름" />
             <input type="submit" value="제출" />
         </form>
