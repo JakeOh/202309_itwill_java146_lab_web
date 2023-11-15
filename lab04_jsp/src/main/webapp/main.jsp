@@ -22,7 +22,7 @@
         
         <%@ include file="header.jsp" %>
         
-        <main>
+        <main class="card m-2">
             <h1>메인 페이지</h1>
             <nav>
                 <ul>

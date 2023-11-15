@@ -3,7 +3,7 @@
 
 <%-- jspf(jsp fragment): 다른 JSP에 포함되는 조각 파일임을 명시하는 확장자. --%>
 
-<footer>
-    <div>(주)10강의장</div>
-    <div>http://www.0410.com</div>
+<footer class="card m-2 text-secondary">
+    <div class="fs-5">(주)10강의장</div>
+    <div class="fs-6">http://www.0410.com</div>
 </footer>
