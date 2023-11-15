@@ -1,4 +1,4 @@
-package com.itwll.jsp1.model;
+package com.itwill.jsp1.model;
 
 public class Contact {
     // 필드

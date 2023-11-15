@@ -1,4 +1,4 @@
-package com.itwll.jsp1;
+package com.itwill.jsp1;
 
 import java.io.IOException;
 

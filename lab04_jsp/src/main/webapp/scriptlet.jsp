@@ -1,4 +1,4 @@
-<%@ page import="com.itwll.jsp1.model.Contact"%>
+<%@ page import="com.itwill.jsp1.model.Contact"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
