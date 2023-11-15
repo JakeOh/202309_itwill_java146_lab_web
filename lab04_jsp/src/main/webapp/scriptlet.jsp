@@ -78,9 +78,21 @@
         
         <h2>Unordered List</h2>
         <%-- 스크립트릿과 식을 사용해서 연락처의 이름들을 ul로 작성. --%>
+        <ul>
+            <% for (Contact c : data) { %>
+            <li><%= c.getName() %></li>
+            <% } %>
+        </ul>
         
         <h2>Description List</h2>
         <%-- 스크립트릿과 식을 사용해서 dl을 작성(dt: 이름, dd: 전화번호와 이메일) --%>
+        <dl>
+            <% for (Contact c : data) { %>
+            <dt><%= c.getName() %></dt>
+            <dd><%= c.getPhone() %></dd>
+            <dd><%= c.getEmail() %></dd>
+            <% } %>
+        </dl>
         
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
