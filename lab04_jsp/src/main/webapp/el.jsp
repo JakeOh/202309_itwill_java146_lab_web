@@ -80,8 +80,8 @@
         <% pageContext.setAttribute("number", 123); %>
         <p>${ number } = ${ (number % 2 == 1) ? '홀수' : '짝수' }</p>
         
-        <% session.setAttribute("logInUser", null); %>
-        <p>${ logInUser != null ? '안녕하세요' : '로그인하세요' }</p>
+        <% session.setAttribute("logInUser", "admin"); %>
+        <p>${ (logInUser != null) ? '안녕하세요,' : '로그인하세요' } ${ logInUser }</p>
         
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
