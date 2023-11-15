@@ -1,0 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+
+<%-- jspf(jsp fragment): 다른 JSP에 포함되는 조각 파일임을 명시하는 확장자. --%>
+
+<footer>
+    <div>(주)10강의장</div>
+    <div>http://www.0410.com</div>
+</footer>

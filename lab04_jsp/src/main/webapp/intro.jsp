@@ -22,7 +22,7 @@
      (3) 선언문(declaration): <%! ... %>
          JSP가 Java로 변환될 때, 클래스의 필드, 메서드를 선언하는 부분.
      (4) 스크립트릿(scriptlet): <% ... %>
-         JSP가 Java로 변환될 때, _jspService(req, res) 메서드 안에 포함되는 자바 코드.
+         JSP가 Java로 변환될 때, _jspService(request, response) 메서드 안에 포함되는 자바 코드.
          지역 변수 선언 & 초기화, 메서드 호출, 조건문, 반복문, ...
      (5) 식, 표현식(expression): <%= ... %>
          JSP가 Java로 변환될 때, out.write(arg) 메서드의 아규먼트로 전달되는 값.
