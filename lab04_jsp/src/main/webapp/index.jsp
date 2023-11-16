@@ -42,6 +42,9 @@
             <li>
                 <a href="el.jsp">EL(Expression Language)</a>
             </li>
+            <li>
+                <a href="jstl.jsp">JSTL</a>
+            </li>
         </ul>
     </body>
 </html>
