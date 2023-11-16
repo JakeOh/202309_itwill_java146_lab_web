@@ -45,6 +45,9 @@
             <li>
                 <a href="jstl.jsp">JSTL</a>
             </li>
+            <li>
+                <a href="form2.jsp">폼 2 (JSTL)</a>
+            </li>
         </ul>
     </body>
 </html>
