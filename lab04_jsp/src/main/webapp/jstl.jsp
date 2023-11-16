@@ -1,3 +1,5 @@
+<%@ page import="com.itwill.jsp1.model.Contact"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
@@ -26,7 +28,7 @@
         <%
         // HTML 리스트 아이템으로 사용할 더미 데이터:
         String[] sns = { "인*그램", "너튜브", "얼굴책" };
-        pageContext.setAttribute("sns", sns); //-> 문자열 배열을 EL에서 사용하기 위해서.
+        pageContext.setAttribute("sites", sns); //-> 문자열 배열을 EL에서 사용하기 위해서.
         %>
         
         <h2>스크립트릿, 식 사용</h2>
@@ -35,6 +37,43 @@
             <li><%= s %></li>
         <% } %>
         </ul>
+        
+        <h2>JSTL, EL 사용</h2>
+        <ul>
+            <c:forEach var="x" items="${sites}">
+            <li>${x}</li>
+            </c:forEach>
+        </ul>
+        
+        <h2>JSTL, EL을 사용한 테이블</h2>
+        <% 
+        // Contact 타입 10개를 저장하는 더미 데이터를 만들고, EL에서 사용할 수 있도록 설정.
+        ArrayList<Contact> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add(new Contact(i, "name-" + i, "phone-" + i, "email-" + i));
+        }
+        pageContext.setAttribute("list", list);
+        %>
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="c" items="${list}">
+                    <tr>
+                        <td>${c.id}</td> <%-- EL은 프로퍼티 이름으로 getter 메서드를 찾음. --%>
+                        <td>${c.name}</td>
+                        <td>${c.phone}</td>
+                        <td>${c.email}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
 		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
