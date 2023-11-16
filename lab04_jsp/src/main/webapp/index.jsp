@@ -58,6 +58,9 @@
                 <a href="${reqURL}">클릭</a>
                 <%-- <a href="form2_result.jsp?username=adm&in&color=r">클릭</a> --%>
             </li>
+            <li>
+                <a href="mvc">MVC Model 2</a>
+            </li>
         </ul>
     </body>
 </html>
