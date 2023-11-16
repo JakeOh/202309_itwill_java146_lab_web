@@ -58,6 +58,15 @@ if (color.equals("r")) {
         <h3>아이디: <span id="s2">${param.username}</span></h3>
         <%-- request.getParameter("name")을 대신하는 EL: ${param.name} --%>
         
+        <c:choose>
+            <c:when test="${param.username eq 'admin'}">
+                <h2>관리자 페이지</h2>
+            </c:when>
+            <c:otherwise>
+                <h2>일반 사용자 페이지</h2>
+            </c:otherwise>
+        </c:choose>
+        
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
     	    crossorigin="anonymous"></script>

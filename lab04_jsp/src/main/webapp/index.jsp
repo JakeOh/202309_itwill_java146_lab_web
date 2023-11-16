@@ -1,6 +1,7 @@
 <%@ page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -47,6 +48,15 @@
             </li>
             <li>
                 <a href="form2.jsp">폼 2 (JSTL)</a>
+            </li>
+            <li>
+                <%-- URL을 만드는 JSTL 태그 --%>
+                <c:url var="reqURL" value="form2_result.jsp">
+                    <c:param name="username" value="adm&in" />
+                    <c:param name="color" value="b" />
+                </c:url>
+                <a href="${reqURL}">클릭</a>
+                <%-- <a href="form2_result.jsp?username=adm&in&color=r">클릭</a> --%>
             </li>
         </ul>
     </body>
