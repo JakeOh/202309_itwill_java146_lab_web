@@ -11,17 +11,20 @@
 
     <dependencies> <!-- 프로젝트 의존성(외부 라이브러리)들 설정 -->
         <!-- Tomcat 10.1.x에서 JSTL(Jakarta Standard Tag Library)를 사용하기 위한 설정 -->
+        <!-- Jakarta Standard Tag Library API -->
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <!-- Jakarta Standard Tag Library Implementation -->
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
             <version>3.0.1</version>
         </dependency>
 
+        <!-- Log4j, Slf4j 사용하기 위한 설정 -->
         <!-- The Apache Log4j Implementation -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -37,14 +40,14 @@
         <!-- The Apache Log4j SLF4J API binding to Log4j 2 Core -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
             <version>2.21.1</version>
         </dependency>
         <!-- The slf4j API -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.36</version> <!-- slf4j 2.x 버전은 에러 발생 -->
+            <version>2.0.9</version>
         </dependency>
 
         <!-- 자바 단위 테스트(Java Unit Test)를 하기 위해서 -->
