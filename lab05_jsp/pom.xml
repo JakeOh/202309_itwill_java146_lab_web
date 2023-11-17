@@ -44,7 +44,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.36</version>
+            <version>1.7.36</version> <!-- slf4j 2.x 버전은 에러 발생 -->
         </dependency>
     </dependencies>
 
