@@ -13,6 +13,12 @@ public class Post {
     private LocalDateTime modifiedTime;
     
     public Post() {}
+    
+    public Post(String title, String content, String author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+    }
 
     public Post(Long id, String title, String content, String author, 
             LocalDateTime createdTime, LocalDateTime modifiedTime) {

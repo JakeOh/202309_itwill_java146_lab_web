@@ -82,4 +82,41 @@ public class PostDao {
         return list;
     }
     
+    // 새 포스트 작성에서 사용되는 SQL 문장
+    private static final String SQL_INSERT = 
+            "insert into POSTS (TITLE, CONTENT, AUTHOR) values (?, ?, ?)";
+    
+    // SQL_INSERT를 실행하는 메서드
+    public int insert(Post post) {
+        log.debug("insert(post={})", post);
+        
+        int result = 0;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement(SQL_INSERT);
+            log.debug(SQL_INSERT);
+            
+            stmt.setString(1, post.getTitle());
+            stmt.setString(2, post.getContent());
+            stmt.setString(3, post.getAuthor());
+            
+            result = stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return result;
+    }
+    
 }
