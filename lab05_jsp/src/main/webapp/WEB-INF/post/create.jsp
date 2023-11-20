@@ -13,7 +13,7 @@
             crossorigin="anonymous">
 	</head>
 	<body>
-		<header>
+		<header class="my-2 p-4 bg-dark text-white text-center">
             <h1>새 포스트 작성 페이지</h1>
         </header>
         
@@ -30,21 +30,25 @@
             </ul>
         </nav>
         
-        <main>
-            <div>
+        <main class="my-2">
+            <div class="card p-2">
                 <c:url var="postCreate" value="/post/create" />
                 <form action="${postCreate}" method="post">
-                    <div>
-                        <input type="text" name="title" placeholder="제목" autofocus required />
+                    <div class="my-2">
+                        <input class="form-control" 
+                            type="text" name="title" placeholder="제목" autofocus required />
                     </div>
-                    <div>
-                        <textarea name="content" rows="5" cols="80" placeholder="내용" required></textarea>
+                    <div class="my-2">
+                        <textarea class="form-control"
+                            name="content" rows="5" cols="80" placeholder="내용" required></textarea>
                     </div>
-                    <div>
-                        <input type="text" name="author" placeholder="작성자" required />
+                    <div class="my-2">
+                        <input class="form-control"
+                            type="text" name="author" placeholder="작성자" required />
                     </div>
-                    <div>
-                        <input type="submit" value="작성완료" />
+                    <div class="my-2">
+                        <input class="form-control btn btn-success" 
+                            type="submit" value="작성완료" />
                     </div>
                 </form>
             </div>
