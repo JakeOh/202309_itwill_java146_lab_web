@@ -1,8 +1,11 @@
 package com.itwill.jsp2.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itwill.jsp2.domain.Post;
 import com.itwill.jsp2.repository.PostDao;
 
 // Model 2 MVC 아키텍쳐에서 서비스(비즈니스) 계층을 담당하는 클래스.
@@ -24,6 +27,12 @@ public class PostService {
         }
         
         return instance;
+    }
+    
+    public List<Post> read() {
+        log.info("read()");
+        
+        return postDao.select();
     }
 
 }
