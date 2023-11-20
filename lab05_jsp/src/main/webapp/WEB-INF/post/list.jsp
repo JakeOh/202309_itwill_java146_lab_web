@@ -23,6 +23,10 @@
                     <c:url var="mainPage" value="/" /> <%-- context root --%>
                     <a href="${mainPage}">메인 페이지</a>
                 </li>
+                <li>
+                    <c:url var="postCreate" value="/post/create" />
+                    <a href="${postCreate}">새 포스트 작성</a>
+                </li>
             </ul>
         </nav>
         
