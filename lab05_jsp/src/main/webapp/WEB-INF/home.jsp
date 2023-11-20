@@ -18,13 +18,27 @@
         </header>
         
         <!-- 내비게이션 메뉴 -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <c:url var="postList" value="/post/list" />
-                    <a class="nav-link" href="${postList}">포스트 목록 페이지</a>
-                </li>
-            </ul>
+        <nav class="my-2 navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <c:url var="postList" value="/post/list" />
+                            <a class="nav-link" href="${postList}">포스트 목록</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
         </nav>
         
         <!-- 메인 컨텐트 -->

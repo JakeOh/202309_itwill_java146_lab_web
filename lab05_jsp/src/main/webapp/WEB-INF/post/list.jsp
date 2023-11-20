@@ -17,18 +17,30 @@
             <h1>포스트 목록 페이지</h1>
         </header>
         
-        <nav  class="my-2 navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="my-2 navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <c:url var="mainPage" value="/" /> <%-- context root --%>
-                        <a class="nav-link" href="${mainPage}">메인 페이지</a>
-                    </li>
-                    <li class="nav-item">
-                        <c:url var="postCreate" value="/post/create" />
-                        <a class="nav-link" href="${postCreate}">새 포스트 작성</a>
-                    </li>
-                </ul>
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <c:url var="mainPage" value="/" />
+                            <a class="nav-link" href="${mainPage}">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <c:url var="postList" value="/post/list" />
+                            <a class="nav-link" href="${postList}">포스트 목록</a>
+                        </li>
+                        <li class="nav-item">
+                            <c:url var="postCreate" value="/post/create" />
+                            <a class="nav-link" href="${postCreate}">새 포스트</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
         
