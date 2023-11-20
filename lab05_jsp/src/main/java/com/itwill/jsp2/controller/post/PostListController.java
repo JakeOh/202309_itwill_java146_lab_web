@@ -6,7 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.itwill.jsp2.domain.Post;
+import com.itwill.jsp2.dto.PostListItemDto;
 import com.itwill.jsp2.service.PostService;
 
 import jakarta.servlet.ServletException;
@@ -33,7 +33,7 @@ public class PostListController extends HttpServlet {
 		log.debug("doGet()");
 		
 		// 서비스(비즈니스) 계층의 메서드를 호출해서 뷰에 보여줄 데이터를 가져옴.
-		List<Post> list = postService.read();
+		List<PostListItemDto> list = postService.read();
 		// 데이터를 뷰에 보내기 위해서 요청 객체에 속성으로 추가.
 		request.setAttribute("posts", list);
 		
