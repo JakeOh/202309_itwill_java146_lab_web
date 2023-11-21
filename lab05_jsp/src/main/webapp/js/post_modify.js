@@ -30,7 +30,15 @@
          if (result) { // result === true: 사용자가 [확인(Yes)]을 선택하면
              location.href = `delete?id=${inputId.value}`; // delete 요청을 보냄.
          }
+     });
+     
+     // 수정완료 버튼에 클릭 이벤트 리스너를 등록.
+     btnUpdate.addEventListener('click', () => {
+         // TODO
          
+         form.action = 'update'; // 폼(양식)을 제출(submit)할 요청 주소.
+         form.method = 'post'; // 폼 요청 방식(get/post).
+         form.submit();
      });
      
  });

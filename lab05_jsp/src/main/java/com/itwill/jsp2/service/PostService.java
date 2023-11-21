@@ -61,5 +61,14 @@ public class PostService {
         
         return post;
     }
+    
+    public int delete(Long id) {
+        log.debug("delete(id={})", id);
+        
+        int result = postDao.delete(id);
+        log.debug("delete result = {}", result);
+        
+        return result;
+    }
 
 }

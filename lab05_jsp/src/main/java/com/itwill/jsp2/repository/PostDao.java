@@ -135,6 +135,33 @@ public class PostDao {
         return post;
     }
     
+    // 포스트 아이디(PK)로 포스트 삭제하기
+    private static final String SQL_DELETE_BY_ID = 
+            "delete from POSTS where ID = ?";
+    
+    // SQL_DELETE_BY_ID를 실행하는 메서드
+    public int delete(Long id) {
+        log.debug("delete(id={})", id);
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int result = 0;
+        try {
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement(SQL_DELETE_BY_ID);
+            log.debug(SQL_DELETE_BY_ID);
+            stmt.setLong(1, id);
+            result = stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+        return result;
+    }
+    
     private Post generatePostFromRS(ResultSet rs) throws SQLException {
         Long id = rs.getLong("ID");
         String title = rs.getString("TITLE");
