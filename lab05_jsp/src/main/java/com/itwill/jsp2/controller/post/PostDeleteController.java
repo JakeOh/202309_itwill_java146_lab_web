@@ -39,7 +39,8 @@ public class PostDeleteController extends HttpServlet {
 		postService.delete(id);
 		
 		// 포스트 목록 페이지로 리다이렉트
-		response.sendRedirect("/jsp2/post/list");
+		String url = request.getContextPath() + "/post/list";
+		response.sendRedirect(url);
 		
 	}
 
