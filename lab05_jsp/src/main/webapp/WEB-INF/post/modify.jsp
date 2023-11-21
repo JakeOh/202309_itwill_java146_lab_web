@@ -78,5 +78,15 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
     	    crossorigin="anonymous"></script>
-	</body>
+	   
+       <script src="../js/post_modify.js"></script>
+       <%-- 
+         현재 요청 주소: http://localhost:8081/jsp2/post/modify?id=00
+         상대 경로 ./abc => http://localhost:8081/jsp2/post/abc
+         상대 경로 ../abc => http://localhost:8081/jsp2/abc
+         ../js/modify.js => http://localhost:8081/jsp2/js/modify.js
+         
+         context root(http://localhost:8081/jsp2)는 WAS의 webapp 디렉토리(폴더)를 의미.
+       --%>
+    </body>
 </html>
