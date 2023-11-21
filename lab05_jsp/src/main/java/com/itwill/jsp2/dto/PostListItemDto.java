@@ -14,7 +14,6 @@ public class PostListItemDto {
     public PostListItemDto() {}
 
     public PostListItemDto(Long id, String title, String author, LocalDateTime modifiedTime) {
-        super();
         this.id = id;
         this.title = title;
         this.author = author;
