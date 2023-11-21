@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,9 +13,73 @@
             crossorigin="anonymous">
 	</head>
 	<body>
-		<header>
+		<header class="my-2 p-4 bg-dark text-white text-center">
             <h1>포스트 상세보기 페이지</h1>
         </header>
+        
+        <nav class="my-2 navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <c:url var="mainPage" value="/" />
+                            <a class="nav-link" href="${mainPage}">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <c:url var="postList" value="/post/list" />
+                            <a class="nav-link" href="${postList}">포스트 목록</a>
+                        </li>
+                        <li class="nav-item">
+                            <c:url var="postCreate" value="/post/create" />
+                            <a class="nav-link" href="${postCreate}">새 포스트</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <main class="my-2">
+            <div class="card">
+                <form class="card-body">
+                    <div class="my-2">
+                        <label for="id" class="form-label">번호</label>
+                        <input class="form-control" id="id"
+                            type="number" value="${post.id}" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="title" class="form-label">제목</label>
+                        <input id="title" class="form-control"
+                            type="text" value="${post.title}" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="content" class="form-label">내용</label>
+                        <textarea id="content" class="form-control"
+                            readonly>${post.content}</textarea>
+                    </div>
+                    <div class="my-2">
+                        <label for="author" class="form-label">작성자</label>
+                        <input id="author" class="form-control" 
+                            type="text" value="${post.author}" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="createdTime" class="form-label">작성 시간</label>
+                        <input id="createdTime" class="form-control"
+                            type="text" value="${post.createdTime}" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="modifiedTime" class="form-label">수정 시간</label>
+                        <input id="modifiedTime" class="form-control" 
+                            type="text" value="${post.modifiedTime}" readonly />
+                    </div>
+                </form>
+            </div>
+        </main>
 		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
