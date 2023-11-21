@@ -28,7 +28,7 @@
          const result = confirm('정말 삭제할까요?');
          // console.log(`confirm result = ${result}`); //-> true/false
          if (result) { // result === true: 사용자가 [확인(Yes)]을 선택하면
-             location.href = `delete?id=${inputId.value}`;
+             location.href = `delete?id=${inputId.value}`; // delete 요청을 보냄.
          }
          
      });
