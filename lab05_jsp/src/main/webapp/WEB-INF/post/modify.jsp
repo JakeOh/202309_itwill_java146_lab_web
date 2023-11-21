@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<header class="my-2 p-4 bg-dark text-white text-center">
-            <h1>포스트 상세보기 페이지</h1>
+            <h1>포스트 수정 페이지</h1>
         </header>
         
         <nav class="my-2 navbar navbar-expand-lg bg-body-tertiary">
@@ -46,43 +46,31 @@
         
         <main class="my-2">
             <div class="card">
-                <form class="card-body">
+                <form class="card-body" id="postModifyForm">
                     <div class="my-2">
                         <label for="id" class="form-label">번호</label>
-                        <input class="form-control" id="id"
+                        <input class="form-control" id="id" name="id"
                             type="number" value="${post.id}" readonly />
                     </div>
                     <div class="my-2">
                         <label for="title" class="form-label">제목</label>
-                        <input id="title" class="form-control"
-                            type="text" value="${post.title}" readonly />
+                        <input id="title" class="form-control" name="title"
+                            type="text" value="${post.title}" autofocus />
                     </div>
                     <div class="my-2">
                         <label for="content" class="form-label">내용</label>
                         <textarea id="content" class="form-control"
-                            readonly>${post.content}</textarea>
+                            name="content">${post.content}</textarea>
                     </div>
                     <div class="my-2">
                         <label for="author" class="form-label">작성자</label>
                         <input id="author" class="form-control" 
                             type="text" value="${post.author}" readonly />
                     </div>
-                    <div class="my-2">
-                        <label for="createdTime" class="form-label">작성 시간</label>
-                        <input id="createdTime" class="form-control"
-                            type="text" value="${post.createdTime}" readonly />
-                    </div>
-                    <div class="my-2">
-                        <label for="modifiedTime" class="form-label">수정 시간</label>
-                        <input id="modifiedTime" class="form-control" 
-                            type="text" value="${post.modifiedTime}" readonly />
-                    </div>
                 </form>
                 <div class="card-footer">
-                    <c:url var="postModify" value="/post/modify">
-                        <c:param name="id" value="${post.id}"></c:param>
-                    </c:url>
-                    <a class="btn btn-primary" href="${postModify}">수정</a>
+                    <button id="btnDelete" class="btn btn-danger">삭제</button>
+                    <button id="btnUpdate" class="btn btn-success">수정 완료</button>
                 </div>
             </div>
         </main>
