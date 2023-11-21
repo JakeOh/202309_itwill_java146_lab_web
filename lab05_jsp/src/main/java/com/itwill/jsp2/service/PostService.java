@@ -46,10 +46,20 @@ public class PostService {
     }
     
     public void create(PostCreateDto dto) {
-        log.info("crate(dto={})", dto);
+        log.debug("crate(dto={})", dto);
         
         // PostCreateDto를 Post 타입으로 변환해서, PostDao의 메서드(insert)를 호출할 때 전달.
-        postDao.insert(dto.toPost());
+        int result = postDao.insert(dto.toPost());
+        log.debug("insert result = {}", result);
+    }
+    
+    public Post read(Long id) {
+        log.debug("read(id={})", id);
+        
+        Post post = postDao.select(id);
+        log.debug("select result = {}", post);
+        
+        return post;
     }
 
 }
