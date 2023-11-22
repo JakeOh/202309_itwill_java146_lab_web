@@ -14,6 +14,12 @@
         
         <ul>
             <li>
+                <a href="exsession">세션(session)</a>
+            </li>
+            <li>
+                <a href="excookie">쿠키(cookie)</a>
+            </li>
+            <li>
                 <a href="ex1">첫번째 서블릿</a>
             </li>
             <li>
