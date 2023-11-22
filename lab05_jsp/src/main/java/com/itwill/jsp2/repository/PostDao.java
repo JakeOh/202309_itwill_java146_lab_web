@@ -162,6 +162,36 @@ public class PostDao {
         return result;
     }
     
+    private static final String SQL_UPDATE = 
+            "update POSTS set TITLE = ?, CONTENT = ?, MODIFIED_TIME = systimestamp "
+            + "where ID = ?";
+    
+    public int update(Post post) {
+        log.debug("update(post={})", post);
+        
+        int result = 0;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            log.debug(SQL_UPDATE);
+            
+            stmt.setString(1, post.getTitle());
+            stmt.setString(2, post.getContent());
+            stmt.setLong(3, post.getId());
+            
+            result = stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+        return result;
+    }
+    
     private Post generatePostFromRS(ResultSet rs) throws SQLException {
         Long id = rs.getLong("ID");
         String title = rs.getString("TITLE");
