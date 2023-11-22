@@ -63,7 +63,8 @@
                                     name="keyword" placeholder="검색어" required autofocus />
                             </div>
                             <div class="col-3">
-                                <input class="form-control" type="submit" value="검색" />
+                                <input class="form-control btn btn-secondary" 
+                                    type="submit" value="검색" />
                             </div>
                         </div>
                     </form>
