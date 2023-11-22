@@ -46,7 +46,20 @@
         
         <main class="my-2">
             <div class="card p-2">
-                <table class="table table-striped">
+                <div class="card-header my-2">
+                    <c:url var="searchPage" value="/post/search" />
+                    <form action="${searchPage}" method="get">
+                        <select name="category">
+                            <option value="t">제목</option>
+                            <option value="c">내용</option>
+                            <option value="tc">제목 + 내용</option>
+                            <option value="a">작성자</option>
+                        </select>
+                        <input type="text" name="keyword" placeholder="검색어" required autofocus />
+                        <input type="submit" value="검색" />
+                    </form>
+                </div>
+                <table class="table table-striped card-body my-2">
                     <thead>
                         <tr>
                             <th>번호</th>

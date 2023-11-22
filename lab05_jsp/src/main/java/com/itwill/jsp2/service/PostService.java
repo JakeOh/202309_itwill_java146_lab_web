@@ -47,7 +47,7 @@ public class PostService {
     }
     
     public void create(PostCreateDto dto) {
-        log.debug("crate(dto={})", dto);
+        log.debug("create(dto={})", dto);
         
         // PostCreateDto를 Post 타입으로 변환해서, PostDao의 메서드(insert)를 호출할 때 전달.
         int result = postDao.insert(dto.toPost());
