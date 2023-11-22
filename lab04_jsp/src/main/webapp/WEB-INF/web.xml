@@ -6,11 +6,19 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>firstServlet</servlet-name>
-    <servlet-class>com.itwll.jsp1.FirstServlet</servlet-class>
+    <servlet-class>com.itwill.jsp1.FirstServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>firstServlet</servlet-name>
     <url-pattern>/ex1</url-pattern>
   </servlet-mapping>
-  
+  <filter>
+    <display-name>filterEx1</display-name>
+    <filter-name>filterEx1</filter-name>
+    <filter-class>com.itwill.jsp1.filter.FilterEx1</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>filterEx1</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>
