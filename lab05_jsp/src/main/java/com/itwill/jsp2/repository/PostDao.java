@@ -192,6 +192,74 @@ public class PostDao {
         return result;
     }
     
+    // 제목으로 검색하기:
+    private static final String SQL_SELECT_BY_TITLE = 
+            "select * from POSTS where upper(TITLE) like ? order by ID desc";
+    // 내용으로 검색하기:
+    private static final String SQL_SELECT_BY_CONTENT = 
+            "select * from POSTS where upper(CONTENT) like ? order by ID desc";
+    // 제목 또는 내용으로 검색하기:
+    private static final String SQL_SELECT_BY_TITLE_OR_CONTENT = 
+            "select * from POSTS "
+            + "where upper(TITLE) like ? or upper(CONTENT) like ? "
+            + "order by ID desc";
+    // 작성자로 검색하기:
+    private static final String SQL_SELECT_BY_AUTHOR = 
+            "select * from POSTS where upper(AUTHOR) like ? order by ID desc";
+    
+    public List<Post> search(String category, String keyword) {
+        log.debug("search(category={}, keyword={})", category, keyword);
+        
+        List<Post> result = new ArrayList<>(); // 검색 결과를 저장할 리스트
+        
+        // 대/소문자 구분없이 like 검색을 하기 위해서
+        String searchKeyword = "%" + keyword.toUpperCase() + "%";
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = ds.getConnection();
+            
+            switch (category) {
+            case "t":
+                log.debug(SQL_SELECT_BY_TITLE);
+                stmt = conn.prepareStatement(SQL_SELECT_BY_TITLE);
+                stmt.setString(1, searchKeyword);
+                break;
+            case "c":
+                log.debug(SQL_SELECT_BY_CONTENT);
+                stmt = conn.prepareStatement(SQL_SELECT_BY_CONTENT);
+                stmt.setString(1, searchKeyword);
+                break;
+            case "tc":
+                log.debug(SQL_SELECT_BY_TITLE_OR_CONTENT);
+                stmt = conn.prepareStatement(SQL_SELECT_BY_TITLE_OR_CONTENT);
+                stmt.setString(1, searchKeyword);
+                stmt.setString(2, searchKeyword);
+                break;
+            case "a":
+                log.debug(SQL_SELECT_BY_AUTHOR);
+                stmt = conn.prepareStatement(SQL_SELECT_BY_AUTHOR);
+                stmt.setString(1, searchKeyword);
+                break;
+            }
+            
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Post p = generatePostFromRS(rs);
+                result.add(p);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt, rs);
+        }
+        
+        return result;
+    }
+    
     private Post generatePostFromRS(ResultSet rs) throws SQLException {
         Long id = rs.getLong("ID");
         String title = rs.getString("TITLE");

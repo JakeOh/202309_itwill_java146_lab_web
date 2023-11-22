@@ -81,4 +81,17 @@ public class PostService {
         return result;
     }
 
+    public List<PostListItemDto> search(String category, String keyword) {
+        log.debug("search(category={}, keyword={})", category, keyword);
+        
+        List<Post> list = postDao.search(category, keyword);
+        log.debug("검색 결과 개수 = {}", list.size());
+        
+        List<PostListItemDto> result = list.stream()
+                .map(PostListItemDto::fromPost)
+                .toList();
+        
+        return result;
+    }
+    
 }
