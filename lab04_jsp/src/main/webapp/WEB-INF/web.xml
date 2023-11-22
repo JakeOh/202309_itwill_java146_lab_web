@@ -21,4 +21,7 @@
     <filter-name>filterEx1</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <listener>
+    <listener-class>com.itwill.jsp1.listener.ListenerEx</listener-class>
+  </listener>
 </web-app>
