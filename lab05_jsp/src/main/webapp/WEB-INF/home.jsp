@@ -35,7 +35,10 @@
                             <c:url var="postList" value="/post/list" />
                             <a class="nav-link" href="${postList}">포스트 목록</a>
                         </li>
-                        
+                        <li class="nav-item">
+                            <c:url var="signUpPage" value="/user/signup" />
+                            <a class="nav-link" href="${signUpPage}">회원가입</a>
+                        </li>
                     </ul>
                 </div>
             </div>
