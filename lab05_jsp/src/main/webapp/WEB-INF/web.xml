@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
   <display-name>lab05_jsp</display-name>
-  
+  <filter>
+    <display-name>authenticationFilter</display-name>
+    <filter-name>authenticationFilter</filter-name>
+    <filter-class>com.itwill.jsp2.filter.AuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>authenticationFilter</filter-name>
+    <url-pattern>/post/create</url-pattern>
+    <url-pattern>/post/details</url-pattern>
+    <url-pattern>/post/modify</url-pattern>
+    <url-pattern>/post/update</url-pattern>
+    <url-pattern>/post/delete</url-pattern>
+  </filter-mapping>
 </web-app>

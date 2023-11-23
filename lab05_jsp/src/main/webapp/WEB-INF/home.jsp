@@ -38,9 +38,13 @@
                         <%-- 세션에 signedInUser 속성이 있으면(로그인되어 있으면) --%>
                         <c:if test="${not empty signedInUser}">
                             <li class="nav-item">
-                                <a class="nav-link">로그아웃</a>
+                                <c:url var="signOutPage" value="/user/signout" />
+                                <a class="nav-link" href="${signOutPage}">
+                                    <span>${signedInUser}</span> 로그아웃
+                                </a>
                             </li>
                         </c:if>
+                        <%-- 세션에 signedInUser 속성이 없으면(로그인되이 있지 않으면) --%>
                         <c:if test="${empty signedInUser}">
                             <li class="nav-item">
                                 <c:url var="signInPage" value="/user/signin" />
