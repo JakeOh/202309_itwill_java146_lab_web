@@ -1,16 +1,19 @@
 package com.itwill.jsp2.controller.user;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itwill.jsp2.domain.User;
+import com.itwill.jsp2.dto.UserSignInDto;
 import com.itwill.jsp2.service.UserService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class UserSignInController
@@ -40,7 +43,27 @@ public class UserSignInController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	        throws ServletException, IOException {
+		log.debug("doPost()");
+	    
+	    // 요청 파라미터 userid, password를 찾음.
+		String userid = request.getParameter("userid");
+		String password = request.getParameter("password");
+//		UserSignInDto dto = new UserSignInDto(userid, password);
+		UserSignInDto dto = UserSignInDto.builder()
+		        .userid(userid).password(password).build();
+		log.debug("dto={}", dto);
 		
+	    // 서비스 메서드를 호출하면서 로그인 정보를 전달.
+		User signedInUser = userService.signIn(dto);
+		
+	    // 성공이면 포스트 목록 페이지로 이동, 실패면 로그인 페이지로 이동.
+		if (signedInUser != null) {
+		    String url = request.getContextPath() + "/post/list";
+		    response.sendRedirect(url);
+		} else {
+		    String url = request.getContextPath() + "/user/signin?result=fail";
+		    response.sendRedirect(url);
+		}
 	}
 
 }

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.itwill.jsp2.datasource.DataSourceUtil;
 import com.itwill.jsp2.domain.User;
+import com.itwill.jsp2.dto.UserSignInDto;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class UserDao {
@@ -58,6 +59,52 @@ public class UserDao {
         }
         
         return result;
+    }
+    
+    // 로그인 체크 SQL
+    private static final String SQL_SIGN_IN = 
+            "select * from USERS where USERID = ? and PASSWORD = ?";
+    
+    // userid와 password가 일치하면 User 객체를, 일치하지 않으면 null을 리턴.
+    public User selectByUseridAndPassword(UserSignInDto dto) {
+        log.debug("selectByUseridAndPassword(dto={})", dto);
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        User user = null;
+        try {
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement(SQL_SIGN_IN);
+            log.debug(SQL_SIGN_IN);
+            
+            stmt.setString(1, dto.getUserid());
+            stmt.setString(2, dto.getPassword());
+            
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                user = generateUserFromRS(rs);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt, rs);
+        }
+        
+        return user;
+    }
+    
+    private User generateUserFromRS(ResultSet rs) throws SQLException {
+        Long id = rs.getLong("ID");
+        String userid = rs.getString("USERID");
+        String password = rs.getString("PASSWORD");
+        String email = rs.getString("EMAIL");
+        Long points = rs.getLong("POINTS");
+        
+        return User.builder()
+                .id(id).userid(userid).password(password).email(email).points(points)
+                .build();
     }
     
     private void closeResources(Connection conn, Statement stmt, ResultSet rs) {

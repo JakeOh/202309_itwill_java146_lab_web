@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,7 +23,11 @@
         <main>
             <div class="card">
                 <div class="card-body">
-                    <form method="post">
+                    <c:if test="${not empty param.result && param.result eq 'fail'}">
+                        <div class="text-danger">아이디와 패스워드를 확인하세요...</div>
+                    </c:if>
+                    <c:url var="signInPage" value="/user/signin" />
+                    <form action="${signInPage}" method="post">
                         <div class="my-2">
                             <input class="form-control"
                                 type="text" name="userid" placeholder="아이디" required autofocus />
