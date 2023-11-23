@@ -36,6 +36,10 @@
                             <a class="nav-link" href="${postList}">포스트 목록</a>
                         </li>
                         <li class="nav-item">
+                            <c:url var="signInPage" value="/user/signin" />
+                            <a class="nav-link" href=${signInPage}>로그인</a>
+                        </li>
+                        <li class="nav-item">
                             <c:url var="signUpPage" value="/user/signup" />
                             <a class="nav-link" href="${signUpPage}">회원가입</a>
                         </li>
