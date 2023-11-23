@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class UserSignInController
@@ -58,6 +59,13 @@ public class UserSignInController extends HttpServlet {
 		
 	    // 성공이면 포스트 목록 페이지로 이동, 실패면 로그인 페이지로 이동.
 		if (signedInUser != null) {
+		    HttpSession session = request.getSession();
+		    //-> 세션이 생성되어 있지 않은 경우에는 새로운 세션 객체를 생성해서 리턴,
+		    //-> 세션이 이미 생성되어 있는 경우에는 기존 세션을 리턴.
+		    
+		    session.setAttribute("signedInUser", signedInUser.getUserid());
+		    //-> 세션에 로그인 성공한 사용자의 아이디를 저장.
+		    
 		    String url = request.getContextPath() + "/post/list";
 		    response.sendRedirect(url);
 		} else {

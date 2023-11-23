@@ -35,14 +35,22 @@
                             <c:url var="postList" value="/post/list" />
                             <a class="nav-link" href="${postList}">포스트 목록</a>
                         </li>
-                        <li class="nav-item">
-                            <c:url var="signInPage" value="/user/signin" />
-                            <a class="nav-link" href=${signInPage}>로그인</a>
-                        </li>
-                        <li class="nav-item">
-                            <c:url var="signUpPage" value="/user/signup" />
-                            <a class="nav-link" href="${signUpPage}">회원가입</a>
-                        </li>
+                        <%-- 세션에 signedInUser 속성이 있으면(로그인되어 있으면) --%>
+                        <c:if test="${not empty signedInUser}">
+                            <li class="nav-item">
+                                <a class="nav-link">로그아웃</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${empty signedInUser}">
+                            <li class="nav-item">
+                                <c:url var="signInPage" value="/user/signin" />
+                                <a class="nav-link" href=${signInPage}>로그인</a>
+                            </li>
+                            <li class="nav-item">
+                                <c:url var="signUpPage" value="/user/signup" />
+                                <a class="nav-link" href="${signUpPage}">회원가입</a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>

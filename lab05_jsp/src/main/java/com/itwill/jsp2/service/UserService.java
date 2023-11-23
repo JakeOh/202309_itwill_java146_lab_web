@@ -43,6 +43,7 @@ public class UserService {
         log.debug("signIn(dto={})", dto);
         
         User user = userDao.selectByUseridAndPassword(dto);
+        log.debug("로그인 결과 user = {}", user);
         
         return user;
     }
