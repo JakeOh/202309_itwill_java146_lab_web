@@ -1,5 +1,7 @@
 package com.itwill.jsp2.dto;
 
+import com.itwill.jsp2.domain.User;
+
 public class UserSignUpDto {
     private String userid;
     private String password;
@@ -40,6 +42,12 @@ public class UserSignUpDto {
     @Override
     public String toString() {
         return "UserSignUpDto [userid=" + userid + ", password=" + password + ", email=" + email + "]";
+    }
+    
+    public User toUser() {
+        return User.builder()
+                .userid(userid).password(password).email(email)
+                .build();
     }
     
     //----- builder pattern
