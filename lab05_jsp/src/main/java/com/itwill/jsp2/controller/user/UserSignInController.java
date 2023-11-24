@@ -66,8 +66,11 @@ public class UserSignInController extends HttpServlet {
 		    session.setAttribute("signedInUser", signedInUser.getUserid());
 		    //-> 세션에 로그인 성공한 사용자의 아이디를 저장.
 		    
-		    String url = request.getContextPath() + "/post/list";
-		    response.sendRedirect(url);
+		    // 로그인 성공인 경우에는 요청 파라미터 target의 값으로 이동(redirect)
+		    String target = request.getParameter("target");
+		    log.debug("target={}", target);
+		    
+		    response.sendRedirect(target);
 		} else {
 		    String url = request.getContextPath() + "/user/signin?result=fail";
 		    response.sendRedirect(url);

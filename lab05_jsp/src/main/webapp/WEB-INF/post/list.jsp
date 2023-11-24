@@ -13,7 +13,7 @@
             crossorigin="anonymous">
 	</head>
 	<body>
-		<header class="my-2 p-4 bg-dark text-white text-center">
+    	<header class="my-2 p-4 bg-dark text-white text-center">
             <h1>포스트 목록 페이지</h1>
         </header>
         
@@ -51,7 +51,9 @@
                         <%-- 세션에 signedInUser 속성이 없으면(로그인되이 있지 않으면) --%>
                         <c:if test="${empty signedInUser}">
                             <li class="nav-item">
-                                <c:url var="signInPage" value="/user/signin" />
+                                <c:url var="signInPage" value="/user/signin">
+                                    <c:param name="target" value="http://localhost:8081/jsp2/post/list"></c:param>
+                                </c:url>
                                 <a class="nav-link" href=${signInPage}>로그인</a>
                             </li>
                             <li class="nav-item">
