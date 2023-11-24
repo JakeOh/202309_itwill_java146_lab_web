@@ -26,8 +26,8 @@
                     <c:if test="${not empty param.result && param.result eq 'fail'}">
                         <div class="text-danger">회원 가입 양식을 다시 작성하세요...</div>
                     </c:if>
-                    <c:url val="signUpPage" value="/user/signup" />
-                    <form action="${signUpPage }" method="post">
+                    <c:url var="signUpPage" value="/user/signup" />
+                    <form action="${signUpPage}" method="post">
                         <div class="my-2">
                             <input class="form-control" 
                                 type="text" name="userid" placeholder="아이디" required autofocus />

@@ -88,10 +88,15 @@
                             type="text" value="${post.author}" readonly />
                     </div>
                 </form>
-                <div class="card-footer">
-                    <button id="btnDelete" class="btn btn-danger">삭제</button>
-                    <button id="btnUpdate" class="btn btn-success">수정 완료</button>
-                </div>
+                <%-- 로그인한 사용자 아이디와 포스트 작성자 아이디가 같은 경우에만 
+                     수정과 삭제가 가능하도록 
+                --%>
+                <c:if test="${signedInUser eq post.author}">
+                    <div class="card-footer">
+                        <button id="btnDelete" class="btn btn-danger">삭제</button>
+                        <button id="btnUpdate" class="btn btn-success">수정 완료</button>
+                    </div>
+                </c:if>
             </div>
         </main>
 		

@@ -77,9 +77,12 @@
                             <textarea class="form-control"
                                 name="content" rows="5" cols="80" placeholder="내용" required></textarea>
                         </div>
-                        <div class="my-2">
+                        <%-- d-none: 요소는 생성되지만 화면에서는 보이지 않음. 
+                             작성자 input의 value를 로그인한 사용자 아이디로 채움.
+                        --%>
+                        <div class="my-2 d-none">
                             <input class="form-control"
-                                type="text" name="author" placeholder="작성자" required />
+                                type="text" name="author" value="${signedInUser}" readonly />
                         </div>
                         <div class="my-2">
                             <input class="form-control btn btn-success" 
