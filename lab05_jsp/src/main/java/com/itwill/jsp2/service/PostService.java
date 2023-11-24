@@ -10,6 +10,7 @@ import com.itwill.jsp2.dto.PostCreateDto;
 import com.itwill.jsp2.dto.PostListItemDto;
 import com.itwill.jsp2.dto.PostUpdateDto;
 import com.itwill.jsp2.repository.PostDao;
+import com.itwill.jsp2.repository.UserDao;
 
 // Model 2 MVC 아키텍쳐에서 서비스(비즈니스) 계층을 담당하는 클래스.
 public class PostService {
@@ -18,10 +19,16 @@ public class PostService {
     // singleton 적용:
     private static PostService instance = null;
     
-    private PostDao postDao;
+    private final PostDao postDao;
+    private final UserDao userDao;
+    
+    // final로 선언된 필드는 반드시 명시적으로 초기화를 수행해야 함!
+    // (1) 필드를 선언하는 위치에서 초기화를 하거나,
+    // (2) 생성자에서 초기화.
     
     private PostService() {
         postDao = PostDao.getInstance();
+        userDao = UserDao.getInstance();
     }
     
     public static PostService getInstance() {
@@ -52,6 +59,11 @@ public class PostService {
         // PostCreateDto를 Post 타입으로 변환해서, PostDao의 메서드(insert)를 호출할 때 전달.
         int result = postDao.insert(dto.toPost());
         log.debug("insert result = {}", result);
+        
+        if (result == 1) { // 새 포스트 작성을 성공하면, 
+            // 포스트 작성자에게 10 포인트를 지급.
+            userDao.updatePoints(10, dto.getAuthor());
+        }
     }
     
     public Post read(Long id) {

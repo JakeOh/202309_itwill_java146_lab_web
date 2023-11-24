@@ -95,6 +95,36 @@ public class UserDao {
         return user;
     }
     
+    // 사용자가 포스트를 작성했을 때 포인트를 지급:
+    private static final String SQL_UPDATE_POINT = 
+            "update USERS set POINTS = POINTS + ? where USERID = ?";
+    
+    public int updatePoints(int point, String userid) {
+        log.debug("updatePoints(point={}, userid={})", point, userid);
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int result = 0;
+        try {
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE_POINT);
+            log.debug(SQL_UPDATE_POINT);
+            
+            stmt.setInt(1, point);
+            stmt.setString(2, userid);
+            
+            result = stmt.executeUpdate();
+            log.debug("포인트 업데이트 result = {}", result);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+        return result;
+    }
+    
     private User generateUserFromRS(ResultSet rs) throws SQLException {
         Long id = rs.getLong("ID");
         String userid = rs.getString("USERID");
