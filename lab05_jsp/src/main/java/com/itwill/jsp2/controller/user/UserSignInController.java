@@ -1,6 +1,7 @@
 package com.itwill.jsp2.controller.user;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +59,9 @@ public class UserSignInController extends HttpServlet {
 		User signedInUser = userService.signIn(dto);
 		
 	    // 성공이면 포스트 목록 페이지로 이동, 실패면 로그인 페이지로 이동.
+		String target = request.getParameter("target"); // 로그인 성공 시 이동할 페이지(타겟)
+        log.debug("target={}", target);
+        
 		if (signedInUser != null) {
 		    HttpSession session = request.getSession();
 		    //-> 세션이 생성되어 있지 않은 경우에는 새로운 세션 객체를 생성해서 리턴,
@@ -67,12 +71,12 @@ public class UserSignInController extends HttpServlet {
 		    //-> 세션에 로그인 성공한 사용자의 아이디를 저장.
 		    
 		    // 로그인 성공인 경우에는 요청 파라미터 target의 값으로 이동(redirect)
-		    String target = request.getParameter("target");
-		    log.debug("target={}", target);
-		    
 		    response.sendRedirect(target);
+		    
 		} else {
-		    String url = request.getContextPath() + "/user/signin?result=fail";
+		    String url = request.getContextPath() 
+		            + "/user/signin?result=fail&target="
+		            + URLEncoder.encode(target, "UTF-8");
 		    response.sendRedirect(url);
 		}
 	}
