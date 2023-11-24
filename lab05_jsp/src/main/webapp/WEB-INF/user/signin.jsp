@@ -37,7 +37,7 @@
                                 type="password" name="password" placeholder="비밀번호" required />
                         </div>
                         <div class="d-none">
-                            <input type="text" name="target" value="${param.target}" readonly />
+                            <input type="hidden" name="target" value="${param.target}" readonly />
                         </div>
                         <div>
                             <input class="form-control btn btn-primary"

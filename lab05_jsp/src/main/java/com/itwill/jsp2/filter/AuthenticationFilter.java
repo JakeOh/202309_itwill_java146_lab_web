@@ -1,6 +1,8 @@
 package com.itwill.jsp2.filter;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,12 +50,28 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		// 로그인 되어 있으면, (서블릿으로 요청을 전달해서) 계속 요청을 처리.
 
 	    HttpServletRequest req = (HttpServletRequest) request;
+	    
+	    // 필터로 들어온 요청(request)의 정보(요청 주소, ...)
+//	    log.debug("URL: {}", req.getRequestURL()); //-> (예) http://localhost:8081/jsp2/post/details
+//	    log.debug("URI: {}", req.getRequestURI()); //-> (예) /jsp2/post/details
+//	    log.debug("query string: {}", req.getQueryString()); //-> (예) id=1
+	    
+	    String reqUrl = req.getRequestURL().toString(); // 요청 주소(URL)
+	    String qs = req.getQueryString(); // 질의 문자열(query string)
+	    String target = ""; // 로그인 성공하면 이동(redirect)할 타겟 주소
+	    if (qs == null) { // 질의 문자열이 없는 경우
+	        target = URLEncoder.encode(reqUrl, "UTF-8");
+	    } else { // 질의 문자열이 있는 경우
+	        target = URLEncoder.encode(reqUrl + "?" + qs, "UTF-8");
+	    }
+	    log.debug("target={}", target);
+	    
 		HttpSession session = req.getSession();
 		Object signedInUser = session.getAttribute("signedInUser");
 		if (signedInUser == null) { // 로그인 안 된 상태
 		    log.debug("로그아웃 상태 ---> 로그인 페이지로 이동");
 		    
-		    String url = req.getContextPath() + "/user/signin"; // 로그인 페이지
+		    String url = req.getContextPath() + "/user/signin?target=" + target; // 로그인 페이지
 		    ((HttpServletResponse) response).sendRedirect(url);
 		} else { // 로그인된 상태
 		    log.debug("로그인 상태: {}", signedInUser);

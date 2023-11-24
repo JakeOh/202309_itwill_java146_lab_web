@@ -18,6 +18,7 @@
         </header>
         
         <!-- 내비게이션 메뉴 -->
+        <c:set var="targetURL" value="http://localhost:8081/jsp2" />
         <nav class="my-2 navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button"
@@ -48,7 +49,7 @@
                         <c:if test="${empty signedInUser}">
                             <li class="nav-item">
                                 <c:url var="signInPage" value="/user/signin">
-                                    <c:param name="target" value="http://localhost:8081/jsp2/"></c:param>
+                                    <c:param name="target" value="${targetURL}" />
                                 </c:url>
                                 <a class="nav-link" href=${signInPage}>로그인</a>
                             </li>
