@@ -14,6 +14,7 @@
 	<body>
 		<header>
             <h1>메인 페이지</h1>
+            <h2>${now}</h2>
         </header>
 		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 

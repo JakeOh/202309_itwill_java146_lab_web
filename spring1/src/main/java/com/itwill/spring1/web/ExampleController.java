@@ -1,6 +1,9 @@
 package com.itwill.spring1.web;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 public class ExampleController {
 
     @GetMapping("/") //-> 컨텍스트 루트로 GET 방식의 요청이 왔을 때 호출되는 메서드
-    public String home() {
+    public String home(Model model) {
         log.debug("home()");
+        
+        LocalDateTime now = LocalDateTime.now(); // 현재 시간
+        model.addAttribute("now", now);
         
         return "home";
     }
