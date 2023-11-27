@@ -14,16 +14,25 @@
 	</head>
 	<body>
 		<header>
-            <h1>메인 페이지</h1>
-            <h2>${now}</h2>
+            <h1>Ex1 페이지</h1>
         </header>
         
         <nav>
             <li>
-                <c:url var="ex1Page" value="/ex1" />
-                <a href="${ex1Page}">ex1</a>
+                <c:url var="homePage" value="/" />
+                <a href="${homePage}">메인 페이지</a>
             </li>
         </nav>
+        
+        <main>
+            <h2>GET 요청</h2>
+            <c:url var="ex2" value="/ex2" />
+            <form action="${ex2}" method="get">
+                <input type="text" name="username" placeholder="사용자 이름" />
+                <input type="number" name="age" placeholder="나이" />
+                <input type="submit" value="제출" />
+            </form>
+        </main>
 		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 

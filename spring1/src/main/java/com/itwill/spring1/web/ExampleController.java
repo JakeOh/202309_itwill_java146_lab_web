@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,20 @@ public class ExampleController {
         model.addAttribute("now", now);
         
         return "home";
+        // 컨트롤러 메서드가 문자열을 리턴하면 디스패쳐 서블릿이 뷰의 이름을 찾는 데 사용.
+        // /WEB-INF/views/home.jsp
+    }
+    
+    @GetMapping("/ex1")
+    public void example1() {
+        log.debug("example1()");
+        // 컨트롤러 메서드가 void인 경우(리턴값이 없는 경우), 요청 주소가 뷰의 경로(이름)가 됨.
+    }
+    
+    @GetMapping("/ex2")
+    public void example2(@RequestParam(name = "username") String username, 
+            @RequestParam(name = "age", defaultValue = "0") int age) {
+        log.debug("example2(username={}, age={})", username, age);
     }
     
 }

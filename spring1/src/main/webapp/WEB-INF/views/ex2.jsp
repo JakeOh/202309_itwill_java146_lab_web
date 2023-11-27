@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Spring 1</title>
+		<title>Spring2</title>
 		
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
             rel="stylesheet" 
@@ -14,16 +14,19 @@
 	</head>
 	<body>
 		<header>
-            <h1>메인 페이지</h1>
-            <h2>${now}</h2>
+            <h1>Ex2 페이지</h1>
         </header>
         
         <nav>
             <li>
-                <c:url var="ex1Page" value="/ex1" />
-                <a href="${ex1Page}">ex1</a>
+                <c:url var="homePage" value="/" />
+                <a href="${homePage}">메인 페이지</a>
             </li>
         </nav>
+        
+        <main>
+            <h2>요청 처리 결과</h2>
+        </main>
 		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
