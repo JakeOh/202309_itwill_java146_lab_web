@@ -41,6 +41,11 @@ public class ExampleController {
     @GetMapping("/ex2")
     public void example2(@RequestParam(name = "username") String username, 
             @RequestParam(name = "age", defaultValue = "0") int age) {
+        // @RequestParam: 디스패쳐 서블릿에서 요청 파라미터를 분석(request.getParameter(name))해서 
+        // 컨트롤러 메서드를 호출할 때 아규먼트를 전달할 수 있음.
+        // name 속성: 요청 파라미터 이름.
+        // defaultValue 속성: 요청 파라미터 값이 없을 때(빈 문자열일 때) 사용할 기본값.
+        
         log.debug("example2(username={}, age={})", username, age);
     }
     

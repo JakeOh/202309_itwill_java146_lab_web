@@ -10,6 +10,10 @@
     <name>Spring1</name>
     <description>Spring Web MVC example</description>
     
+    <properties>
+        <spring.version>6.1.1</spring.version>
+    </properties>
+    
     <dependencies> <!-- 프로젝트 의존성(외부 라이브러리)들 설정 -->
         <!-- Tomcat 10.1.x에서 JSTL(Jakarta Standard Tag Library)를 사용하기 위한 설정 -->
         <!-- Jakarta Standard Tag Library API -->
@@ -96,28 +100,28 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>6.1.1</version>
+            <version>${spring.version}</version>
         </dependency>
         
         <!-- Spring Context -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>6.1.1</version>
+            <version>${spring.version}</version>
         </dependency>
         
         <!-- Spring Web MVC -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>6.1.1</version>
+            <version>${spring.version}</version>
         </dependency>
         
         <!-- Spring TestContext Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>6.1.1</version>
+            <version>${spring.version}</version>
         </dependency>
 
     </dependencies>

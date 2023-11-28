@@ -22,6 +22,10 @@
                 <c:url var="homePage" value="/" />
                 <a href="${homePage}">메인 페이지</a>
             </li>
+            <li>
+                <c:url var="ex1Page" value="/ex1" />
+                <a href="${ex1Page}">ex1</a>
+            </li>
         </nav>
         
         <main>
