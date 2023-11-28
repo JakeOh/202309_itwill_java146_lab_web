@@ -8,7 +8,17 @@
         http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
     
     <!-- Spring MVC 설정들을 애너테이션 기반으로 설정할 수 있도록 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     
     <!-- Spring MVC에서 dispatcherServlet이 처리하지 않는 정적 요청에 필요한 파일들 
     (image, css, javascript, ...)이 있는 폴더 위치를 설정.
