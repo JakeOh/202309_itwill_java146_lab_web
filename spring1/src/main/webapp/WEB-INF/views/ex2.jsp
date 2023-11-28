@@ -18,18 +18,21 @@
         </header>
         
         <nav>
-            <li>
-                <c:url var="homePage" value="/" />
-                <a href="${homePage}">메인 페이지</a>
-            </li>
-            <li>
-                <c:url var="ex1Page" value="/ex1" />
-                <a href="${ex1Page}">ex1</a>
-            </li>
+            <ul>
+                <li>
+                    <c:url var="homePage" value="/" />
+                    <a href="${homePage}">메인 페이지</a>
+                </li>
+                <li>
+                    <c:url var="ex1Page" value="/ex1" />
+                    <a href="${ex1Page}">ex1</a>
+                </li>
+            </ul>
         </nav>
         
         <main>
             <h2>요청 처리 결과</h2>
+            <div>dto: ${dto}</div>
         </main>
 		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 

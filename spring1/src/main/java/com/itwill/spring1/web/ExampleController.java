@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.spring1.dto.ExampleDto;
 
@@ -43,24 +45,75 @@ public class ExampleController {
     
     @GetMapping("/ex2")
     public void example2(@RequestParam(name = "username") String username, 
-            @RequestParam(name = "age", defaultValue = "0") int age) {
+            @RequestParam(name = "age", defaultValue = "0") int age,
+            Model model) {
         // @RequestParam: 디스패쳐 서블릿에서 요청 파라미터를 분석(request.getParameter(name))해서 
         // 컨트롤러 메서드를 호출할 때 아규먼트를 전달할 수 있음.
         // name 속성: 요청 파라미터 이름.
         // defaultValue 속성: 요청 파라미터 값이 없을 때(빈 문자열일 때) 사용할 기본값.
         
+        ExampleDto dto = ExampleDto.builder().age(age).username(username).build();
+        model.addAttribute("dto", dto); //-> 뷰에 전달되는 데이터.
+        
         log.debug("example2(username={}, age={})", username, age);
     }
     
     @PostMapping("/ex3")
-    public String example3(ExampleDto dto) {
+    public String example3(@ModelAttribute(name = "dto") ExampleDto dto) {
         log.debug("example3(dto={})", dto);
         // 디스패쳐 서블릿이 컨트롤러 메서드를 호출하기 위해서
         // (1) request.getParameter("username"), request.getParameter("age")
         // (2) ExampleDto의 생성자 호출 -> 객체 생성.
         // (3) DTO 객체를 example3() 메서드의 아규먼트로 전달.
         
+        // @ModelAttribute(name = "dto") ExampleDto dto
+        //-> model.addAttribute("dto", dto); 코드 작성과 같은 효과.
+        //-> 컨트롤러 메서드의 아규먼트를 뷰에 전달하는 모델 속성(attribute)로 설정함.
+        
         return "ex2"; // 뷰(jsp 파일) 이름을 리턴.
+    }
+    
+    @GetMapping("/test")
+    public void test() {
+        log.debug("test()");
+    }
+    
+    @GetMapping("/forward")
+    public String forward() {
+        log.debug("forward()");
+        
+        return "forward:/test"; // 요청 주소 "/test"로 전달(forward)
+        // 포워드 방식의 페이지 이동 - 요청 주소가 최초의 요청 주소 그대로 유지.
+    }
+    
+    @GetMapping("/redirect")
+    public String redirect() {
+        log.debug("redirect()");
+        
+        return "redirect:/test"; // 요청 주소 "/redirect"로 이동(redirect)
+        // 리다이렉트 방식의 페이지 이동 - 응답 완료 & 새로운 요청 - 요청 주소가 바뀜.
+    }
+    
+    @GetMapping("/rest1")
+    @ResponseBody
+    //-> 컨트롤러 메서드가 리턴하는 값이 뷰를 찾기 위한 문자열이 아니라,
+    // 응답 패킷의 바디로 사용됨 -> 클라이언트로 직접 전달되는 데이터.
+    public String rest1() {
+        log.debug("rest1()");
+        
+        return "Hello";
+    }
+    
+    @GetMapping("/rest2")
+    @ResponseBody
+    public ExampleDto rest2() {
+        log.debug("rest2()");
+        
+        ExampleDto dto = ExampleDto.builder().age(16).username("홍길동").build();
+        
+        return dto;
+        // REST 컨트롤러가 리턴한 자바 객체를 jackson-databind 라이브러리에서
+        // JSON(JavaScript Object Notation) 문자열로 변환 후 클라이언트로 응답.
     }
     
 }
