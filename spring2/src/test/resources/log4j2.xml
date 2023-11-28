@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p [%-40.40logger] %m%n" />
+        </Console>
+        <!-- 로그 패턴: 
+          o. %d, %date: 로그가 발생한 날짜/시간.
+          o. %p, %level: 로그 레벨. all(trace) < debug < info < warn < error < fatal < off
+          o. %c, %logger: 로그를 쓰는 로거(logger)의 이름.
+          o. %m, %msg, %message: 로그 메시지.
+          o. %n: 줄바꿈(new line)
+          o. %L, %line: 로그가 발생한 소스의 라인 번호.
+          ...
+        -->
+    </Appenders>
+    <Loggers>
+        <!-- org.springframework 로 시작하는 logger들은 debug 레벨 이상만 출력 -->
+        <Logger name="org.springframework" level="debug" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+    
+        <!-- 이름이 com.zaxxer.hikari 로 시작하는 logger들은 info 레벨 이상의 로그만 출력 -->
+        <Logger name="com.zaxxer.hikari" level="info" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        
+        <!-- logger 출력 기본값: debug 이상을 출력 -->
+        <Root level="debug" additivity="false">
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
