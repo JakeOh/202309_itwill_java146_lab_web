@@ -5,7 +5,10 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.itwill.spring1.dto.ExampleDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,6 +50,17 @@ public class ExampleController {
         // defaultValue 속성: 요청 파라미터 값이 없을 때(빈 문자열일 때) 사용할 기본값.
         
         log.debug("example2(username={}, age={})", username, age);
+    }
+    
+    @PostMapping("/ex3")
+    public String example3(ExampleDto dto) {
+        log.debug("example3(dto={})", dto);
+        // 디스패쳐 서블릿이 컨트롤러 메서드를 호출하기 위해서
+        // (1) request.getParameter("username"), request.getParameter("age")
+        // (2) ExampleDto의 생성자 호출 -> 객체 생성.
+        // (3) DTO 객체를 example3() 메서드의 아규먼트로 전달.
+        
+        return "ex2"; // 뷰(jsp 파일) 이름을 리턴.
     }
     
 }

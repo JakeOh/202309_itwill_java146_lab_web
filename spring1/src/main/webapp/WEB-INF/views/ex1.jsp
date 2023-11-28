@@ -32,6 +32,14 @@
                 <input type="number" name="age" placeholder="나이" />
                 <input type="submit" value="제출" />
             </form>
+            
+            <h2>POST 요청</h2>
+            <c:url var="ex3" value="/ex3" />
+            <form action="${ex3}" method="post">
+                <input type="text" name="username" placeholder="사용자 이름" />
+                <input type="number" name="age" placeholder="나이" />
+                <input type="submit" value="제출" />
+            </form>
         </main>
 		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 

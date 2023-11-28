@@ -11,7 +11,7 @@
     <description>Spring Web MVC example</description>
     
     <properties>
-        <spring.version>6.1.1</spring.version>
+        <spring.version>6.0.9</spring.version>
     </properties>
     
     <dependencies> <!-- 프로젝트 의존성(외부 라이브러리)들 설정 -->
