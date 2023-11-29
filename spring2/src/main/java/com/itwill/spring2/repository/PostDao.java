@@ -10,5 +10,6 @@ public interface PostDao {
     Post selectById(long id);
     int insert(Post post);
     int update(Post post);
+    int delete(long id);
     
 }

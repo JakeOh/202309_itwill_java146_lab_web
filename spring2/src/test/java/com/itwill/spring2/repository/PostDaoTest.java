@@ -45,7 +45,7 @@ public class PostDaoTest {
         Assertions.assertNull(p);
     }
     
-    @Test
+//    @Test
     public void insertTest() {
         Post post = Post.builder()
                 .title("테스트 MyBatis")
@@ -54,6 +54,31 @@ public class PostDaoTest {
                 .build();
         int result = postDao.insert(post);
         Assertions.assertEquals(1, result);
+    }
+    
+//    @Test
+    public void updateTest() {
+        // 수정할 포스트 내용
+        Post post = Post.builder()
+                .id(101L)
+                .title("update")
+                .content("update test")
+                .build();
+        int result = postDao.update(post); // 아이디가 존재하는 경우 업데이트 성공
+        Assertions.assertEquals(1, result);
+        
+        post = Post.builder().id(1_000L).title("").content("").build();
+        result = postDao.update(post); // 아이디가 존재하지 않는 경우 업데이트 실패
+        Assertions.assertEquals(0, result);
+    }
+    
+    @Test
+    public void deleteTest() {
+        int result = postDao.delete(102); // 아이디가 존재하는 경우
+        Assertions.assertEquals(1, result);
+        
+        result = postDao.delete(1_000); // 아이디가 존재하지 않는 경우
+        Assertions.assertEquals(0, result);
     }
     
 }

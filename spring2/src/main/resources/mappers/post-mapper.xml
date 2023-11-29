@@ -22,6 +22,15 @@
     </insert>
     
     <!-- POSTS 테이블에서 해당 아이디의 제목, 내용, 수정시간을 업데이트 -->
-    
+    <update id="update">
+        update POSTS
+        set TITLE = #{title}, CONTENT = #{content}, MODIFIED_TIME = systimestamp
+        where ID = #{id}
+    </update>
+
+    <!-- POSTS 테이블에서 아이디(PK)로 행을 삭제 -->
+    <delete id="delete">
+        delete from POSTS where ID = #{id}
+    </delete>
 
 </mapper>
