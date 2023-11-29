@@ -10,5 +10,18 @@
     <select id="selectOrderByIdDesc" resultType="Post">
         select * from POSTS order by ID desc
     </select>
+    
+    <!-- POSTS 테이블에서 아이디(PK)로 검색 -->
+    <select id="selectById" resultType="Post">
+        select * from POSTS where ID = #{id}
+    </select>
+    
+    <!-- POSTS 테이블에 새 포스트 삽입 -->
+    <insert id="insert">
+        insert into POSTS (TITLE, CONTENT, AUTHOR) values (#{title}, #{content}, #{author})
+    </insert>
+    
+    <!-- POSTS 테이블에서 해당 아이디의 제목, 내용, 수정시간을 업데이트 -->
+    
 
 </mapper>

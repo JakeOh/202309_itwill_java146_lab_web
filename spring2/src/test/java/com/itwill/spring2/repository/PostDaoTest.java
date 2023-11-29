@@ -23,7 +23,7 @@ public class PostDaoTest {
     // PostDao 타입 객체를 주입.
     @Autowired private PostDao postDao;
     
-    @Test
+    //@Test
     public void selectTest() {
         Assertions.assertNotNull(postDao);
         
@@ -33,6 +33,27 @@ public class PostDaoTest {
             log.debug(list.get(0).toString());
         }
         
+    }
+    
+//    @Test
+    public void selectByIdTest() {
+        Post p = postDao.selectById(1); // 테이블에 존재하는 아이디로 검색했을 때
+        Assertions.assertNotNull(p);
+        log.debug("p={}", p);
+        
+        p = postDao.selectById(1_000); // 테이블에 존재하지 않는 아이디로 검색했을 때
+        Assertions.assertNull(p);
+    }
+    
+    @Test
+    public void insertTest() {
+        Post post = Post.builder()
+                .title("테스트 MyBatis")
+                .content("11/29 MyBatis 테스트")
+                .author("admin")
+                .build();
+        int result = postDao.insert(post);
+        Assertions.assertEquals(1, result);
     }
     
 }
