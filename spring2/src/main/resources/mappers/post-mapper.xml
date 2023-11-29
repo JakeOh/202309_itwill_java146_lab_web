@@ -7,7 +7,7 @@
 <mapper namespace="com.itwill.spring2.repository.PostDao">
 
     <!-- POSTS 테이블 전체 검색, 아이디 내림차순 정렬 -->
-    <select id="selectOrderByIdDesc" resultType="com.itwill.spring2.domain.Post">
+    <select id="selectOrderByIdDesc" resultType="Post">
         select * from POSTS order by ID desc
     </select>
 

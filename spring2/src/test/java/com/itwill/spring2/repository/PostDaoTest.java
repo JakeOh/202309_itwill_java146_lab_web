@@ -29,6 +29,9 @@ public class PostDaoTest {
         
         List<Post> list = postDao.selectOrderByIdDesc();
         log.debug("list size = {}", list.size());
+        if (list.size() > 0) {
+            log.debug(list.get(0).toString());
+        }
         
     }
     
