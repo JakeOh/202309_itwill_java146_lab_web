@@ -1,9 +1,14 @@
 package com.itwill.spring2.datasource;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -29,18 +34,39 @@ public class HikariDataSourceTest {
      */
     
     @Autowired // 스프링 컨테이너가 생성/관리하는 빈(bean)을 변수에 자동 할당(주입).
+    @Qualifier("hikariConfig")
     private HikariConfig config;
+    /*
+     * HikariConfig: super type
+     * |__ HikariDataSource: sub type
+     * 다형성 때문에 HikariConfig 타입으로 선언한 변수에는
+     * HikariConfig 타입 객체와 HikariDataSource 타입 객체를 모두 주입할 수 있음.
+     * 컨텍스트 파일에서 설정한 id값으로 특정 빈(bean)을 주입받을 때 @Qualifier("id")를 사용.
+     */
     
     @Autowired
     private HikariDataSource ds;
     
+    @Autowired
+    private SqlSessionFactoryBean session;
+    
     @Test
-    public void test() {
+    public void test() throws SQLException {
         Assertions.assertNotNull(config);
         log.debug("config={}", config);
         
         Assertions.assertNotNull(ds);
         log.debug("ds={}", ds);
+        
+        Assertions.assertNotNull(session);
+        log.debug("session={}", session);
+        
+        Connection conn = ds.getConnection(); // 데이터소스(커넥션 풀)에서 커넥션을 빌려옴.
+        Assertions.assertNotNull(conn);
+        log.debug("conn={}", conn);
+        
+        conn.close(); // 사용했던 커넥션 객체를 풀에 반환.
+        log.debug("커넥션 반환 성공");
     }
 
 }

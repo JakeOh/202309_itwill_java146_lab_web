@@ -23,5 +23,19 @@
     <bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
         <constructor-arg ref="hikariConfig" />
     </bean>
+    
+    <!-- SqlSessionFactoryBean: 
+        데이터 소스(커넥션 풀)을 이용해서 SQL 문장들을 실행/결과 처리를 하고 리턴하는 객체.
+    -->
+    <bean id="session" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="ds" />
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml" />
+    </bean>
+    
+    <!-- MyBatis 프레임워크에서 생성하고 관리하는 빈(bean)들을 base-package와 
+        그 하위 패키지에서 찾음.
+        PostDao, UserDao 인터페이스들을 작성하는 패키지. 
+    -->
+    <mybatis:scan base-package="com.itwill.spring2.repository" />
 
 </beans>
