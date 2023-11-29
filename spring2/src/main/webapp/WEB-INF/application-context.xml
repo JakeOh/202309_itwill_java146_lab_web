@@ -39,4 +39,8 @@
     -->
     <mybatis:scan base-package="com.itwill.spring2.repository" />
 
+    <!-- 스프링 컨테이너에서 컴포넌트 빈(예: @Service, @Component, ...)들을 
+    검색할 기본 패키지를 설정 -->
+    <context:component-scan base-package="com.itwill.spring2.service" />
+
 </beans>
