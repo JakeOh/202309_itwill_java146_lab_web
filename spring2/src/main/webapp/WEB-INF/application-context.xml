@@ -17,5 +17,11 @@
         <property name="username" value="scott" />
         <property name="password" value="tiger" />
     </bean>
+    
+    <!-- HikariDataSource 객체(bean) 생서을 위한 설정 -->
+    <!-- HikariDataSrouce ds = new HikariDataSource(config); -->
+    <bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+        <constructor-arg ref="hikariConfig" />
+    </bean>
 
 </beans>
