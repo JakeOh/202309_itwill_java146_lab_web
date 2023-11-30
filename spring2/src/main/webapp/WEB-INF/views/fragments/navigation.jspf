@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <ul class="navbar-nav bg-light">
+        <li class="nav-item">
+            <c:url var="homePage" value="/" />
+            <a class="nav-link" href="${homePage}">홈</a>
+        </li>
+        <li class="nav-item">
+            <c:url var="postListPage" value="/post/list" />
+            <a class="nav-link" href="${postListPage}">포스트 목록</a>
+        </li>
+        <li class="nav-item">
+            <c:url var="postCreatePage" value="/post/create" />
+            <a class="nav-link" href="${postCreatePage}">새 포스트</a>
+        </li>
+    </ul>
+</nav>

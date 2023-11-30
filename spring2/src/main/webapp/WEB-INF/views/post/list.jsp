@@ -13,14 +13,18 @@
             crossorigin="anonymous">
 	</head>
 	<body>
-		<header>
-            <h1>포스트 목록 페이지</h1>
-        </header>
-        
-        <main>
+	<div class="container-fluid">
+        <!-- header -->
+        <c:set var="title" value="포스트 목록" />
+        <%@ include file="../fragments/title.jspf" %>
+    
+        <!-- navigation -->
+        <%@ include file="../fragments/navigation.jspf" %>
+    
+        <main class="my-2">
         <!-- 포스트 목록 테이블 -->
-            <div>
-                <table>
+            <div class="card">
+                <table class="card-body table table-hover">
                     <thead>
                         <tr>
                             <th>번호</th>
@@ -42,9 +46,10 @@
                 </table>
             </div>
         </main>
+	</div>	
 		
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
-    	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
-    	    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+	    crossorigin="anonymous"></script>
 	</body>
 </html>

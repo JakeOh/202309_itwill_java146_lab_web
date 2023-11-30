@@ -13,21 +13,22 @@
             crossorigin="anonymous">
 	</head>
 	<body>
-		<header>
-            <h1>메인 페이지</h1>
-        </header>
+	<div class="container-fluid">
+        <!-- 페이지 헤더(header) - 타이틀  -->
+        <c:set var="title" value="메인" />
+        <%@ include file="fragments/title.jspf" %>
         
-        <nav>
-            <ul>
-                <li>
-                    <c:url var="postListPage" value="/post/list" />
-                    <a href="${postListPage}">포스트 목록</a>
-                </li>
-            </ul>
-        </nav>
+        <!-- 내비게이션 메뉴 -->
+        <%@ include file="fragments/navigation.jspf" %>
+        
+        <!-- 메인 -->
+        <main></main>
+        
+	</div>	
 		
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
-    	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
-    	    crossorigin="anonymous"></script>
-	</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+	    crossorigin="anonymous"></script>
+	
+    </body>
 </html>
