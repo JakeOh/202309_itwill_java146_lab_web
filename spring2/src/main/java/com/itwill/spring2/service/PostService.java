@@ -6,16 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.spring2.domain.Post;
+import com.itwill.spring2.dto.post.PostCreateDto;
 import com.itwill.spring2.dto.post.PostListItemDto;
 import com.itwill.spring2.repository.PostDao;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service // 스프링 컨테이너에서 관리하는 서비스 컴포넌트.
 public class PostService {
     // PostDao를 주입받음.
-    @Autowired private PostDao postDao;
+    // @Autowired private PostDao postDao;
+    private final PostDao postDao;
+//    public PostService(PostDao postDao) {
+//        this.postDao = postDao;
+//    }
 
     public List<PostListItemDto> read() {
         log.debug("read()");
@@ -27,6 +34,16 @@ public class PostService {
         return list.stream()
                 .map(PostListItemDto::fromEntity) // map((x) -> PostListItemDto.fromEntity(x))
                 .toList();
+    }
+    
+    public int create(PostCreateDto dto) {
+        log.debug("create(dto={})", dto);
+        
+        // 리포지토리(DAO) 계층의 메서드를 호출해서 테이블에 데이터를 삽입(insert)
+        int result = postDao.insert(dto.toEntity());
+        log.debug("create result = {}", result);
+        
+        return result;
     }
     
 }

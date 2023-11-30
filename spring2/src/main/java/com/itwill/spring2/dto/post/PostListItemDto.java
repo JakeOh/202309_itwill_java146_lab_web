@@ -16,6 +16,7 @@ public class PostListItemDto {
     private String author;
     private LocalDateTime modifiedTime;
     
+    // Post 모델(엔터티) 객체를 PostListItemDto 타입 객체로 변환해서 리턴.
     public static PostListItemDto fromEntity(Post post) {
         return PostListItemDto.builder()
                 .id(post.getId())

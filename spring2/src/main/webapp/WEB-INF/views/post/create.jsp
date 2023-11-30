@@ -23,7 +23,8 @@
         
         <main class="my-2">
             <div class="my-2 card">
-                <form class="card-body">
+                <c:url var="postCreatePage" value="/post/create" />
+                <form class="card-body" action="${postCreatePage}" method="post">
                     <div class="my-2">
                         <input class="form-control" 
                             type="text" name="title" placeholder="제목" required autofocus />

@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.spring2.domain.Post;
+import com.itwill.spring2.dto.post.PostCreateDto;
 import com.itwill.spring2.dto.post.PostListItemDto;
 import com.itwill.spring2.service.PostService;
 
@@ -27,7 +29,6 @@ public class PostController {
     
     // (2) 생성자에 의한 의존성 주입
     private final PostService postService;
-    
 //    public PostController(PostService s) {
 //        this.postService = s;
 //    }
@@ -46,7 +47,17 @@ public class PostController {
     
     @GetMapping("/create")
     public void create() {
-        log.debug("create()");
+        log.debug("GET - create()");
+    }
+    
+    @PostMapping("/create")
+    public String create(PostCreateDto dto) {
+        log.debug("POST - create(dto={})", dto);
+        
+        // 서비스 계층의 메서드를 호출해서 새 포스트 작성 서비스를 수행.
+        postService.create(dto);
+        
+        return "redirect:/post/list"; // 포스트 목록 페이지로 이동(redirect)
     }
 
 }
