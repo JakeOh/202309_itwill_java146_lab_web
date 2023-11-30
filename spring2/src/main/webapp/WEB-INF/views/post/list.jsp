@@ -39,7 +39,7 @@
                             <td>${post.id}</td>
                             <td>${post.title}</td>
                             <td>${post.author}</td>
-                            <td>${post.modified_time}</td>
+                            <td>${post.modifiedTime}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
