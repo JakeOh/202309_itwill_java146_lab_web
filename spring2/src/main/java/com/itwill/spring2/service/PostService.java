@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.spring2.domain.Post;
 import com.itwill.spring2.dto.post.PostCreateDto;
 import com.itwill.spring2.dto.post.PostListItemDto;
+import com.itwill.spring2.dto.post.PostUpdateDto;
 import com.itwill.spring2.repository.PostDao;
 
 import lombok.RequiredArgsConstructor;
@@ -53,6 +54,24 @@ public class PostService {
         log.debug("{}", post);
         
         return post;
+    }
+    
+    public int delete(long id) {
+        log.debug("delete(id={})", id);
+        
+        // 리포지토리 계층의 메서드를 호출해서 delete SQL을 실행.
+        int result = postDao.delete(id);
+        
+        return result;
+    }
+    
+    public int update(PostUpdateDto dto) {
+        log.debug("update(dto={})", dto);
+        
+        // 리포지토리 계층의 메서드를 호출해서 update SQL을 실행.
+        int result = postDao.update(dto.toEntity());
+        
+        return result;
     }
     
 }

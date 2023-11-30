@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.spring2.domain.Post;
 import com.itwill.spring2.dto.post.PostCreateDto;
 import com.itwill.spring2.dto.post.PostListItemDto;
+import com.itwill.spring2.dto.post.PostUpdateDto;
 import com.itwill.spring2.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -72,4 +73,26 @@ public class PostController {
         model.addAttribute("post", post);
     }
 
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name = "id") long id) {
+        log.debug("delete(id={})", id);
+        
+        // 서비스 계층의 메서드를 호출해서 해당 아이디의 포스트를 삭제하는 서비스를 수행.
+        postService.delete(id);
+        
+        // 포스트 삭제후 포스트 목록 페이지로 이동(redirect)
+        return "redirect:/post/list";
+    }
+    
+    @PostMapping("/update")
+    public String update(PostUpdateDto dto) {
+        log.info("update(dto={})", dto);
+        
+        // 서비스 계층의 메서드를 호출해서 포스트 업데이트 서비스를 수행.
+        postService.update(dto);
+        
+        // 포스트 업데이트 수 포스트 목록 페이지로 이동(redirect)
+        return "redirect:/post/list";
+    }
+    
 }
