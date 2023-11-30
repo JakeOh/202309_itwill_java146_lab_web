@@ -23,7 +23,7 @@
         
         <main class="my-2">
             <div class="card">
-                <form class="card-body">
+                <form class="card-body" id="modifyForm">
                     <div class="d-none">
                         <label class="form-label" for="id">번호</label>
                         <input class="form-control" id="id" name="id"
@@ -45,8 +45,8 @@
                     </div>
                 </form>
                 <div class="card-footer">
-                    <button class="btn btn-danger">삭제</button>
-                    <button class="btn btn-success">수정완료</button>
+                    <button class="btn btn-danger" id="btnDelete">삭제</button>
+                    <button class="btn btn-success" id="btnUpdate">수정완료</button>
                 </div>
             </div>
         </main>	
@@ -56,5 +56,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
 	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
 	    crossorigin="anonymous"></script>
-	</body>
+	
+    <script src="../js/post-modify.js"></script>
+    
+    </body>
 </html>
