@@ -33,8 +33,8 @@
     </bean>
     
     <!-- 컨트롤러 클래스들을 작성하는 패키지 이름 설정. 
-    특정 패키지 아래에 컨트롤러 애너테이션(@Controller, @RestController)이 사용된 클래스들을
-    디스패쳐 서블릿이 생성하고 관리하도록 하기 위한 설정.
+    특정 패키지 아래에 컨트롤러 애너테이션(@Controller, @RestController, @Component, ...)이 
+    사용된 클래스들을 디스패쳐 서블릿이 생성하고 관리하도록 하기 위한 설정.
     -->
     <context:component-scan base-package="com.itwill.spring2.web" />
     
