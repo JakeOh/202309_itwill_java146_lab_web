@@ -2,12 +2,12 @@ package com.itwill.spring2.web;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.spring2.domain.Post;
 import com.itwill.spring2.dto.post.PostCreateDto;
@@ -58,6 +58,17 @@ public class PostController {
         postService.create(dto);
         
         return "redirect:/post/list"; // 포스트 목록 페이지로 이동(redirect)
+    }
+    
+    @GetMapping("/details")
+    public void details(@RequestParam(name = "id") long id, Model model) {
+        log.debug("details(id={})", id);
+        
+        // 서비스 계층의 메서드를 호출해서 뷰에 전달할 포스트 상세보기 내용을 읽음.
+        Post post = postService.read(id);
+        
+        // 뷰에 데이터 전달하기 위해서모델에 데이터를 속성으로 추가
+        model.addAttribute("post", post);
     }
 
 }

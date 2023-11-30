@@ -2,7 +2,6 @@ package com.itwill.spring2.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.spring2.domain.Post;
@@ -44,6 +43,16 @@ public class PostService {
         log.debug("create result = {}", result);
         
         return result;
+    }
+    
+    public Post read(long id) {
+        log.debug("read(id={})", id);
+        
+        // 리포지토리 계층의 메서드를 호출해서 DB 테이블에서 해당 아이디의 포스트 상세내용을 검색.
+        Post post = postDao.selectById(id);
+        log.debug("{}", post);
+        
+        return post;
     }
     
 }
