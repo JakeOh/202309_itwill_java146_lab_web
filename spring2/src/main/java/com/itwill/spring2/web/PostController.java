@@ -60,7 +60,8 @@ public class PostController {
         return "redirect:/post/list"; // 포스트 목록 페이지로 이동(redirect)
     }
     
-    @GetMapping("/details")
+    @GetMapping({ "/details", "/modify" })
+    //-> /post/details, /post/modify 2개의 요청을 처리하는 메서드
     public void details(@RequestParam(name = "id") long id, Model model) {
         log.debug("details(id={})", id);
         
