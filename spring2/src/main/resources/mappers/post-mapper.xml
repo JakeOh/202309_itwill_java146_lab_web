@@ -32,5 +32,29 @@
     <delete id="delete">
         delete from POSTS where ID = #{id}
     </delete>
+    
+    <!-- POSTS 테이블에서 제목, 내용, 제목 또는 내용, 작성자로 검색하기 -->
+    <select id="search" resultType="Post">
+        <bind name="searchKeyword" value="'%' + keyword + '%'" />
+        select * from POSTS
+        where 
+        <choose>
+            <when test='category eq "t"'>
+                upper(TITLE) like upper(#{searchKeyword})
+            </when>
+            <when test='category eq "c"'>
+                upper(CONTENT) like upper(#{searchKeyword})
+            </when>
+            <when test='category eq "tc"'>
+                upper(TITLE) like upper(#{searchKeyword}) 
+                or 
+                upper(CONTENT) like upper(#{searchKeyword})
+            </when>
+            <when test='category eq "a"'>
+                upper(AUTHOR) like upper(#{searchKeyword})
+            </when>
+        </choose>
+        order by ID desc
+    </select>
 
 </mapper>

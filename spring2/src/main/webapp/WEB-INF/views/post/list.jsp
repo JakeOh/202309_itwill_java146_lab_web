@@ -24,6 +24,29 @@
         <main class="my-2">
         <!-- 포스트 목록 테이블 -->
             <div class="card">
+                <div class="card-header">
+                    <c:url var="postSearchPage" value="/post/search" />
+                    <form action="${postSearchPage}" method="get">
+                        <div class="row">
+                            <div class="col-3">
+                                <select class="form-control" name="category">
+                                    <option value="t">제목</option>
+                                    <option value="c">내용</option>
+                                    <option value="tc">제목+내용</option>
+                                    <option value="a">작성자</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control" type="text" 
+                                    name="keyword" placeholder="검색어" required autofocus />
+                            </div>
+                            <div class="col-3">
+                                <input class="form-control btn btn-secondary" 
+                                    type="submit" value="검색" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <table class="card-body table table-hover">
                     <thead>
                         <tr>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.spring2.domain.Post;
 import com.itwill.spring2.dto.post.PostCreateDto;
 import com.itwill.spring2.dto.post.PostListItemDto;
+import com.itwill.spring2.dto.post.PostSearchDto;
 import com.itwill.spring2.dto.post.PostUpdateDto;
 import com.itwill.spring2.repository.PostDao;
 
@@ -72,6 +73,16 @@ public class PostService {
         int result = postDao.update(dto.toEntity());
         
         return result;
+    }
+    
+    public List<PostListItemDto> search(PostSearchDto dto) {
+        log.debug("search(dto={})", dto);
+        
+        List<Post> list = postDao.search(dto);
+        
+        return list.stream()
+                .map(PostListItemDto::fromEntity)
+                .toList();
     }
     
 }

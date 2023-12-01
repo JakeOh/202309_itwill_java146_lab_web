@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.spring2.domain.Post;
 import com.itwill.spring2.dto.post.PostCreateDto;
 import com.itwill.spring2.dto.post.PostListItemDto;
+import com.itwill.spring2.dto.post.PostSearchDto;
 import com.itwill.spring2.dto.post.PostUpdateDto;
 import com.itwill.spring2.service.PostService;
 
@@ -93,6 +94,19 @@ public class PostController {
         
         // 포스트 업데이트 수 포스트 목록 페이지로 이동(redirect)
         return "redirect:/post/list";
+    }
+    
+    @GetMapping("/search")
+    public String search(PostSearchDto dto, Model model) {
+        log.debug("search(dto={})", dto);
+        
+        // 서비스 계층의 메서드를 호출해서 검색 서비스를 수행.
+        List<PostListItemDto> list = postService.search(dto);
+        
+        // 검색 결과를 뷰에 전달하기 위해서 모델 속성(attribute)에 추가.
+        model.addAttribute("posts", list);
+        
+        return "post/list"; //-> 뷰의 경로(/WEB-INF/views/post/list.jsp)
     }
     
 }

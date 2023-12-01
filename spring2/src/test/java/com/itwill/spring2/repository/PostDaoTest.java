@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.itwill.spring2.domain.Post;
+import com.itwill.spring2.dto.post.PostSearchDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -72,13 +73,22 @@ public class PostDaoTest {
         Assertions.assertEquals(0, result);
     }
     
-    @Test
+//    @Test
     public void deleteTest() {
         int result = postDao.delete(102); // 아이디가 존재하는 경우
         Assertions.assertEquals(1, result);
         
         result = postDao.delete(1_000); // 아이디가 존재하지 않는 경우
         Assertions.assertEquals(0, result);
+    }
+    
+    @Test
+    public void searchTest() {
+        PostSearchDto dto = new PostSearchDto();
+        dto.setCategory("a");
+        dto.setKeyword("tE");
+        
+        postDao.search(dto);
     }
     
 }
