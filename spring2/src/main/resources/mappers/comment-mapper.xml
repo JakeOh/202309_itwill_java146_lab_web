@@ -10,5 +10,33 @@
         where POSTID = #{postid}
         order by ID desc
     </select>
+    
+    <!-- 특정 포스트에 새 댓글을 추가. -->
+    <insert id="insert">
+        insert into COMMENTS (POSTID, WRITER, CTEXT) 
+        values (#{postid}, #{writer}, #{ctext})
+    </insert>
+    
+    <!-- 댓글 삭제 1: PK(id)로 찾아서 1개의 댓글을 삭제 -->
+    <delete id="deleteById">
+        delete from COMMENTS where ID = #{id}
+    </delete>
+    
+    <!-- 댓글 삭제 2: 특정 포스트에 달려 있는 모든 댓글 삭제 -->
+    <delete id="deleteByPostId">
+        delete from COMMENTS where POSTID = #{postid}
+    </delete>
+    
+    <!-- 댓글 수정: 특정 댓글 아이디(PK)의 댓글 내용과 수정 시간을 업데이트 -->
+    <update id="update">
+        update COMMENTS set CTEXT = #{ctext}, MODIFIED_TIME = systimestamp
+        where ID = #{id}
+    </update>
+
+    <!-- 특정 포스트에 달려 있는 댓글 개수를 검색 -->
+    <select id="selectCommentCounts" resultType="java.lang.Long">
+        select count(ID) from COMMENTS
+        where POSTID = #{postid} 
+    </select>
 
 </mapper>
