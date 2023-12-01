@@ -61,6 +61,38 @@
                     <a href="${postModifyPage}" class="btn btn-primary">수정하기</a>
                 </div>
             </div>
+
+            <div class="my-2 card">
+                <div class="card-header d-inline-flex gap-1">
+                    <!-- collapse(접기/펼치기) 기능 버튼 -->
+                    <button class="btn btn-secondary" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseComments"
+                        aria-expanded="false"
+                        aria-controls="collapseComments">댓글 보기</button>
+                </div>
+                <div class="card-body collapse" id="collapseComments">
+                    <div class="card card-body">
+                        <!-- 내 댓글 등록 -->
+                        <div class="row my-2">
+                            <div class="col-10">
+                                <!-- 댓글 입력 창 -->
+                                <textarea class="form-control"
+                                    id="ctext" placeholder="댓글 입력"></textarea>
+                                <!-- 댓글 작성자 아이디 - TODO: 로그인 사용자 아이디로 변경 -->
+                                <input class="d-none" id="writer" value="admin" />
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-outline-success" 
+                                    id="btnRegisterComment">등록</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 포스트에 달려 있는 댓글 목록을 보여줄 영역 -->
+                        <div class="my-2" id="comments">TODO: 댓글 목록...</div>
+                    </div>
+                </div>
+            </div>
         </main>	
 	
     </div>
