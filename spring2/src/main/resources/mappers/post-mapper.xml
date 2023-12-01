@@ -37,12 +37,12 @@
     <select id="search" resultType="Post">
         <bind name="searchKeyword" value="'%' + keyword + '%'" />
         select * from POSTS
-        <where> 
+        <where>
             <choose>
-                <when test='category eq "t"'>
+                <when test='category.equals("t")'>
                     upper(TITLE) like upper(#{searchKeyword})
                 </when>
-                <when test='category eq "c"'>
+                <when test='category.equals("c")'>
                     upper(CONTENT) like upper(#{searchKeyword})
                 </when>
                 <when test='category eq "tc"'>
