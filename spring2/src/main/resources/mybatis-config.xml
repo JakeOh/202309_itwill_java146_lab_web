@@ -8,6 +8,7 @@
 
     <typeAliases>
         <typeAlias type="com.itwill.spring2.domain.Post" alias="Post" />
+        <typeAlias type="com.itwill.spring2.domain.Comment" alias="Comment"/>
     </typeAliases>
 
 </configuration>
