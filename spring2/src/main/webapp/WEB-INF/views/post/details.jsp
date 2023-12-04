@@ -94,11 +94,15 @@
 	
     </div>
 	
+    <!-- Bootstrap 자바스크립트 모듈 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
 	    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
 	    crossorigin="anonymous"></script>
     
-    <!-- 부트스트랩 모듈을 사용하는 자바스크립트 파일은 모듈을 포함시킨 다음에 작성. -->
+    <!-- Axios 자바스크립트 모듈 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- 부트스트랩 모듈과 Axiso 모듈을 사용하는 자바스크립트 파일은 모듈을 포함시킨 다음에 작성. -->
     <script src="../js/comment.js"></script>
 
 	</body>
