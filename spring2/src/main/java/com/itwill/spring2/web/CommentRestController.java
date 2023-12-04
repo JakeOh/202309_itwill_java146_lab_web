@@ -1,5 +1,6 @@
 package com.itwill.spring2.web;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ public class CommentRestController {
     private final CommentService commentService; // 생성자에 의한 의존성 주입
     
     @PostMapping
-    public String registerComment(@RequestBody CommentRegisterDto dto) {
+    public ResponseEntity<Integer> registerComment(@RequestBody CommentRegisterDto dto) {
         // 컨트롤러 메서드의 파라미터 선언에서 사용하는 애너테이션:
         // @RequestParam: 질의 문자열(query string)에 포함된 요청 파라미터를 읽을 때.
         // @ModelAttribute: POST 방식의 양식 데이터를 읽을 때.
@@ -32,7 +33,8 @@ public class CommentRestController {
         // 서비스 계층의 메서드를 호출해서 댓글 등록 서비스를 수행.
         int result = commentService.create(dto);
         
-        return "success";
+        // ResponseEntity<T>: 서버가 클라이언트로 보내는 데이터와 응답코드를 설정할 수 있는 객체.
+        return ResponseEntity.ok(result); //-> 응답코드(200:success)와 데이터 result를 클라이언트로 전송.
     }
 
 }

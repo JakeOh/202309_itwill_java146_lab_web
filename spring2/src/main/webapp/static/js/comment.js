@@ -65,6 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
         axios.post('../api/comment', data) // post 방식의 Ajax 요청으로 data를 보냄.
             .then((response) => {
                 console.log(response);
+                if (response.data === 1) {
+                    alert('댓글 등록 성공!');
+                    // 댓글 입력 textarea의 내용을 비움.
+                    document.querySelector('textarea#ctext').value = '';
+                }
+                
             }) // 성공 응답이 왔을 때 실행할 콜백 등록.
             .catch((error) => {
                 console.log(error);
