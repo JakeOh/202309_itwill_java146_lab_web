@@ -1,11 +1,16 @@
 package com.itwill.spring2.web;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.spring2.domain.Comment;
 import com.itwill.spring2.dto.comment.CommentRegisterDto;
 import com.itwill.spring2.service.CommentService;
 
@@ -35,6 +40,18 @@ public class CommentRestController {
         
         // ResponseEntity<T>: 서버가 클라이언트로 보내는 데이터와 응답코드를 설정할 수 있는 객체.
         return ResponseEntity.ok(result); //-> 응답코드(200:success)와 데이터 result를 클라이언트로 전송.
+    }
+    
+    @GetMapping("/all/{postId}")
+    public ResponseEntity<List<Comment>> getAllComments(@PathVariable long postId) {
+        // @PathVariable: 요청 주소의 일부가 변수처럼 변할 수 있는 값일 때,
+        // 요청 주소를 분석해서 컨트롤러 메서드의 파라미터로 전달.
+        log.debug("getAllComments(postId={})", postId);
+        
+        // 서비스 계층의 메서드를 호출해서 댓글 전체 목록을 가져옴.
+        List<Comment> list = commentService.read(postId);
+        
+        return ResponseEntity.ok(list);
     }
 
 }

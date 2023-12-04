@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (btnToggleComment.innerHTML === '댓글 보기') {
             btnToggleComment.innerHTML = '댓글 감추기';
+            
+            getAllComments(); // 현재 포스트의 댓글 전체 목록 요청
+            
         } else {
             btnToggleComment.innerHTML = '댓글 보기';
         }
@@ -75,6 +78,31 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch((error) => {
                 console.log(error);
             }); // 실패 응답일 때 실행할 콜백 등록.
-    }
+    } // end function registerComment
+    
+    /*
+     * 현재 상세보기 페이지의 포스트에 달려 있는 모든 댓글 목록을 요청(Ajax) 
+     * & 응답 처리 콜백 등록 
+     */
+    function getAllComments() {
+        // 댓글 목록을 요청하기 위한 포스트 번호(아이디):
+        const postId = document.querySelector('input#id').value;
+        
+        // 댓글 목록을 요청할 URI(주소, 경로)
+        const uri = `../api/comment/all/${postId}`;
+        // console.log(uri);
+        
+        axios.get(uri) // GET 방식의 Ajax 요청으 보냄.
+            .then((response) => {
+                console.log(response);
+                
+                // TODO: 댓글 목록 HTML을 작성 -> 댓글 목록을 브라우저 화면에 보여줌.
+                
+            }) // 성공 응답이 왔을 때 실행할 콜백 등록
+            .catch((error) => {
+                console.log(error);
+            }); // 요청 실패일 때 실행할 콜백 등록
+        
+    } // end function getAllComments
     
 });
