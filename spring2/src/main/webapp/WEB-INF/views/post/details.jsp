@@ -105,7 +105,7 @@
                             <!-- 수정할 댓글 아이디 -->
                             <input class="d-none" id="modalCommentId" />
                             <!-- 댓글 입력 -->
-                            <textarea class="form-control" id="modalCommnentText"></textarea>
+                            <textarea class="form-control" id="modalCommentText"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button"
