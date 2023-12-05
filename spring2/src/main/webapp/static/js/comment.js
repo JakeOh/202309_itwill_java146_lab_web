@@ -121,8 +121,47 @@ document.addEventListener('DOMContentLoaded', () => {
         // for (let i = 0; i < data.length; i++) {}
         for (let comment of data) {
             // console.log(comment);
+            // comment 객체의 modifiedTime 값(Timestamp)을 날짜/시간 타입의 문자열로 변환
+            const time = new Date(comment.modifiedTime).toLocaleString();
+            
+            htmlStr += `
+            <div class="card card-body my-1">
+                <div>
+                    <span class="d-none">${comment.id}</span>
+                    <span class="fw-bold">${comment.writer}</span>
+                    <span class="text-secondary">${time}</span>
+                </div>
+                <div>${comment.ctext}</div>
+                <div>
+                    <button class="btnCommentDelete btn btn-outline-danger" 
+                        data-id="${comment.id}">삭제</button>
+                    <button class="btnCommentModify btn btn-outline-success" 
+                        data-id="${comment.id}">수정</button>
+                </div>
+            </div>
+            `;
         }
         
+        // 작성된 댓글 목록 HTML 코드를 div#comments 영역에 추가.
+        divComments.innerHTML = htmlStr;
+        
+        // 모든 삭제 버튼을 찾아서 클릭 이벤트 리스너를 등록
+        const btnDeletes = document.querySelectorAll('button.btnCommentDelete');
+        for (let btn of btnDeletes) {
+            btn.addEventListener('click', deleteComment);
+        }
+        
+        // TODO: 모든 수정 버튼을 찾아서 클릭 이벤트 리스너를 등록
+        
     } // end function makeCommentElements()
+    
+    /*
+     * 댓글 삭제 Ajax 요청을 보내고, 응답 처리.
+     * argument e: 이벤트 객체.
+     */
+    function deleteComment(e) {
+        console.log(e.target);
+        
+    } // end function deleteComment()
     
 });
