@@ -151,7 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', deleteComment);
         }
         
-        // TODO: 모든 수정 버튼을 찾아서 클릭 이벤트 리스너를 등록
+        // 모든 수정 버튼을 찾아서 클릭 이벤트 리스너를 등록
+        const btnModifies = document.querySelectorAll('button.btnCommentModify');
+        for (let btn of btnModifies) {
+            btn.addEventListener('click', showCommentModal);
+        }
         
     } // end function makeCommentElements()
     
@@ -188,4 +192,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
     } // end function deleteComment()
     
+    /*
+     * 댓글 수정 모달 보여주기
+     */
+    function showCommentModal(e) {
+        // 이벤트 타겟(수정 버튼)에서 data-id 속성 값(댓글 아이디)를 읽음.
+        // Ajax 요청을 보내서 해당 아이디의 댓글을 검색
+        // 모달의 input과 textarea를 채움.
+        
+        const modal = new bootstrap.Modal('div#commentModal', {backdrop: true});
+        modal.show();
+    }
 });
