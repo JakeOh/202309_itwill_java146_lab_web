@@ -160,7 +160,31 @@ document.addEventListener('DOMContentLoaded', () => {
      * argument e: 이벤트 객체.
      */
     function deleteComment(e) {
-        console.log(e.target);
+        console.log(e.target); // e.target: 이벤트가 발생한 타겟. 여기서는 삭제 버튼.
+        
+        const result = confirm('정말 삭제할까요?'); //-> true:확인(Y), false:취소(N)
+        if (!result) { // 사용자가 [취소]를 클릭했을 때
+            return; // 콜백 종료
+        }
+        
+        // 삭제할 댓글 아이디를 찾음.
+        const id = e.target.getAttribute('data-id');
+        
+        // Ajax 요청을 보냄.
+        const uri = `../api/comment/${id}`;
+        axios.delete(uri) // DELETE 방식의 Ajax 요청을 보냄.
+            .then((response) => {
+                console.log(response);
+                
+                if (response.data === 1) {
+                    alert('댓글 삭제 성공!');
+                    getAllComments(); // 댓글 목록 갱신.
+                }
+                
+            }) // 응답(response)를 처리하는 콜백 등록.
+            .catch((error) => {
+                console.log(error);
+            }); // 에러(error)를 처리하는 콜백 등록.
         
     } // end function deleteComment()
     

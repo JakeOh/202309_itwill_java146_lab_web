@@ -41,4 +41,14 @@ public class CommentService {
                 .toList();
     }
 
+    public int delete(long id) {
+        log.debug("delete(id={})", id);
+        
+        // 리포지토리 계층의 메서드를 호출해서 COMMENTS 테이블에서 댓글 1개를 삭제.
+        int result = commentDao.deleteById(id);
+        log.debug("댓글 삭제 결과 = {}", result);
+        
+        return result;
+    }
+    
 }
