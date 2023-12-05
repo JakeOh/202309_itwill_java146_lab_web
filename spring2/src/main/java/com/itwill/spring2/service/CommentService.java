@@ -51,4 +51,14 @@ public class CommentService {
         return result;
     }
     
+    public CommentListItemDto readById(long id) {
+        log.debug("readById(id={})", id);
+        
+        // 리포지토리 계층의 메서드를 호출해서 COMMENTS 테이블에서 아이디로 검색.
+        Comment comment = commentDao.selectById(id);
+        log.debug(comment.toString());
+        
+        return CommentListItemDto.fromEntity(comment);
+    }
+    
 }

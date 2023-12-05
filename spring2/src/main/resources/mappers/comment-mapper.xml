@@ -38,5 +38,10 @@
         select count(ID) from COMMENTS
         where POSTID = #{postid} 
     </select>
+    
+    <!-- 댓글 아이디(PK)로 검색하기 -->
+    <select id="selectById" resultType="Comment">
+        select * from COMMENTS where ID = #{id}
+    </select>
 
 </mapper>

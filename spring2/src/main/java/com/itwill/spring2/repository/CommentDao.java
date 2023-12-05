@@ -12,5 +12,6 @@ public interface CommentDao {
     int deleteByPostId(long postid);
     int update(Comment comment);
     Long selectCommentCounts(long postid);
+    Comment selectById(long id);
     
 }

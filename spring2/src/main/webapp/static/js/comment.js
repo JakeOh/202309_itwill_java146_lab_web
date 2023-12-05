@@ -193,14 +193,32 @@ document.addEventListener('DOMContentLoaded', () => {
     } // end function deleteComment()
     
     /*
-     * 댓글 수정 모달 보여주기
+     * 댓글 [수정] 버튼의 클릭 이벤트 리스너 콜백 - 댓글 수정 모달 보여주기.
+     * async function: 비동기식(asynchronous)으로 동작하는 함수를 await 키워드를 사용해서
+     * 호출하는 코드가 있을 때.
      */
-    function showCommentModal(e) {
+    async function showCommentModal(e) {
         // 이벤트 타겟(수정 버튼)에서 data-id 속성 값(댓글 아이디)를 읽음.
-        // Ajax 요청을 보내서 해당 아이디의 댓글을 검색
-        // 모달의 input과 textarea를 채움.
+        const id = e.target.getAttribute('data-id');
         
-        const modal = new bootstrap.Modal('div#commentModal', {backdrop: true});
-        modal.show();
-    }
+        try {
+            // Ajax 요청을 보내서 해당 아이디의 댓글을 검색
+            const response = await axios.get(`../api/comment/${id}`);
+            console.log(response);
+            const commentId = response.data.id;
+            const ctext = response.data.ctext;
+            
+            // 모달의 input과 textarea를 채움.
+            document.querySelector('input#modalCommentId').value = commentId;
+            document.querySelector('textarea#modalCommentText').value = ctext;
+            
+            // 부트스트랩 모달 객체 생성.
+            const modal = new bootstrap.Modal('div#commentModal', {backdrop: true});
+            modal.show(); // 모달 객체 보여줌.
+        } catch (error) {
+            console.log(error);
+        }
+        
+    } // end async function showCommentModal()
+    
 });

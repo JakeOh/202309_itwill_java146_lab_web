@@ -70,5 +70,16 @@ public class CommentRestController {
         // 결과를 리턴(클라이언트로 응답을 보냄)
         return ResponseEntity.ok(result);
     }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<CommentListItemDto> getCommentById(@PathVariable long id) {
+        log.debug("getCommentById(id={})", id);
+        
+        // 서비스 계층의 메서드를 호출해서 응답을 보낼 DTO 객체를 읽어옴.
+        CommentListItemDto dto = commentService.readById(id);
+        
+        // Ajax 요청에 대한 응답을 리턴.
+        return ResponseEntity.ok(dto);
+    }
 
 }
