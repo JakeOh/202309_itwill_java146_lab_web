@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.spring2.domain.Comment;
 import com.itwill.spring2.dto.comment.CommentListItemDto;
 import com.itwill.spring2.dto.comment.CommentRegisterDto;
+import com.itwill.spring2.dto.comment.CommentUpdateDto;
 import com.itwill.spring2.repository.CommentDao;
 
 import lombok.RequiredArgsConstructor;
@@ -59,6 +60,16 @@ public class CommentService {
         log.debug(comment.toString());
         
         return CommentListItemDto.fromEntity(comment);
+    }
+    
+    public int update(CommentUpdateDto dto) {
+        log.debug("update(dto={})", dto);
+        
+        // 리포지토리 계층의 메서드를 호출해서 COMMENTS 테이블을 업데이트.
+        int result = commentDao.update(dto.toEntity());
+        log.debug("댓글 업데이트 결과 = {}", result);
+        
+        return result;
     }
     
 }

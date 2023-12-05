@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // btnRegisterComment에 클릭 이벤트 리스너를 등록 -> 댓글 등록.
     btnRegisterComment.addEventListener('click', registerComment);
     
+    // 부트스트랩 모달 객체 생성.
+    const modal = new bootstrap.Modal('div#commentModal', {backdrop: true});
+            
+    // 모달의 [저장 내용 변경] 버튼(#btnUpdateComment)을 찾고, 클릭 이벤트 리스너를 등록
+    const btnUpdateComment = document.querySelector('button#btnUpdateComment');
+    btnUpdateComment.addEventListener('click', updateComment);
+    
     /*
      * 댓글 등록 버튼의 이벤트 리스너(콜백)
      */
@@ -212,13 +219,43 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('input#modalCommentId').value = commentId;
             document.querySelector('textarea#modalCommentText').value = ctext;
             
-            // 부트스트랩 모달 객체 생성.
-            const modal = new bootstrap.Modal('div#commentModal', {backdrop: true});
             modal.show(); // 모달 객체 보여줌.
         } catch (error) {
             console.log(error);
         }
         
     } // end async function showCommentModal()
+    
+    /*
+     * 댓글 [변경 내용 저장] 버튼(btnUpdateComment)의 클릭 이벤트 리스너(콜백).
+     * Ajax PUT 요청을 보내고, 댓글 업데이트 성공 응답이 오면 모달을 닫음. 
+     */
+    async function updateComment(e) {
+        // 수정할 댓글 아이디
+        const id = document.querySelector('input#modalCommentId').value;
+        // 댓글 수정 내용
+        const ctext = document.querySelector('textarea#modalCommentText').value;
+        
+        if (ctext === '') { // 댓글이 비어 있으면
+            alert('댓글 내용을 입력하세요.');
+            return;
+        }
+        
+        if (!confirm('수정한 내용을 저장할까요?')) { // [취소]를 클릭하면
+            return; // 콜백 종료
+        }
+        
+        try {
+            // Ajax PUT 요청을 보냄.
+            const response = await axios.put(`../api/comment/${id}`, { ctext });
+            if (response.data === 1) { // 업데이트 성공 응답인 경우
+                modal.hide(); // 모달을 숨김.
+                getAllComments(); // 댓글 목록 갱신.
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        
+    } // end async function updateComment()
     
 });

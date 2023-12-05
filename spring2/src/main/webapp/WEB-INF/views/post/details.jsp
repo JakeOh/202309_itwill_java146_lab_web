@@ -111,7 +111,7 @@
                             <button type="button"
                                 class="btn btn-secondary"
                                 data-bs-dismiss="modal">취소</button>
-                            <button type="button"
+                            <button id="btnUpdateComment" type="button"
                                 class="btn btn-primary">변경 내용 저장</button>
                         </div>
                     </div>
