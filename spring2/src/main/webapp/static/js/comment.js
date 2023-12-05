@@ -95,8 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
         axios.get(uri) // GET 방식의 Ajax 요청으 보냄.
             .then((response) => {
                 console.log(response);
+                //-> response 객체의 data 속성(property): 서버에서 응답으로 보낸 결과(객체)
                 
-                // TODO: 댓글 목록 HTML을 작성 -> 댓글 목록을 브라우저 화면에 보여줌.
+                // 댓글 목록 HTML을 작성 -> 댓글 목록을 브라우저 화면에 보여줌.
+                makeCommentElements(response.data);
                 
             }) // 성공 응답이 왔을 때 실행할 콜백 등록
             .catch((error) => {
@@ -104,5 +106,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }); // 요청 실패일 때 실행할 콜백 등록
         
     } // end function getAllComments
+    
+    /*
+     * 댓글 목록 HTML을 작성하고, div#comments 영역에 추가하는 함수.
+     * argument data: 댓글 목록(배열).
+     */
+    function makeCommentElements(data) {
+        // 댓글 목록 HTML을 추가할 영역.
+        const divComments = document.querySelector('div#comments');
+        
+        // 댓글 목록 HTML 코드
+        let htmlStr = '';
+        
+        // for (let i = 0; i < data.length; i++) {}
+        for (let comment of data) {
+            // console.log(comment);
+        }
+        
+    } // end function makeCommentElements()
     
 });

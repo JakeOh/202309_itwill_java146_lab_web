@@ -86,7 +86,7 @@
                         </div>
                         
                         <!-- 포스트에 달려 있는 댓글 목록을 보여줄 영역 -->
-                        <div class="my-2" id="comments">TODO: 댓글 목록...</div>
+                        <div class="my-2" id="comments"></div>
                     </div>
                 </div>
             </div>
