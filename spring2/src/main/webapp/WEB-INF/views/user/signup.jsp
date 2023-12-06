@@ -33,7 +33,7 @@
                     </div>
                     <div class="my-2">
                         <input type="email" class="form-control"
-                            id="email" name="email" placeholder="eamil" required />
+                            id="email" name="email" placeholder="email" required />
                     </div>
                     <div>
                         <button type="submit" id="btnRegister" 
