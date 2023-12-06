@@ -1,8 +1,11 @@
 package com.itwill.spring2.web;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.spring2.service.UserService;
 
@@ -21,6 +24,19 @@ public class UserController {
     @GetMapping("/signup")
     public void signup() {
         log.debug("GET - signup()");
+    }
+    
+    @GetMapping("/checkid")
+    @ResponseBody
+    public ResponseEntity<String> checkId(@RequestParam(name = "userid") String userid) {
+        log.debug("checkId(userid={})", userid);
+        
+        boolean result = userService.checkUserid(userid);
+        if (result) {
+            return ResponseEntity.ok("Y");
+        } else {
+            return ResponseEntity.ok("N");
+        }
     }
 
 }
