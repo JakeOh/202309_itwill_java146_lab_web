@@ -6,9 +6,11 @@
 <!-- MyBatis3 프레임워크 설정 -->
 <configuration>
 
+    <!-- mapper 파일의 resultType 속성 값으로 사용하기 위한 별명들 -->
     <typeAliases>
         <typeAlias type="com.itwill.spring2.domain.Post" alias="Post" />
         <typeAlias type="com.itwill.spring2.domain.Comment" alias="Comment"/>
+        <typeAlias type="com.itwill.spring2.domain.User" alias="User"/>
     </typeAliases>
 
 </configuration>
