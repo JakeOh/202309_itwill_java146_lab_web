@@ -13,7 +13,7 @@
         crossorigin="anonymous">
 </head>
 <body>
-	<div class="contianer-fluid">
+	<div class="container-fluid">
         <c:set var="title" value="회원가입" />
         <%@ include file="../fragments/title.jspf" %>
     </div>
