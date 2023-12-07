@@ -33,9 +33,10 @@
                         <textarea class="form-control" rows="5" 
                             name="content" placeholder="내용" required></textarea>
                     </div>
-                    <div class="my-2">
+                    <div class="d-none">
+                        <!-- 작성자 아이디는 로그인한 사용자 아이디로 설정. -->
                         <input class="form-control" 
-                            type="text" name="author" placeholder="작성자" required />
+                            type="text" name="author" value="${signedInUser}" readonly />
                     </div>
                     <div class="my-2">
                         <input class="form-control btn btn-success" 

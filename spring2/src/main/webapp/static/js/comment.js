@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('댓글 등록 성공!');
                     // 댓글 입력 textarea의 내용을 비움.
                     document.querySelector('textarea#ctext').value = '';
+                    getAllComments(); // 댓글 목록 갱신.
                 }
                 
             }) // 성공 응답이 왔을 때 실행할 콜백 등록.
@@ -139,14 +140,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="text-secondary">${time}</span>
                 </div>
                 <div>${comment.ctext}</div>
+                `;
+           
+           // 댓글 작성자 아이디와 로그인 아이디가 같은 경우에만 [삭제/수정] 버튼을 보여줌.
+           if (comment.writer === signedInUser) { 
+                htmlStr +=`
                 <div>
                     <button class="btnCommentDelete btn btn-outline-danger" 
                         data-id="${comment.id}">삭제</button>
                     <button class="btnCommentModify btn btn-outline-success" 
                         data-id="${comment.id}">수정</button>
-                </div>
-            </div>
-            `;
+                </div>`;
+            }
+            
+            htmlStr += '</div>'; // <div class="card">의 종료 태그
+            
         }
         
         // 작성된 댓글 목록 HTML 코드를 div#comments 영역에 추가.

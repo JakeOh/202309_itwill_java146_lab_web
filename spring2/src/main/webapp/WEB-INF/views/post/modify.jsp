@@ -45,8 +45,10 @@
                     </div>
                 </form>
                 <div class="card-footer">
-                    <button class="btn btn-danger" id="btnDelete">삭제</button>
-                    <button class="btn btn-success" id="btnUpdate">수정완료</button>
+                    <c:if test="${post.author eq signedInUser}">
+                        <button class="btn btn-danger" id="btnDelete">삭제</button>
+                        <button class="btn btn-success" id="btnUpdate">수정완료</button>
+                    </c:if>
                 </div>
             </div>
         </main>	

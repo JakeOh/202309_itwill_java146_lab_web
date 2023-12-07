@@ -55,10 +55,13 @@
                     </div>
                 </form>
                 <div class="card-footer">
-                    <c:url var="postModifyPage" value="/post/modify">
-                        <c:param name="id" value="${post.id}" />
-                    </c:url>
-                    <a href="${postModifyPage}" class="btn btn-primary">수정하기</a>
+                    <!-- 작성자 아이디와 로그인 사용자 아이디가 같을 때만 [수정하기] 버튼을 보여줌. -->
+                    <c:if test="${post.author eq signedInUser}">
+                        <c:url var="postModifyPage" value="/post/modify">
+                            <c:param name="id" value="${post.id}" />
+                        </c:url>
+                        <a href="${postModifyPage}" class="btn btn-primary">수정하기</a>
+                    </c:if>
                 </div>
             </div>
 
@@ -76,8 +79,8 @@
                                 <!-- 댓글 입력 창 -->
                                 <textarea class="form-control"
                                     id="ctext" placeholder="댓글 입력"></textarea>
-                                <!-- 댓글 작성자 아이디 - TODO: 로그인 사용자 아이디로 변경 -->
-                                <input class="d-none" id="writer" value="admin" />
+                                <!-- 댓글 작성자 아이디 - 로그인 사용자 아이디로 설정 -->
+                                <input class="d-none" id="writer" value="${signedInUser}" />
                             </div>
                             <div class="col-2">
                                 <button class="btn btn-outline-success" 
@@ -131,6 +134,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
     <!-- 부트스트랩 모듈과 Axiso 모듈을 사용하는 자바스크립트 파일은 모듈을 포함시킨 다음에 작성. -->
+    <script>
+        const signedInUser = '${signedInUser}';
+    </script>
     <script src="../js/comment.js"></script>
 
 	</body>
