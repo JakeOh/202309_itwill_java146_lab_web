@@ -19,8 +19,8 @@
         
         <main class="my-2">
             <div class="my-2 card card-body">
-                <c:url var="signInPage" value="/user/signin" />
-                <form action="${signInPage}" method="post">
+                <!-- form action 속성이 설정되어 있지 않으면 현재 페이지(URL)로 submit. -->
+                <form method="post">
                     <c:if test="${not empty param.result and param.result eq 'f'}">
                         <!-- 로그인 실패 후 다시 로그인 페이지로 이동했을 때 경고 메시지 -->
                         <div class="text-danger">아이디와 패스워드를 확인하세요...</div>

@@ -1,5 +1,8 @@
 package com.itwill.spring2.web;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,8 +51,11 @@ public class UserController {
     }
     
     @PostMapping("/signin")
-    public String signin(@ModelAttribute UserSignInDto dto, HttpSession session) {
-        log.debug("POST - signin(dto={}, session={})", dto, session);
+    public String signin(@ModelAttribute UserSignInDto dto, 
+            HttpSession session,
+            @RequestParam(name = "target", defaultValue = "") String target) 
+                    throws UnsupportedEncodingException {
+        log.debug("POST - signin(dto={}, session={}, target={})", dto, session, target);
         
         // 서비스 메서드를 호출해서 아이디와 비밀번호가 일치하는 사용자가 있는 지 확인
         User user = userService.read(dto);
@@ -58,11 +64,12 @@ public class UserController {
             session.setAttribute("signedInUser", user.getUserid());
             
             // 타겟 페이지로 이동
-            return "redirect:/";
+            return (target.equals("")) ? "redirect:/" : "redirect:" + target;
             
         } else { // 아이디와 비밀번호가 일치하는 사용자가 없는 경우 -> 로그인 실패
             // 로그인 페이지로 이동
-            return "redirect:/user/signin?result=f";
+            return "redirect:/user/signin?result=f&target=" 
+                + URLEncoder.encode(target, "UTF-8");
         }
     }
     
