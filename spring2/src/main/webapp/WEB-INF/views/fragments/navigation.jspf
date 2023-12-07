@@ -16,13 +16,24 @@
             <c:url var="postCreatePage" value="/post/create" />
             <a class="nav-link" href="${postCreatePage}">새 포스트</a>
         </li>
-        <li class="nav-item">
-            <c:url var="signInPage" value="/user/signin" />
-            <a class="nav-link" href="${signInPage}">로그인</a>
-        </li>
-        <li class="nav-item">
-            <c:url var="signUpPage" value="/user/signup" />
-            <a class="nav-link" href="${signUpPage}">회원가입</a>
-        </li>
+        <c:if test="${empty signedInUser}">
+            <li class="nav-item">
+                <c:url var="signInPage" value="/user/signin" />
+                <a class="nav-link" href="${signInPage}">로그인</a>
+            </li>
+            <li class="nav-item">
+                <c:url var="signUpPage" value="/user/signup" />
+                <a class="nav-link" href="${signUpPage}">회원가입</a>
+            </li>
+        </c:if>
+        <c:if test="${not empty signedInUser}">
+            <li class="nav-item">
+                <c:url var="signOutPage" value="/user/signout" />
+                <a class="nav-link" href="${signOutPage}">
+                    <span class="text-primary fw-bold">${signedInUser}</span>
+                    <span>로그아웃</span>
+                </a>
+            </li>
+        </c:if>
     </ul>
 </nav>

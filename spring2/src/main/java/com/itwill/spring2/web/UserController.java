@@ -55,7 +55,7 @@ public class UserController {
         User user = userService.read(dto);
         if (user != null) { // 아이디와 비밀번호 모두 일치하는 사용자가 있는 경우 -> 로그인 성공
             // 세션에 로그인 사용자 정보를 저장
-            session.setAttribute("signedInUser", user.getId());
+            session.setAttribute("signedInUser", user.getUserid());
             
             // 타겟 페이지로 이동
             return "redirect:/";
@@ -64,6 +64,20 @@ public class UserController {
             // 로그인 페이지로 이동
             return "redirect:/user/signin?result=f";
         }
+    }
+    
+    @GetMapping("/signout")
+    public String signout(HttpSession session) {
+        log.debug("signout(session={})", session);
+        
+        // 세션에 저장된 "signedInUser" 정보를 삭제.
+        session.removeAttribute("signedInUser");
+        
+        // 세션을 만료시킴.
+        session.invalidate();
+        
+        // 로그아웃 이후 로그인 페이지로 이동
+        return "redirect:/user/signin";
     }
     
     @GetMapping("/checkid")
