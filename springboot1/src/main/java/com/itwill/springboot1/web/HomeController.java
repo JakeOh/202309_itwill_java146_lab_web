@@ -1,6 +1,7 @@
 package com.itwill.springboot1.web;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,6 +54,32 @@ public class HomeController {
         model.addAttribute("book", book);
         
         return "book";
+    }
+    
+    @GetMapping("/books/list")
+    public String bookList(Model model) {
+        log.info("bookList()");
+        
+        // 더미 데이터를 저장하기 위한 리스트 객체 생성
+        ArrayList<Book> books = new ArrayList<>();
+        
+        // 더미 데이터 10개를 생성
+        for (int i = 1; i <= 10; i++) {
+            Book book = Book.builder()
+                    .id(i)
+                    .title("TITLE_" + i)
+                    .author(Author.builder().firstName("First_" + i).lastName("Last_" + i).build())
+                    .build();
+            books.add(book);
+        }
+        
+        // 더미 데이터를 모델에 실어서 뷰에게 전달
+        model.addAttribute("books", books);
+        
+        // return "list"; // 뷰 -> templates/list.html
+        return "books/list"; // 뷰 -> templates/books/list.html
+        
+        // 리턴 타입이 void인 경우 뷰 -> templates/books/list.html
     }
 
 }
