@@ -21,10 +21,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="book : ${books}">
-                <td th:text="${book.id}"></td>
-                <td th:text="${book.title}"></td>
-                <td th:text="${book.author}"></td>
+            <tr th:each="book : ${books}" th:object="${book}">
+                <td th:text="*{id}"></td>
+                <td th:text="*{title}"></td>
+                <td th:text="|*{author.firstName} *{author.lastName}|"></td>
             </tr>
         </tbody>
     </table>
