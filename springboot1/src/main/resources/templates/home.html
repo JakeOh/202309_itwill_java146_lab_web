@@ -13,7 +13,10 @@
     <!-- templates/layout/fragments.html 파일에서 선언된 프래그먼트 끼워넣기 
          ~{파일(경로)이름 :: 프래그먼트이름 (아규먼트)}
     -->
+    <!-- div 태그가 header 태그로 교체됨 -->
     <div th:replace="~{/layout/fragments :: header ('Home Page')}"></div>
+    
+    <!-- div 태그 안에 header 태그가 삽입됨 -->
     <div th:insert="~{/layout/fragments :: header ('홈 페이지')}"></div>
     
     <h1>첫번째 Spring Boot 프로젝트</h1>
