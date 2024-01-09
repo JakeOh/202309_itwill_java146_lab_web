@@ -10,6 +10,10 @@
         crossorigin="anonymous">
 </head>
 <body>
+    <!-- templates/layout/fragments.html 에서 선언된 프래그먼트 끼워넣기 -->
+    <div th:replace="~{/layout/fragments :: myHeader ('책 리스트 페이지')}"></div>
+    <div th:replace="~{/layout/fragments :: navigation}"></div>
+    
     <h1>Book List</h1>
     
     <table>

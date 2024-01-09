@@ -10,6 +10,10 @@
         crossorigin="anonymous">
 </head>
 <body>
+    <!-- templates/layout/fragments.html 에서 선언된 프래그먼트를 끼워넣기 -->
+    <header th:replace="~{/layout/fragments :: myHeader ('Book Details Page')}"></header>
+    <nav th:replace="~{/layout/fragments :: navigation}"></nav>
+    
     <h1>책 상세 페이지</h1>
     <h2 th:text="${book}"></h2>
     
