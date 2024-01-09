@@ -10,6 +10,12 @@
         crossorigin="anonymous">
 </head>
 <body>
+    <!-- templates/layout/fragments.html 파일에서 선언된 프래그먼트 끼워넣기 
+         ~{파일(경로)이름 :: 프래그먼트이름 (아규먼트)}
+    -->
+    <div th:replace="~{/layout/fragments :: header ('Home Page')}"></div>
+    <div th:insert="~{/layout/fragments :: header ('홈 페이지')}"></div>
+    
     <h1>첫번째 Spring Boot 프로젝트</h1>
     <h2 th:text="${currentTime}"></h2>
     <h3 th:text="${book}"></h3>

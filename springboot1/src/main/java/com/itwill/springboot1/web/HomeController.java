@@ -73,6 +73,7 @@ public class HomeController {
             books.add(book);
         }
         
+        books.get(0).setAuthor(null);
         // 더미 데이터를 모델에 실어서 뷰에게 전달
         model.addAttribute("books", books);
         
