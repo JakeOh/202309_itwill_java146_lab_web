@@ -19,7 +19,8 @@ public class Answer {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne
+    @ManyToOne // 다대일 관계
+    // 테이블의 컬럼 이름: question_[Question 엔터티의 ID 필드]
     private Question question;
     
     @Basic(optional = false)
