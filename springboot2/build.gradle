@@ -30,6 +30,9 @@ dependencies {
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// JUnit 테스트에서 NoSuchMethodError: 'java.util.Set org.junit.platform.engine.TestDescriptor.getAncestors()' 에러를 해결하기 위해서.
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('bootBuildImage') {
