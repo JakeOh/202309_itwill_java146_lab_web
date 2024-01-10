@@ -39,7 +39,12 @@
                         <a th:href="@{/employee/details/} + *{id}" th:text="*{ename}"></a>
                     </td>
                     <td th:text="*{job}"></td>
-                    <td th:text="*{manager != null} ? *{manager.ename} : ''"></td>
+                    <td>
+                        <th:block th:if="*{manager != null}">
+                            <a th:href="@{/employee/details/} + *{manager.id}"
+                                th:text="*{manager.ename}"></a>
+                        </th:block>
+                    </td>
                     <td th:text="*{hiredate}"></td>
                     <td th:text="*{salary}"></td>
                     <td th:text="*{commission}"></td>
