@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JPA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+        crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <h1>부서 상세 정보</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li>
+                <a th:href="@{/}">홈페이지</a>
+            </li>
+            <li>
+                <a th:href="@{/employee/list}">직원목록</a>
+            </li>
+            <li>
+                <a th:href="@{/department/list}">부서목록</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section>
+            <h2>부서 정보</h2>
+            <table>
+                <tbody th:object="${department}">
+                    <tr>
+                        <th>부서코드</th>
+                        <td th:text="*{id}"></td>
+                    </tr>
+                    <tr>
+                        <th>부서이름</th>
+                        <td th:text="*{dname}"></td>
+                    </tr>
+                    <tr>
+                        <th>위치</th>
+                        <td th:text="*{location}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>직원 정보</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>JOB</th>
+                        <th>MANAGER</th>
+                        <th>HIRE DATE</th>
+                        <th>SALARY</th>
+                        <th>COMMISSION</th>
+                        <th>DEPARTMENT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="emp : ${department.employees}" th:object="${emp}">
+                        <td>
+                            <a th:href="@{/employee/details/} + *{id}" th:text="*{id}"></a>
+                        </td>
+                        <td>
+                            <a th:href="@{/employee/details/} + *{id}" th:text="*{ename}"></a>
+                        </td>
+                        <td th:text="*{job}"></td>
+                        <td>
+                            <th:block th:if="*{manager != null}">
+                                <a th:href="@{/employee/details/} + *{manager.id}"
+                                    th:text="*{manager.ename}"></a>
+                            </th:block>
+                        </td>
+                        <td th:text="*{hiredate}"></td>
+                        <td th:text="*{salary}"></td>
+                        <td th:text="*{commission}"></td>
+                        <td th:text="*{department.dname}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+        crossorigin="anonymous"></script>
+</body>
+</html>

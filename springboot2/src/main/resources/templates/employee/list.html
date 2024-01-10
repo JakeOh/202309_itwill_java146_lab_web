@@ -14,7 +14,19 @@
         <h1>직원 목록</h1>
     </header>
     
-    <nav></nav>
+    <nav>
+        <ul>
+            <li>
+                <a th:href="@{/}">홈페이지</a>
+            </li>
+            <li>
+                <a th:href="@{/employee/list}">직원목록</a>
+            </li>
+            <li>
+                <a th:href="@{/department/list}">부서목록</a>
+            </li>
+        </ul>
+    </nav>
     
     <main>
         <table>
@@ -48,7 +60,10 @@
                     <td th:text="*{hiredate}"></td>
                     <td th:text="*{salary}"></td>
                     <td th:text="*{commission}"></td>
-                    <td th:text="*{department.dname}"></td>
+                    <td>
+                        <a th:href="@{/department/details/} + *{department.id}"
+                            th:text="*{department.dname}"></a>
+                    </td>
                 </tr>
             </tbody>
         </table>

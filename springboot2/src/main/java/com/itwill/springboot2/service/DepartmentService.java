@@ -23,4 +23,10 @@ public class DepartmentService {
         return deptDao.findAll();
     }
     
+    public Department getDepartmentDetails(Integer id) {
+        log.info("getDepartmentDetails(id={})", id);
+        
+        return deptDao.findById(id).orElse(null);
+    }
+    
 }

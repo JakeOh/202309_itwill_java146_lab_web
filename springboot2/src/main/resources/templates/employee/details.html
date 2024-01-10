@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,7 +14,19 @@
         <h1>직원 상세 정보</h1>
     </header>
     
-    <nav></nav>
+    <nav>
+        <ul>
+            <li>
+                <a th:href="@{/}">홈페이지</a>
+            </li>
+            <li>
+                <a th:href="@{/employee/list}">직원목록</a>
+            </li>
+            <li>
+                <a th:href="@{/department/list}">부서목록</a>
+            </li>
+        </ul>
+    </nav>
     
     <main>
         <table>
@@ -49,7 +61,10 @@
                 </tr>
                 <tr>
                     <th>부서</th>
-                    <td th:text="*{department.dname}"></td>
+                    <td>
+                        <a th:href="@{/department/details/} + *{department.id}"
+                            th:text="*{department.dname}"></a>
+                    </td>
                 </tr>
             </tbody>
         </table>

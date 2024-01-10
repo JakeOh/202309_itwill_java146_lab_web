@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.springboot2.domain.Department;
@@ -27,6 +28,17 @@ public class DepartmentController {
         
         List<Department> departments = deptSvc.getDepartmentList();
         model.addAttribute("departments", departments);
+    }
+    
+    @GetMapping("/details/{id}")
+    public String deptDetails(@PathVariable(name = "id") Integer id, Model model) {
+        log.info("deptDetails(id={})", id);
+        
+        Department dept = deptSvc.getDepartmentDetails(id);
+        model.addAttribute("department", dept);
+//        log.info("# of employees = {}", dept.getEmployees().size());
+        
+        return "department/details";
     }
     
 }

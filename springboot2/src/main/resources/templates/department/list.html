@@ -14,7 +14,19 @@
         <h1>부서 목록</h1>
     </header>
     
-    <nav></nav>
+    <nav>
+        <ul>
+            <li>
+                <a th:href="@{/}">홈페이지</a>
+            </li>
+            <li>
+                <a th:href="@{/employee/list}">직원목록</a>
+            </li>
+            <li>
+                <a th:href="@{/department/list}">부서목록</a>
+            </li>
+        </ul>
+    </nav>
     
     <main>
         <table>
@@ -27,8 +39,12 @@
             </thead>
             <tbody>
                 <tr th:each="dept : ${departments}" th:object="${dept}">
-                    <td th:text="*{id}"></td>
-                    <td th:text="*{dname}"></td>
+                    <td>
+                        <a th:href="@{/department/details/} + *{id}" th:text="*{id}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{/department/details/} + *{id}" th:text="*{dname}"></a>
+                    </td>
                     <td th:text="*{location}"></td>
                 </tr>
             </tbody>
