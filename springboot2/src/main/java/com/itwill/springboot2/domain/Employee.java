@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -24,8 +25,10 @@ public class Employee {
     
     private String job;
     
-    @Column(name = "MGR")
-    private Integer manager;
+    @ToString.Exclude // toString 메서드에서 제외.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MGR")
+    private Employee manager;
     
     private LocalDate hiredate;
     
@@ -35,8 +38,8 @@ public class Employee {
     @Column(name = "COMM")
     private Double commission;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    // FK 컬럼에 해당하는 엔터티 객체.
+    @ToString.Exclude // toString 메서드에서 제외
+    @ManyToOne(fetch = FetchType.LAZY) // FK 컬럼에 해당하는 엔터티 객체.
     @JoinColumn(name = "deptno") // EMP 테이블에서 DEPT와 join할 수 있는 컬럼 이름.
     private Department department;
 
