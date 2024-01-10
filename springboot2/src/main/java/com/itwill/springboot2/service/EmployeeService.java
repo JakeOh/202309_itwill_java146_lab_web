@@ -22,5 +22,11 @@ public class EmployeeService {
         
         return empDao.findAll();
     }
+    
+    public Employee getEmployeeDetails(Integer id) {
+        log.info("getEmployeeDetails(id={})", id);
+        
+        return empDao.findById(id).orElse(null);
+    }
 
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,38 +11,44 @@
 </head>
 <body>
     <header>
-        <h1>직원 목록</h1>
+        <h1>직원 상세 정보</h1>
     </header>
     
     <nav></nav>
     
     <main>
         <table>
-            <thead>
+            <tbody th:object="${employee}">
                 <tr>
-                    <th>ID</th>
-                    <th>NAME</th>
-                    <th>JOB</th>
-                    <th>MANAGER</th>
-                    <th>HIRE DATE</th>
-                    <th>SALARY</th>
-                    <th>COMMISSION</th>
-                    <th>DEPARTMENT</th>
+                    <th>사번</th>
+                    <td th:text="*{id}"></td>
                 </tr>
-            </thead>
-            <tbody>
-                <tr th:each="emp : ${employees}" th:object="${emp}">
-                    <td>
-                        <a th:href="@{/employee/details/} + *{id}" th:text="*{id}"></a>
-                    </td>
-                    <td>
-                        <a th:href="@{/employee/details/} + *{id}" th:text="*{ename}"></a>
-                    </td>
+                <tr>
+                    <th>이름</th>
+                    <td th:text="*{ename}"></td>
+                </tr>
+                <tr>
+                    <th>업무</th>
                     <td th:text="*{job}"></td>
+                </tr>
+                <tr>
+                    <th>매니저</th>
                     <td th:text="*{manager != null} ? *{manager.ename} : ''"></td>
+                </tr>
+                <tr>
+                    <th>입사일</th>
                     <td th:text="*{hiredate}"></td>
+                </tr>
+                <tr>
+                    <th>급여</th>
                     <td th:text="*{salary}"></td>
+                </tr>
+                <tr>
+                    <th>수당</th>
                     <td th:text="*{commission}"></td>
+                </tr>
+                <tr>
+                    <th>부서</th>
                     <td th:text="*{department.dname}"></td>
                 </tr>
             </tbody>
