@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+<body>
+
+<div class="container-fluied">
+    <header th:replace="~{/layout/fragments :: myheader ('부서 상세정보')}"></header>
+    
+    <nav th:replace="~{/layout/fragments :: navigation}"></nav>
+    
+    <main>
+        <table>
+            <tbody th:object="${department}">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="*{id}"></td>
+                </tr>
+                <tr>
+                    <th>NAME</th>
+                    <td th:text="*{departmentName}"></td>
+                </tr>
+                <tr>
+                    <th>MANAGER</th>
+                    <td th:text="*{manager} ? *{manager.name} : '--'"></td>
+                </tr>
+                <tr>
+                    <th>LOCATION</th>
+                    <td th:text="*{location} ? *{location.address.city} : '--'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    
+</div>
+
+<script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+</body>
+</html>

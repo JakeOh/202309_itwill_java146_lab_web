@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+<body>
+
+<div class="container-fluied">
+    <header th:replace="~{/layout/fragments :: myheader ('직원 상세정보')}"></header>
+    
+    <nav th:replace="~{/layout/fragments :: navigation}"></nav>
+    
+    <main>
+        <table>
+            <tbody th:object="${employee}">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="*{id}"></td>
+                </tr>
+                <tr>
+                    <th>NAME</th>
+                    <td th:text="*{name}"></td>
+                </tr>
+                <tr>
+                    <th>EMAIL</th>
+                    <td th:text="*{email}"></td>
+                </tr>
+                <tr>
+                    <th>PHONE NO.</th>
+                    <td th:text="*{phoneNumber} ?: '--'"></td>
+                </tr>
+                <tr>
+                    <th>HIRE DATE</th>
+                    <td th:text="*{hireDate}"></td>
+                </tr>
+                <tr>
+                    <th>JOB</th>
+                    <td th:text="*{job.jobTitle}"></td>
+                </tr>
+                <tr>
+                    <th>SALARY</th>
+                    <td th:text="*{salary} ?: '--'"></td>
+                </tr>
+                <tr>
+                    <th>COMMISSION PCT.</th>
+                    <td th:text="*{commissionPct} ?: '--'"></td>
+                </tr>
+                <tr>
+                    <th>MANAGER</th>
+                    <td>
+                        <a th:if="*{manager}" 
+                            th:href="@{/employee/details/} + *{manager.id}"
+                            th:text="*{manager.name}"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>DEPARTMENT</th>
+                    <td>
+                        <a th:if="*{department}"
+                            th:href="@{/department/details/} + *{department.id}"
+                            th:text="*{department.departmentName}"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    
+</div>
+
+<script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+</body>
+</html>

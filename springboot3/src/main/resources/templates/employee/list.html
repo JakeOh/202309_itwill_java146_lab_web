@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+<body>
+
+<div class="container-fluid">
+    <header th:replace="~{/layout/fragments :: myheader ('직원 목록')}"></header>
+    
+    <nav th:replace="~{/layout/fragments :: navigation}"></nav>
+    
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>EMAIL</th>
+                    <th>PHONE</th>
+                    <th>HIRE DATE</th>
+                    <th>JOB</th>
+                    <th>SALARY</th>
+                    <th>COMMISSION</th>
+                    <th>MANAGER</th>
+                    <th>DEPARTMENT</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr th:each="emp : ${page}" th:object="${emp}">
+                    <td>
+                        <a th:href="@{/employee/details/} + *{id}"
+                             th:text="*{id}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{/employee/details/} + *{id}"
+                             th:text="*{name}"></a>
+                    </td>
+                    <td th:text="*{email}"></td>
+                    <td th:text="*{phoneNumber} ?: '--'"></td>
+                    <td th:text="*{hireDate}"></td>
+                    <td th:text="*{job.id}"></td>
+                    <td th:text="*{salary} ?: '--'"></td>
+                    <td th:text="*{commissionPct} ?: '--'"></td>
+                    <td>
+                        <a th:if="*{manager}"
+                            th:href="@{/employee/details/} + *{manager.id}"
+                            th:text="*{manager.id}"></a>
+                    </td>
+                    <td>
+                        <a th:if="*{department}"
+                            th:href="@{/department/details/} + *{department.id}"
+                            th:text="*{department.id}"></a>
+                        <th:block th:unless="*{department}" th:text="--"></th:block>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div th:replace="~{/layout/fragments :: pagination}"></div>
+        
+    </main>
+    
+</div>
+
+<script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+
+</body>
+</html>

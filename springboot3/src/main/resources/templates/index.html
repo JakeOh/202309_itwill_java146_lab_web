@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+<body>
+<div class="container-fluid">
+    
+    <header th:replace="~{/layout/fragments :: myheader ('Home')}"></header>
+    
+    <nav th:replace="~{/layout/fragments :: navigation}"></nav>
+    
+</div>
+    
+<script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+</body>
+</html>

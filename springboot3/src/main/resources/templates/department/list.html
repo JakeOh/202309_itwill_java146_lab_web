@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+<body>
+
+<div class="container-fluid">
+    <header th:replace="~{/layout/fragments :: myheader ('부서 목록')}"></header>
+    
+    <nav th:replace="~{/layout/fragments :: navigation}"></nav>
+    
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>MANAGER</th>
+                    <th>LOCATION</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr th:each="dept : ${page}" th:object="${dept}">
+                    <td>
+                        <a th:href="@{/department/details/} + *{id}"
+                            th:text="*{id}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{/department/details/} + *{id}"
+                            th:text="*{departmentName}"></a>
+                    </td>
+                    <td>
+                        <a th:if="*{manager}"
+                            th:href="@{/employee/details/} + *{manager.id}"
+                            th:text="*{manager.id}"></a>
+                        <th:block th:unless="*{manager}" th:text="--"></th:block>
+                    </td>
+                    <td th:text="*{location} ? *{location.id} : '--'"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div th:replace="~{/layout/fragments :: pagination}"></div>
+        
+    </main>
+    
+</div>
+
+<script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+
+</body>
+</html>
