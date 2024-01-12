@@ -1,4 +1,4 @@
-package com.itwill.springboot3;
+package com.itwill.springboot3.repository;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.itwill.springboot3.repository;
+package com.itwill.springboot3;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
