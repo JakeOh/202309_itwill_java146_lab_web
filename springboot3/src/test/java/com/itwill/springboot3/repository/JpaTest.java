@@ -1,5 +1,6 @@
 package com.itwill.springboot3.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -34,7 +35,14 @@ public class JpaTest {
 //        List<Employee> list = empDao.findByNameLastNameContainingIgnoreCaseOrderByNameLastName("Ing");
 //        List<Employee> list = empDao.findBySalaryGreaterThan(20_000.);
 //        List<Employee> list = empDao.findBySalaryLessThan(10_000.);
-        List<Employee> list = empDao.findBySalaryBetween(10_000., 20_000.);
+//        List<Employee> list = empDao.findBySalaryBetween(10_000., 20_000.);
+//        List<Employee> list = empDao.findByHireDateAfter(LocalDate.of(2007, 1, 1));
+//        List<Employee> list = empDao.findByHireDateBefore(LocalDate.of(2007, 1, 1));
+//        List<Employee> list = empDao.findByHireDateBetween(
+//                LocalDate.of(2007, 1, 1), LocalDate.of(2007, 12, 31));
+//        List<Employee> list = empDao.findByManagerIdNull();
+//        List<Employee> list = empDao.findByName("Steven", "King");
+        List<Employee> list = empDao.findByNameContaining("ee");
         
         list.forEach((emp) -> log.info(emp.toString()));
     }
