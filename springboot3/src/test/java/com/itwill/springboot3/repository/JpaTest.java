@@ -22,10 +22,21 @@ public class JpaTest {
     public void test() {
         Assertions.assertNotNull(empDao);
         
-        List<Employee> list = empDao.findByDepartmentId(90);
-        for (Employee e : list) {
-            log.info(e.toString());
-        }
+//        List<Employee> list = empDao.findByDepartmentId(90);
+//        for (Employee e : list) {
+//            log.info(e.toString());
+//        }
+        
+//        List<Employee> list = empDao.findByDepartmentDepartmentNameIgnoreCase("it");
+//        List<Employee> list = empDao.findByNameLastName("King");
+//        List<Employee> list = empDao.findByNameLastNameContaining("ing");
+//        List<Employee> list = empDao.findByNameLastNameContainingIgnoreCase("iNg");
+//        List<Employee> list = empDao.findByNameLastNameContainingIgnoreCaseOrderByNameLastName("Ing");
+//        List<Employee> list = empDao.findBySalaryGreaterThan(20_000.);
+//        List<Employee> list = empDao.findBySalaryLessThan(10_000.);
+        List<Employee> list = empDao.findBySalaryBetween(10_000., 20_000.);
+        
+        list.forEach((emp) -> log.info(emp.toString()));
     }
 
 }
