@@ -76,4 +76,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
             + "or upper(e.name.lastName) like upper('%' || :keyword || '%')")
     List<Employee> findByNameContaining(@Param("keyword") String keyword);
     
+    // 부서 이름으로 직원 정보 검색
+    @Query("select e from Employee e "
+            + "where e.department.departmentName = :dname")
+    List<Employee> findByDepartmentName(@Param("dname") String dname);
+    
 }

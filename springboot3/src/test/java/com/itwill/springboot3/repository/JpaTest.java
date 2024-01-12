@@ -42,7 +42,8 @@ public class JpaTest {
 //                LocalDate.of(2007, 1, 1), LocalDate.of(2007, 12, 31));
 //        List<Employee> list = empDao.findByManagerIdNull();
 //        List<Employee> list = empDao.findByName("Steven", "King");
-        List<Employee> list = empDao.findByNameContaining("ee");
+//        List<Employee> list = empDao.findByNameContaining("ee");
+        List<Employee> list = empDao.findByDepartmentName("Sales");
         
         list.forEach((emp) -> log.info(emp.toString()));
     }
