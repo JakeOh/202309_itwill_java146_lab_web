@@ -43,7 +43,11 @@ public class JpaTest {
 //        List<Employee> list = empDao.findByManagerIdNull();
 //        List<Employee> list = empDao.findByName("Steven", "King");
 //        List<Employee> list = empDao.findByNameContaining("ee");
-        List<Employee> list = empDao.findByDepartmentName("Sales");
+//        List<Employee> list = empDao.findByDepartmentName("Sales");
+//        List<Employee> list = empDao.findByCity("Toronto");
+//        List<Employee> list = empDao.findByCountry("Canada");
+        List<Employee> list = empDao.findByCountryAndSalaryAndHireDate(
+                "United States of America", 1_000., LocalDate.of(2003, 1, 1));
         
         list.forEach((emp) -> log.info(emp.toString()));
     }
