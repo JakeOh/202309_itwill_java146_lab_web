@@ -16,7 +16,7 @@ import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE) @Builder
-@Getter @ToString @EqualsAndHashCode
+@Getter @ToString(callSuper = true) @EqualsAndHashCode
 @Entity @Table(name = "posts")
 // @MappedSuperclass 애너테이션이 있는 엔터티를 상속함.
 public class Post extends BaseTimeEntity {
@@ -34,4 +34,12 @@ public class Post extends BaseTimeEntity {
     @Basic(optional = false)
     private String author;
 
+    // update에 필요한 메서드
+    public Post update(String title, String content) {
+        this.title = title;
+        this.content = content;
+        
+        return this;
+    }
+    
 }
