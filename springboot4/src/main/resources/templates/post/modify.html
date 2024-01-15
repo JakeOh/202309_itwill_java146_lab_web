@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+<body>
+<div class="container-fluid">
+
+    <header th:replace="~{/layout/fragments :: myheader ('포스트 수정')}"></header>
+    
+    <nav th:replace="~{/layout/fragments :: navigation}"></nav>
+    
+    <main class="my-2">
+        <div class="my-2 card">
+            <div class="card-header"></div>
+            <div class="card-body">
+                <form id="updateForm" th:object="${post}" 
+                    method="post" th:action="@{/post/update}">
+                    <div class="my-2 d-none">
+                        <input type="text" id="id" class="form-control" 
+                            name="id" th:value="*{id}" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="title" class="form-label">제목</label>
+                        <input type="text" class="form-control"
+                            id="title" name="title" th:value="*{title}" autofocus />
+                    </div>
+                    <div class="my-2">
+                        <label for="content" class="form-label">내용</label>
+                        <textarea class="form-control" style="height: 120px;" 
+                            id="content" name="content" th:text="*{content}"></textarea>
+                    </div>
+                    <div class="my-2 d-none">
+                        <input type="text" class="form-control" 
+                            th:value="*{author}" readonly />
+                    </div>
+                </form>
+                <div class="my-2 d-flex justify-content-end">
+                    <button id="btnDelete" class="mx-2 btn btn-danger">삭제</button>
+                    <button id="btnUpdate" class="mr-2 btn btn-primary">업데이트</button>
+                </div>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+    </main>
+
+</div>
+
+<script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+<script src="/js/post-modify.js"></script>
+</body>
+</html>

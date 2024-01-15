@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+
+<body>
+<div class="container-fluid">
+    
+    <header th:replace="~{/layout/fragments :: myheader ('포스트 목록')}"></header>
+    
+    <nav th:replace="~{/layout/fragments :: navigation}"></nav>
+    
+    <main class="my-2">
+        <div class="my-2 card">
+            <div class="card-header"></div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>수정시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="post : ${page}" th:object="${post}">
+                            <td th:text="*{id}"></td>
+                            <td>
+                                <a th:href="@{/post/details(id=*{id})}"
+                                    th:text="*{title}"></a>
+                            </td>
+                            <td th:text="*{author}"></td>
+                            <td th:text="*{#temporals.format(modifiedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"
+                            th:classappend="${!page.hasPrevious} ? 'disabled'">
+                            <a class="page-link"
+                                th:href="@{/post/list(p=${page.number - 1})}">&lt;</a>
+                        </li>
+                        <li class="page-item"
+                            th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1)}"
+                            th:if="${pageNo > page.number - 5 && pageNo <= page.number + 5}"
+                            th:classappend="${pageNo == page.number} ? 'active'">
+                            <a class="page-link"
+                                th:href="@{/post/list(p=${pageNo})}"
+                                th:text="${pageNo + 1}"></a>
+                        </li>
+                        <li class="page-item"
+                            th:classappend="${!page.hasNext} ? 'disabled'">
+                            <a class="page-link"
+                                th:href="@{/post/list(p=${page.number + 1})}">&gt;</a>
+                        </li>
+                    </ul>
+                </div>
+    
+            </div>
+            <div class="card-footer"></div>
+        </div>
+    </main>
+    
+    
+</div>
+
+<script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+</body>
+
+</html>

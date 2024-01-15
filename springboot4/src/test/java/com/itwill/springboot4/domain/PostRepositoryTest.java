@@ -1,5 +1,6 @@
 package com.itwill.springboot4.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -59,10 +60,25 @@ public class PostRepositoryTest {
         log.info("(3) update: {}", entity);
     }
     
-    @Test
+//    @Test
     public void testDelete() {
         postDao.deleteById(1L);
         // id로 select 쿼리를 실행한 후, 엔터티가 존재할 때 delete 쿼리를 실행함.
+    }
+    
+//    @Test
+    public void makeDummyData() {
+        List<Post> data = new ArrayList<>();
+        for (int i = 1; i <= 100; i++) {
+            Post post = Post.builder()
+                    .title("dummy title #" + i)
+                    .content("dummy content #" + i)
+                    .author("admin")
+                    .build();
+            data.add(post);
+        }
+        
+        postDao.saveAll(data);
     }
     
 }
