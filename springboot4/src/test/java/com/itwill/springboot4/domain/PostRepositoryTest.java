@@ -41,7 +41,7 @@ public class PostRepositoryTest {
         log.info("저장 후: {}", entity);
     }
 
-    @Test
+//    @Test
     public void testUpdate() {
         // PK(id)로 포스트 엔터티를 검색.
         Post entity = postDao.findById(1L).orElseThrow();
@@ -57,6 +57,12 @@ public class PostRepositoryTest {
         // select 쿼리를 먼저 실행하고 레코드가 있으면 update 쿼리를 실행함.
         
         log.info("(3) update: {}", entity);
+    }
+    
+    @Test
+    public void testDelete() {
+        postDao.deleteById(1L);
+        // id로 select 쿼리를 실행한 후, 엔터티가 존재할 때 delete 쿼리를 실행함.
     }
     
 }
