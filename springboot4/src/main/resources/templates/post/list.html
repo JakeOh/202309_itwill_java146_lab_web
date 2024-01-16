@@ -27,6 +27,11 @@
                         <tr th:each="post : ${page}" th:object="${post}">
                             <td th:text="*{id}"></td>
                             <td>
+                                <!-- thymeleaf에서 경로 변수(path variable)를 전달하는 URL 작성 
+                                    @{/post/details/{id}(id=*{id})}
+                                -->
+                                <!-- thymeleaf에서 질의문자열(query string)의 
+                                요청 파라미터(reuquest parameter)를 전달하는 URL 작성: -->
                                 <a th:href="@{/post/details(id=*{id})}"
                                     th:text="*{title}"></a>
                             </td>

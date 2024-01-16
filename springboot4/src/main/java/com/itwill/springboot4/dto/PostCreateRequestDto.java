@@ -5,6 +5,7 @@ import com.itwill.springboot4.domain.Post;
 import lombok.Data;
 
 @Data
+//-> 기본 생성자, getters & setters
 public class PostCreateRequestDto {
 
     private String title;
