@@ -78,9 +78,12 @@ public class PostController {
     }
     
     @GetMapping("/search")
-    public void search(@ModelAttribute PostSearchRequestDto dto) {
+    public void search(@ModelAttribute PostSearchRequestDto dto, Model model) {
         log.info("search(dto={})", dto);
+        
         // Service 메서드 호출 -> 검색 결과 -> Model -> View
+        Page<Post> data = postService.search(dto);
+        model.addAttribute("page", data);
     }
     
 }

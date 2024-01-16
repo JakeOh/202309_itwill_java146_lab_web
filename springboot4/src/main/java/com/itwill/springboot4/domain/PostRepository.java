@@ -13,6 +13,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Post> findByContentContainingIgnoreCase(String keyword, Pageable pageable);
     Page<Post> findByAuthorContainingIgnoreCase(String keyword, Pageable pageable);
 
+    // findByTitleContainingOrContentContainingAllIgnoreCase()
     // JPQL(Java Persistence Query Language)
     @Query("select p from Post p "
             + "where upper(p.title) like upper('%' || :keyword || '%') "

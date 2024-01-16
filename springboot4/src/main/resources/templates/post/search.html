@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+
+<body>
+<div class="container-fluid">
+    
+    <header th:replace="~{/layout/fragments :: myheader ('포스트 검색결과')}"></header>
+    
+    <nav th:replace="~{/layout/fragments :: navigation}"></nav>
+    
+    <main class="my-2">
+        <div class="my-2 card">
+            <div class="card-header">
+                <form method="get" th:action="@{/post/search}">
+                    <div class="row">
+                        <div class="col-2">
+                            <select name="category" class="form-control">
+                                <option value="t">제목</option>
+                                <option value="c">내용</option>
+                                <option value="tc">제목 + 내용</option>
+                                <option value="a">작성자</option>
+                            </select>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control" name="keyword" required />
+                        </div>
+                        <div class="col-2">
+                            <input type="submit" class="form-control btn btn-outline-secondary" value="검색" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>수정시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="post : ${page}" th:object="${post}">
+                            <td th:text="*{id}"></td>
+                            <td>
+                                <!-- thymeleaf에서 경로 변수(path variable)를 전달하는 URL 작성 
+                                    @{/post/details/{id}(id=*{id})}
+                                -->
+                                <!-- thymeleaf에서 질의문자열(query string)의 
+                                요청 파라미터(reuquest parameter)를 전달하는 URL 작성: -->
+                                <a th:href="@{/post/details(id=*{id})}"
+                                    th:text="*{title}"></a>
+                            </td>
+                            <td th:text="*{author}"></td>
+                            <td th:text="*{#temporals.format(modifiedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"
+                            th:classappend="${!page.hasPrevious} ? 'disabled'">
+                            <a class="page-link"
+                                th:href="@{/post/search(category=${param.category}, keyword=${param.keyword}, p=${page.number - 1})}">&lt;</a>
+                        </li>
+                        <li class="page-item"
+                            th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1)}"
+                            th:if="${pageNo > page.number - 5 && pageNo <= page.number + 5}"
+                            th:classappend="${pageNo == page.number} ? 'active'">
+                            <a class="page-link"
+                                th:href="@{/post/search(category=${param.category}, keyword=${param.keyword}, p=${pageNo})}"
+                                th:text="${pageNo + 1}"></a>
+                        </li>
+                        <li class="page-item"
+                            th:classappend="${!page.hasNext} ? 'disabled'">
+                            <a class="page-link"
+                                th:href="@{/post/search(category=${param.category}, keyword=${param.keyword}, p=${page.number + 1})}">&gt;</a>
+                        </li>
+                    </ul>
+                </div>
+    
+            </div>
+            <div class="card-footer"></div>
+        </div>
+    </main>
+    
+    
+</div>
+
+<script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+</body>
+
+</html>

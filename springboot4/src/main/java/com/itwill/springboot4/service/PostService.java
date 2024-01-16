@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.springboot4.domain.Post;
 import com.itwill.springboot4.domain.PostRepository;
 import com.itwill.springboot4.dto.PostCreateRequestDto;
+import com.itwill.springboot4.dto.PostSearchRequestDto;
 import com.itwill.springboot4.dto.PostUpdateRequestDto;
 
 import jakarta.transaction.Transactional;
@@ -63,6 +64,30 @@ public class PostService {
         //-> DB에서 검색한 엔터티의 속성(필드)들의 값을 변경.
         //-> PostRepository.save 메서드를 호출하지 않음.
         //-> @Transactional 애너테이션이 있기 때문에 변경 내용이 자동으로 저장됨!
+    }
+    
+    public Page<Post> search(PostSearchRequestDto dto) {
+        log.info("search(dto={})", dto);
+
+        Pageable pageable = PageRequest.of(dto.getP(), 10, Sort.by("id").descending());
+        
+        Page<Post> result = null;
+        switch (dto.getCategory()) {
+        case "t":
+            result = postDao.findByTitleContainingIgnoreCase(dto.getKeyword(), pageable);
+            break;
+        case "c":
+            result = postDao.findByContentContainingIgnoreCase(dto.getKeyword(), pageable);
+            break;
+        case "tc":
+            result = postDao.findByTitleOrContent(dto.getKeyword(), pageable);
+            break;
+        case "a":
+            result = postDao.findByAuthorContainingIgnoreCase(dto.getKeyword(), pageable);
+            break;
+        }
+        
+        return result;
     }
     
 }

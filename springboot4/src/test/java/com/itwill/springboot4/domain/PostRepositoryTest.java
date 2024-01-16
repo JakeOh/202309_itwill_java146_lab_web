@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -79,6 +83,17 @@ public class PostRepositoryTest {
         }
         
         postDao.saveAll(data);
+    }
+    
+    @Test
+    public void testSearch() {
+        Pageable pageable = PageRequest.of(2, 5, Sort.by("id").descending());
+        
+        Page<Post> list = 
+//                postDao.findByTitleContainingIgnoreCase("tES", pageable); // 제목 검색
+                postDao.findByTitleOrContent("tES", pageable); // 제목 또는 내용 검색
+        
+        list.forEach((x) -> log.info(x.toString()));
     }
     
 }
