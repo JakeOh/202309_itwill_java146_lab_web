@@ -80,7 +80,7 @@ public class PostController {
     @GetMapping("/search")
     public void search(@ModelAttribute PostSearchRequestDto dto) {
         log.info("search(dto={})", dto);
-        
+        // Service 메서드 호출 -> 검색 결과 -> Model -> View
     }
     
 }
