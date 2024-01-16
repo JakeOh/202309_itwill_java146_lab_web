@@ -12,7 +12,26 @@
     
     <main class="my-2">
         <div class="my-2 card">
-            <div class="card-header"></div>
+            <div class="card-header">
+                <form method="get" th:action="@{/post/search}">
+                    <div class="row">
+                        <div class="col-2">
+                            <select name="category" class="form-control">
+                                <option value="t">제목</option>
+                                <option value="c">내용</option>
+                                <option value="tc">제목 + 내용</option>
+                                <option value="a">작성자</option>
+                            </select>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control" name="keyword" required />
+                        </div>
+                        <div class="col-2">
+                            <input type="submit" class="form-control btn btn-outline-secondary" value="검색" />
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="card-body">
                 <table class="table table-hover">
                     <thead>
