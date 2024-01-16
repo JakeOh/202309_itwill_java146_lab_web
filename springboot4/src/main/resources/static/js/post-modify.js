@@ -1,7 +1,7 @@
 /**
  * post-modify.js
  * /post/modify.html에 포함.
- * 사용자 확인 후, 포스트 수정/삭제 요청을 보냄.
+ * 사용자 확인(confirm) 후, 포스트 수정/삭제 요청을 보냄.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnDelete.addEventListener('click', (e) => {
         const check = confirm('정말로 삭제할까요?');
         if (check) {
-            const id = document.querySelector('input#id').value;
+            const id = document.querySelector('input#id').value; // 삭제할 post 번호(id)
             location.href=`delete?id=${id}`;
         }
     });
