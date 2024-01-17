@@ -59,15 +59,30 @@
     <div class="my-2 card">
         <div class="card-header">
             <!-- 댓글 보기/감추기 버튼 -->
+            <button class="btn btn-outline-secondary" id="btnToggleCollapse">댓글 보기</button>
         </div>
-        <div class="card-body">
+        <div class="card-body collapse" id="collapseComments">
             <!-- 댓글 작성 -->
+            <div class="row">
+                <div class="col-10">
+                    <textarea class="form-control" id="cmtText" placeholder="댓글 입력"></textarea>
+                    <input class="d-none" id="cmtWriter" th:value="'admin'" readonly />
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-outline-success form-control"
+                        id="btnRegisterCmt">등록</button>
+                </div>
+            </div>
+            
             <!-- 댓글 목록 -->
+            <div class="my-2" id="cmtDiv"></div>
         </div>
     </div>
     
 </div>
 
 <script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/comments.js"></script>
 </body>
 </html>
