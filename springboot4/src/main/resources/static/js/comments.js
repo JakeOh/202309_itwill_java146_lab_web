@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (btnToggleCollapse.innerHTML === '댓글 보기') {
             btnToggleCollapse.innerHTML = '댓글 감추기';
+            getAllComments(); // 댓글 목록 갱신
         } else {
             btnToggleCollapse.innerHTML = '댓글 보기';
         }
@@ -54,12 +55,35 @@ document.addEventListener('DOMContentLoaded', () => {
             // Ajax POST 요청을 보냄.
             const response = await axios.post('../api/comment', data);
             console.log(response);
-            // TODO: 댓글 목록 갱신
+            document.querySelector('textarea#cmtText').value = '';
+            alert('댓글 등록 성공!');
+            
+            getAllComments(); // 댓글 목록 갱신
             
         } catch (error) {
             console.log(error);
         }
         
-    }
+    } // end function registerComment()
+    
+    /*
+     * 포스트 상세보기 페이지에서, 포스트에 달려 있는 모든 댓글 목록을 요청, 응답을 처리.
+     * 댓글 목록 Collapase 객체를 펼칠 때, 댓글 등록이 성공했을 때 
+     * 댓글 목록을 갱신하기 위해서 호출. 
+     */
+    async function getAllComments() {
+        const postId = document.querySelector('input#id').value;
+        const uri = `../api/comment/all/${postId}`; // Ajax 요청을 보낼 주소
+        try {
+            const response = await axios.get(uri);
+            console.log(response);
+            
+            // TODO: 댓글 목록 html 코드를 작성.
+            
+        } catch (error) {
+            console.log(error);
+        }
+        
+    } // end function getAllComments()
     
 });

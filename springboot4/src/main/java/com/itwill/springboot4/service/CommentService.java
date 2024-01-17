@@ -1,5 +1,8 @@
 package com.itwill.springboot4.service;
 
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.itwill.springboot4.domain.Comment;
@@ -39,4 +42,13 @@ public class CommentService {
         return entity;
     }
 
+    public List<Comment> getCommentList(Long postId) {
+        log.info("getCommentList(postId={})", postId);
+        
+        List<Comment> list = commentDao.findByPostId(postId, Sort.by("id").descending());
+        log.info("댓글 개수 = {}", list.size());
+        
+        return list;
+    }
+    
 }

@@ -1,6 +1,10 @@
 package com.itwill.springboot4.web;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +34,16 @@ public class CommentRestController {
         log.info("id={}, created={}", entity.getId(), entity.getCreatedTime());
         
         return ResponseEntity.ok(entity);
+    }
+    
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<Comment>> getCommentList(@PathVariable(name = "id") Long id) {
+        log.info("getCommentList(id={})", id);
+        
+        // 서비스 메서드 호출 -> 포스트 아이디에 달려있는 모든 댓글 목록을 가져옴.
+        List<Comment> list = commentSvc.getCommentList(id);
+        
+        return ResponseEntity.ok(list);
     }
 
 }
