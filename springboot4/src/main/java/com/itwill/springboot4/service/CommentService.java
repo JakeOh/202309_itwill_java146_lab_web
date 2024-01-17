@@ -45,7 +45,11 @@ public class CommentService {
     public List<Comment> getCommentList(Long postId) {
         log.info("getCommentList(postId={})", postId);
         
-        List<Comment> list = commentDao.findByPostId(postId, Sort.by("id").descending());
+        // 댓글이 달려 있는 포스트 엔터티를 찾음.
+        Post post = postDao.findById(postId).orElseThrow();
+        
+        // 포스트의 댓글 목록을 검색.
+        List<Comment> list = commentDao.findByPost(post, Sort.by("id").descending());
         log.info("댓글 개수 = {}", list.size());
         
         return list;

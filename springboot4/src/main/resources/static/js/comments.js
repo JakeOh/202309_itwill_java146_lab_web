@@ -78,12 +78,42 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await axios.get(uri);
             console.log(response);
             
-            // TODO: 댓글 목록 html 코드를 작성.
+            makeCommentElements(response.data); // 댓글 목록 html 코드를 작성.
             
         } catch (error) {
             console.log(error);
         }
         
     } // end function getAllComments()
+    
+    /*
+     * 댓글들의 배열을 아규먼트 data로 전달받아서, html 코드를 div에 추가.
+     */
+    function makeCommentElements(data) {
+        const cmtDiv = document.querySelector('div#cmtDiv'); // 댓글 목록을 추가할 div
+        let htmlStr = ''; // div에 삽입할 html 코드
+        for (let comment of data) { // 배열의 원소들을 순서대로 반복
+            htmlStr += `
+            <div class="card card-body my-1">
+                <div>
+                    <span class="fw-bold">${comment.writer}</span>
+                    <span class="text-secondary">${comment.modifiedTime}</span>
+                </div>
+                <div>
+                    <textarea class="form-control">${comment.text}</textarea>
+                </div>
+                <div class="my-1">
+                    <button class="btnDeleteCmt btn btn-outline-danger">삭제</button>
+                    <button class="btnUpdateCmt btn btn-outline-primary">업데이트</button>
+                </div>
+            </div>
+            `;
+        }
+        
+        cmtDiv.innerHTML = htmlStr; // html 코드를 div에 삽입.
+        
+        // TODO: 모든 btnDeleteCmt, btnUpdateCmt를 찾아서 클릭 이벤트 리스너를 등록.
+        // document.querySelectorAll()
+    } // end function makeCommentElements()
     
 });
