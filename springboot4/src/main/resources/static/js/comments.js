@@ -29,9 +29,37 @@ document.addEventListener('DOMContentLoaded', () => {
     btnRegisterCmt.addEventListener('click', registerComment);
     
     
-    // ----- 함수 정의(선언)들
-    function registerComment() {
-        alert('댓글 등록!');
+    // ----- 함수 정의(선언)들 -----
+    /*
+     * btnRegisterCmt 버튼의 클릭 이벤트 리스너.
+     * 댓글 등록 Ajax 요청을 보내고, 응답을 받으면 댓글 목록을 갱신하는 "비동기" 함수.
+     */
+    async function registerComment() {
+        // 댓글이 달리는 포스트의 아이디
+        const postId = document.querySelector('input#id').value;
+        // 댓글 내용
+        const text = document.querySelector('textarea#cmtText').value;
+        // 댓글 작성자
+        const writer = document.querySelector('input#cmtWriter').value;
+        
+        if (text === '') {
+            alert('댓글 내용을 입력하세요!');
+            return; // 함수 종료.
+        }
+        
+        // Ajax 요청에 포함시켜서 보낼 데이터
+        const data = {postId, text, writer};
+        
+        try {
+            // Ajax POST 요청을 보냄.
+            const response = await axios.post('../api/comment', data);
+            console.log(response);
+            // TODO: 댓글 목록 갱신
+            
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
     
 });
