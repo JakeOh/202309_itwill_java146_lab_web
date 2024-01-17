@@ -24,7 +24,7 @@ public class CommentRepositoryTest {
                 .text("comment insert 테스트 2")
                 .writer("admin")
                 .build();
-        log.info("save 전: {}, {}", entity, entity.getCreatedTime());
+        log.info("save 전: {}, {}", entity, entity.getCreatedTime());    
         
         commentDao.save(entity);
         
