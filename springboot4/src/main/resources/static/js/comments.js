@@ -119,6 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // 모든 btnDeleteCmt, btnUpdateCmt를 찾아서 클릭 이벤트 리스너를 등록.
         const btnDeletes = document.querySelectorAll('button.btnDeleteCmt');
         btnDeletes.forEach((btn) => btn.addEventListener('click', deleteComment));
+//        for (let b of btnDeletes) {
+//            b.addEventListener('click', deleteComment);
+//        }
         
         const btnUpdates = document.querySelectorAll('button.btnUpdateCmt');
         btnUpdates.forEach((btn) => btn.addEventListener('click', updateComment));
@@ -130,6 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
      * 댓글 삭제 Ajax DELETE 요청을 보내고 응답을 처리하는 비동기 함수.
      */
     async function deleteComment(event) {
+//        console.log(event);
+
         if (!confirm('정말 삭제할까요?')) {
             return;
         }
