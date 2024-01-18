@@ -8,6 +8,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    let curPage = 0; // 현재 보고 있는 댓글 페이지
+    let totalPages = 0; // 댓글 전체 목록의 페이지 수
     
     // bootstrap 모듈의 Collapse 객체를 생성
     const bsCollapse = new bootstrap.Collapse('div#collapseComments', {toggle: false});
@@ -19,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (btnToggleCollapse.innerHTML === '댓글 보기') {
             btnToggleCollapse.innerHTML = '댓글 감추기';
-            getAllComments(); // 댓글 목록 갱신
+            getAllComments(0); // 댓글 목록 갱신
         } else {
             btnToggleCollapse.innerHTML = '댓글 보기';
         }
@@ -28,6 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 댓글 등록 버튼의 이벤트 리스너:
     const btnRegisterCmt = document.querySelector('button#btnRegisterCmt');
     btnRegisterCmt.addEventListener('click', registerComment);
+    
+    // 댓글 더보기 버튼의 이벤트 리스너:
+    const btnMoreCmt = document.querySelector('button#btnMoreCmt');
+    btnMoreCmt.addEventListener('click', () => {
+        getAllComments(curPage + 1);
+    });
     
     
     // ----- 함수 정의(선언)들 -----
@@ -58,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('textarea#cmtText').value = '';
             alert('댓글 등록 성공!');
             
-            getAllComments(); // 댓글 목록 갱신
+            getAllComments(0); // 댓글 목록 갱신
             
         } catch (error) {
             console.log(error);
@@ -71,9 +79,17 @@ document.addEventListener('DOMContentLoaded', () => {
      * 댓글 목록 Collapase 객체를 펼칠 때, 댓글 등록이 성공했을 때 
      * 댓글 목록을 갱신하기 위해서 호출. 
      */
-    async function getAllComments() {
+    async function getAllComments(page) {
+        if (page === undefined) { // 아규먼트가 없으면
+            // undefined: 초기화되지 않은 변수
+            page = 0;
+        }
+        
         const postId = document.querySelector('input#id').value;
-        const uri = `../api/comment/all/${postId}`; // Ajax 요청을 보낼 주소
+        
+        // Ajax 요청을 보낼 주소:
+        // path variable - 댓글이 달린 포스트 아이디, request parameter - 댓글 페이지
+        const uri = `../api/comment/all/${postId}?p=${page}`;
         try {
             const response = await axios.get(uri);
             console.log(response);
@@ -146,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await axios.delete(`../api/comment/${id}`);
             console.log(response);
             alert('댓글 삭제 성공!');
-            getAllComments(); // 댓글 목록 갱신
+            getAllComments(0); // 댓글 목록 갱신
             
         } catch (error) {
             console.log(error);
@@ -176,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await axios.put(`../api/comment/${id}`, { id, text });
             console.log(response);
             alert('댓글 업데이트 성공!');
-            getAllComments(); // 댓글 목록 갱신
+            getAllComments(0); // 댓글 목록 갱신
             
         } catch (error) {
             console.log(error);

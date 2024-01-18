@@ -1,7 +1,6 @@
 package com.itwill.springboot4.web;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.springboot4.domain.Comment;
@@ -40,13 +40,15 @@ public class CommentRestController {
     }
     
     @GetMapping("/all/{id}")
-    public ResponseEntity<List<Comment>> getCommentList(@PathVariable(name = "id") Long id) {
-        log.info("getCommentList(id={})", id);
+    public ResponseEntity<Page<Comment>> getCommentList(
+            @PathVariable(name = "id") Long id,
+            @RequestParam(name = "p", defaultValue = "0") int p) {
+        log.info("getCommentList(id={}, p={})", id, p);
         
         // 서비스 메서드 호출 -> 포스트 아이디에 달려있는 모든 댓글 목록을 가져옴.
-        List<Comment> list = commentSvc.getCommentList(id);
+        Page<Comment> data = commentSvc.getCommentList(id, p);
         
-        return ResponseEntity.ok(list);
+        return ResponseEntity.ok(data);
     }
     
     @DeleteMapping("/{id}")
