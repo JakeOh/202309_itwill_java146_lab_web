@@ -93,8 +93,18 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await axios.get(uri);
             console.log(response);
+            curPage = response.data.number; // Page 객체에서 현재 페이지 숫자를 저장.
+            totalPages = response.data.totalPages; // Page 객체에서 전체 페이지 개수를 저장.
             
-            makeCommentElements(response.data); // 댓글 목록 html 코드를 작성.
+            const divBtnMoreCmt = document.querySelector('div#divBtnMoreCmt'); // [더보기] 버튼이 있는 div
+            if (curPage + 1 < totalPages) { // 현재 페이지 번호가 전체 페이지 개수보다 작을 때
+                // 다음 페이지가 있을 때
+                divBtnMoreCmt.classList.remove('d-none'); // [더보기] 버튼을 보여줌
+            } else { // 다음 페이지가 없을 때
+                divBtnMoreCmt.classList.add('d-none'); // [더보기] 버튼을 숨김
+            }
+            
+            makeCommentElements(response.data.content); // 댓글 목록 html 코드를 작성.
             
         } catch (error) {
             console.log(error);
@@ -130,17 +140,27 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
         
-        cmtDiv.innerHTML = htmlStr; // html 코드를 div에 삽입.
+        if (curPage === 0) {
+            cmtDiv.innerHTML = htmlStr; // div를 비우고 html 코드를 div에 삽입.
+        } else {
+            cmtDiv.innerHTML += htmlStr; // 기존 div 내용 뒤에 html 코드를 추가.
+        }
         
         // 모든 btnDeleteCmt, btnUpdateCmt를 찾아서 클릭 이벤트 리스너를 등록.
         const btnDeletes = document.querySelectorAll('button.btnDeleteCmt');
-        btnDeletes.forEach((btn) => btn.addEventListener('click', deleteComment));
+        btnDeletes.forEach((btn) => {
+            btn.removeEventListener('click', deleteComment); // 이미 등록된 리스너가 있으면 제거.
+            btn.addEventListener('click', deleteComment); // 리스너를 새로 등록.
+        });
 //        for (let b of btnDeletes) {
 //            b.addEventListener('click', deleteComment);
 //        }
         
         const btnUpdates = document.querySelectorAll('button.btnUpdateCmt');
-        btnUpdates.forEach((btn) => btn.addEventListener('click', updateComment));
+        btnUpdates.forEach((btn) => {
+            btn.removeEventListener('click', updateComment);
+            btn.addEventListener('click', updateComment);
+        });
         
     } // end function makeCommentElements()
     
