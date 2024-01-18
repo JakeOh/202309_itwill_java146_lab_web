@@ -43,13 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // 댓글 작성자
         const writer = document.querySelector('input#cmtWriter').value;
         
-        if (text === '') {
+        if (text.trim() === '') {
             alert('댓글 내용을 입력하세요!');
             return; // 함수 종료.
         }
         
         // Ajax 요청에 포함시켜서 보낼 데이터
-        const data = {postId, text, writer};
+        const data = { postId, text, writer };
         
         try {
             // Ajax POST 요청을 보냄.
@@ -93,18 +93,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const cmtDiv = document.querySelector('div#cmtDiv'); // 댓글 목록을 추가할 div
         let htmlStr = ''; // div에 삽입할 html 코드
         for (let comment of data) { // 배열의 원소들을 순서대로 반복
+            const modifiedTime = new Date(comment.modifiedTime).toLocaleString();
             htmlStr += `
             <div class="card card-body my-1">
                 <div>
                     <span class="fw-bold">${comment.writer}</span>
-                    <span class="text-secondary">${comment.modifiedTime}</span>
+                    <span class="text-secondary">${modifiedTime}</span>
                 </div>
                 <div>
-                    <textarea class="form-control">${comment.text}</textarea>
+                    <textarea data-id="${comment.id}" 
+                        class="cmtText form-control">${comment.text}</textarea>
                 </div>
                 <div class="my-1">
-                    <button class="btnDeleteCmt btn btn-outline-danger">삭제</button>
-                    <button class="btnUpdateCmt btn btn-outline-primary">업데이트</button>
+                    <button data-id="${comment.id}" 
+                        class="btnDeleteCmt btn btn-outline-danger">삭제</button>
+                    <button data-id="${comment.id}" 
+                        class="btnUpdateCmt btn btn-outline-primary">업데이트</button>
                 </div>
             </div>
             `;
@@ -112,8 +116,67 @@ document.addEventListener('DOMContentLoaded', () => {
         
         cmtDiv.innerHTML = htmlStr; // html 코드를 div에 삽입.
         
-        // TODO: 모든 btnDeleteCmt, btnUpdateCmt를 찾아서 클릭 이벤트 리스너를 등록.
-        // document.querySelectorAll()
+        // 모든 btnDeleteCmt, btnUpdateCmt를 찾아서 클릭 이벤트 리스너를 등록.
+        const btnDeletes = document.querySelectorAll('button.btnDeleteCmt');
+        btnDeletes.forEach((btn) => btn.addEventListener('click', deleteComment));
+        
+        const btnUpdates = document.querySelectorAll('button.btnUpdateCmt');
+        btnUpdates.forEach((btn) => btn.addEventListener('click', updateComment));
+        
     } // end function makeCommentElements()
+    
+    /*
+     * 댓글 삭제 버튼의 클릭 이벤트 리스너.
+     * 댓글 삭제 Ajax DELETE 요청을 보내고 응답을 처리하는 비동기 함수.
+     */
+    async function deleteComment(event) {
+        if (!confirm('정말 삭제할까요?')) {
+            return;
+        }
+        
+        const id = event.target.getAttribute('data-id'); // 삭제할 댓글 아이디(PK)
+//        console.log(`id = ${id}`);
+        
+        try {
+            const response = await axios.delete(`../api/comment/${id}`);
+            console.log(response);
+            alert('댓글 삭제 성공!');
+            getAllComments(); // 댓글 목록 갱신
+            
+        } catch (error) {
+            console.log(error);
+        }
+        
+    } // end function deleteComment()
+    
+    /*
+     * 댓글 업데이트 버튼의 클릭 이벤트 리스너.
+     * 댓글 업데이트 Ajax PUT 요청을 보내고 응답을 처리하는 비동기 함수.
+     */
+    async function updateComment(event) {
+        const id = event.target.getAttribute('data-id'); // 삭제할 댓글 아이디(PK)
+        const text = document.querySelector(`textarea.cmtText[data-id="${id}"]`).value; // 댓글 내용
+//        console.log(`id=${id}, text=${text}`);
+        
+        if (text.trim() === '') {
+            alert('댓글 내용은 반드시 입력해야 합니다.');
+            return;
+        }
+        
+        if (!confirm('변경 내용을 저장할까요?')) {
+            return;
+        }
+        
+        try {
+            const response = await axios.put(`../api/comment/${id}`, { id, text });
+            console.log(response);
+            alert('댓글 업데이트 성공!');
+            getAllComments(); // 댓글 목록 갱신
+            
+        } catch (error) {
+            console.log(error);
+        }
+        
+    } // end function updateComment()
     
 });

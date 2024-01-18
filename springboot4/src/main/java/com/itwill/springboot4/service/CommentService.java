@@ -10,7 +10,9 @@ import com.itwill.springboot4.domain.CommentRepository;
 import com.itwill.springboot4.domain.Post;
 import com.itwill.springboot4.domain.PostRepository;
 import com.itwill.springboot4.dto.CommentRegisterRequestDto;
+import com.itwill.springboot4.dto.CommentUpdateRequestDto;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,10 +51,24 @@ public class CommentService {
         Post post = postDao.findById(postId).orElseThrow();
         
         // 포스트의 댓글 목록을 검색.
-        List<Comment> list = commentDao.findByPost(post, Sort.by("id").descending());
+        List<Comment> list = commentDao.findByPost(post, Sort.by("modifiedTime").descending());
         log.info("댓글 개수 = {}", list.size());
         
         return list;
+    }
+
+    public void delete(Long id) {
+        log.info("delete(id={})", id);
+        
+        commentDao.deleteById(id);
+    }
+
+    @Transactional
+    public void update(CommentUpdateRequestDto dto) {
+        log.info("update(dto={})", dto);
+        
+        Comment entity = commentDao.findById(dto.getId()).orElseThrow();
+        entity.update(dto.getText());
     }
     
 }
