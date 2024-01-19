@@ -122,13 +122,13 @@ public class PostQuerydslImpl extends QuerydslRepositorySupport
         // 페이징 & 정렬 적용
         getQuerydsl().applyPagination(pageable, query);
         
-        // 한 페이지에 표시될 데이터
-        List<Post> list = query.fetch();
+        // 한 페이지에 표시될 데이터(컨텐트)
+        List<Post> content = query.fetch();
         // 전체 원소 개수
         long total = query.fetchCount();
         
         // Page<T> 타입 객체를 생성
-        Page<Post> page = new PageImpl<>(list, pageable, total);
+        Page<Post> page = new PageImpl<>(content, pageable, total);
         
         return page;
     }
