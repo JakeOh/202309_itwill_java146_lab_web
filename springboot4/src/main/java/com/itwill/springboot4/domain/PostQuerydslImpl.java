@@ -1,5 +1,7 @@
 package com.itwill.springboot4.domain;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import com.querydsl.jpa.JPQLQuery;
@@ -29,6 +31,21 @@ public class PostQuerydslImpl extends QuerydslRepositorySupport
         Post entity = query.fetchOne();
         
         return entity;
+    }
+
+    @Override
+    public List<Post> searchByTitleOrContent(String keyword) {
+        log.info("searchByTitleOrContent(keyword={})", keyword);
+        
+        QPost post = QPost.post;
+        JPQLQuery<Post> query = from(post); // select p from Post p
+        query.where(
+                post.title.containsIgnoreCase(keyword)
+                .or(post.content.containsIgnoreCase(keyword))
+        ); // where p.title like ? or p.content like ?
+        query.orderBy(post.id.desc()); // order by p.id desc
+        
+        return query.fetch();
     }
 
 }
