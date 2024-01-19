@@ -3,6 +3,7 @@ package com.itwill.springboot4.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 //-> 스프링 컨테이너에 객체(bean)를 생성, 관리 - 필요한 곳에 의존성 주입.
+@EnableMethodSecurity // 컨트롤러 메서드 애너테이션을 사용한 권한 부여, 인증 활성화
 public class SecurityConfig {
     
     // Spring Security 5 버전부터 비밀번호는 반드시 암호화를 해야 함.
@@ -68,6 +70,12 @@ public class SecurityConfig {
         http.logout((logout) -> logout.logoutSuccessUrl("/"));
         
         // 페이지 접근 권한, 인증 설정
+        // 1. authorizeHttpRequests() 메서드에서 직접 설정
+        //    -> 단점: 새로운 요청 경로가 생길때 마다 설정 코드(requestMatchers())를 변경.
+        // 2. 애너테이션을 사용해서 권한, 인증 설정
+        //    (1) SecurityConfig 빈에서 @EnableMethodSecurity 애너테이션을 사용.
+        //    (2) 각각의 컨트롤러 메서드에서 @PreAuthorize 또는 @PostAuthorize 애너테이션을 사용.
+        /*
         http.authorizeHttpRequests((auth) -> 
             //auth.anyRequest().authenticated() // 모든 요청주소에 대해서 (role에 상관없이) 아이디/비밀번호 로그인해야 함.
             //auth.anyRequest().hasRole("USER") // 모든 요청주소에 대해서 USER 권한을 가진 아이디/비밀번호 로그인.
@@ -80,7 +88,7 @@ public class SecurityConfig {
                 .anyRequest() // 위에서 설정한 페이지 이외의 다른 모든 페이지
                 .permitAll() // 권한, 인증없이 접근 허용.
         );
-        
+        */
         
         return http.build(); // 스프링 시큐리티 필터 체인 객체를 생성하고 리턴.
     }
