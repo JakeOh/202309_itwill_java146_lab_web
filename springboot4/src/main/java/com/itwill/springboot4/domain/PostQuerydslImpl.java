@@ -1,9 +1,15 @@
 package com.itwill.springboot4.domain;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.JPQLQuery;
 
 import lombok.extern.slf4j.Slf4j;
@@ -47,5 +53,84 @@ public class PostQuerydslImpl extends QuerydslRepositorySupport
         
         return query.fetch();
     }
+    
+    @Override
+    public List<Post> searchByModifiedTime(LocalDateTime from, LocalDateTime to) {
+        log.info("searchByModifiedTime(from={}, to={})", from, to);
+        
+        QPost post = QPost.post;
+        JPQLQuery<Post> query = from(post);
+        query.where(post.modifiedTime.between(from, to));
+        query.orderBy(post.modifiedTime.desc());
+        
+        return query.fetch();
+    }
+    
+    @Override
+    public List<Post> searchByKeywordAndAuthor(String keyword, String author) {
+        log.info("searchByKeywordAndAuthor(keyword={}, author={})", keyword, author);
+        
+        QPost post = QPost.post;
+        JPQLQuery<Post> query = from(post);
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(post.author.eq(author));
+        builder.and(
+                post.title.containsIgnoreCase(keyword)
+                .or(post.content.containsIgnoreCase(keyword))
+        );
+        query.where(builder);
+        
+        return query.fetch();
+    }
+    
+    @Override
+    public List<Post> searchByKeywords(String[] keywords) {
+        log.info("searchByKeywords(keywords={})", Arrays.asList(keywords));
+        
+        QPost post = QPost.post;
+        JPQLQuery<Post> query = from(post);
+        BooleanBuilder builder = new BooleanBuilder();
+        for (String key : keywords) {
+            builder.or(
+                    post.title.containsIgnoreCase(key)
+                    .or(post.content.containsIgnoreCase(key))
+            );
+        }
+        query.where(builder);
+        query.orderBy(post.id.desc());
+        
+        return query.fetch();
+    }
 
+    @Override
+    public Page<Post> searchByKeywords(String[] keywords, Pageable pageable) {
+        log.info("searchByKeywords(keywords={}, pageable={})",
+                Arrays.asList(keywords), pageable);
+        
+        QPost post = QPost.post;
+        JPQLQuery<Post> query = from(post); // select ... from ...
+        
+        BooleanBuilder builder = new BooleanBuilder();
+        for (String key : keywords) {
+            builder.or(
+                    post.title.containsIgnoreCase(key)
+                    .or(post.content.containsIgnoreCase(key))
+            );
+        }
+        query.where(builder); // where ...
+        
+        // 페이징 & 정렬 적용
+        getQuerydsl().applyPagination(pageable, query);
+        
+        // 한 페이지에 표시될 데이터
+        List<Post> list = query.fetch();
+        // 전체 원소 개수
+        long total = query.fetchCount();
+        
+        // Page<T> 타입 객체를 생성
+        Page<Post> page = new PageImpl<>(list, pageable, total);
+        
+        return page;
+    }
+    
 }

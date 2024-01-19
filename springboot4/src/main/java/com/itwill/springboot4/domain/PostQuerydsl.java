@@ -3,6 +3,9 @@ package com.itwill.springboot4.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 /*
  * Querydsl 라이브러리:
  * 1. build.gradle에 의존성(dependency)을 추가, 빌드 옵션 설정.
@@ -24,5 +27,8 @@ public interface PostQuerydsl {
     Post searchById(Long id);
     List<Post> searchByTitleOrContent(String keyword);
     List<Post> searchByModifiedTime(LocalDateTime from, LocalDateTime to);
+    List<Post> searchByKeywordAndAuthor(String keyword, String author);
+    List<Post> searchByKeywords(String[] keywords);
+    Page<Post> searchByKeywords(String[] keywords, Pageable pageable);
     
 }
