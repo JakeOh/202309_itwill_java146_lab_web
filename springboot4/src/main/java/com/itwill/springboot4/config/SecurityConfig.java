@@ -67,6 +67,21 @@ public class SecurityConfig {
         // 로그아웃 이후에 이동할 페이지 설정 - 홈 페이지(/)
         http.logout((logout) -> logout.logoutSuccessUrl("/"));
         
+        // 페이지 접근 권한, 인증 설정
+        http.authorizeHttpRequests((auth) -> 
+            //auth.anyRequest().authenticated() // 모든 요청주소에 대해서 (role에 상관없이) 아이디/비밀번호 로그인해야 함.
+            //auth.anyRequest().hasRole("USER") // 모든 요청주소에 대해서 USER 권한을 가진 아이디/비밀번호 로그인.
+            
+            // 로그인 필요한 페이지와 그렇지 않은 페이지 구분해서 설정:
+            auth
+                .requestMatchers("/post/create", "/post/details", "/post/modify", 
+                        "/post/update", "/post/delete", "/api/comment/**") // 권한이 필요한 페이지
+                .hasRole("USER") // USER 권한의 사용자만 로그인 허용.
+                .anyRequest() // 위에서 설정한 페이지 이외의 다른 모든 페이지
+                .permitAll() // 권한, 인증없이 접근 허용.
+        );
+        
+        
         return http.build(); // 스프링 시큐리티 필터 체인 객체를 생성하고 리턴.
     }
 
