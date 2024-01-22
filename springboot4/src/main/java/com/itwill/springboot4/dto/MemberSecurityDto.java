@@ -1,5 +1,6 @@
 package com.itwill.springboot4.dto;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import com.itwill.springboot4.domain.Member;
+import com.itwill.springboot4.domain.MemberRole;
 
 // (1) UserDetails 인터페이스를 직접 구현하거나
 // (2) UserDetials 인터페이스를 구현하는 User 클래스를 상속
@@ -24,10 +26,15 @@ public class MemberSecurityDto extends User {
     }
     
     public static MemberSecurityDto fromEntity(Member entity) {
-        List<SimpleGrantedAuthority> authorities =
-                entity.getRoles().stream()
-                .map((x) -> new SimpleGrantedAuthority(x.toString()))
-                .toList();
+//        List<SimpleGrantedAuthority> authorities =
+//                entity.getRoles().stream()
+//                .map((x) -> new SimpleGrantedAuthority(x.getAuthority()))
+//                .toList();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for (MemberRole role : entity.getRoles()) {
+            SimpleGrantedAuthority auth = new SimpleGrantedAuthority(role.getAuthority());
+            authorities.add(auth);
+        }
         
         return new MemberSecurityDto(entity.getUsername(), entity.getPassword(), 
                 entity.getEmail(), authorities);
