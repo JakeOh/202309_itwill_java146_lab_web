@@ -59,4 +59,9 @@ public class Member extends BaseTimeEntity {
         return this;
     }
     
+    public Member clearRoles() {
+        roles.clear();
+        return this;
+    }
+    
 }

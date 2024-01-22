@@ -31,6 +31,7 @@ public class SecurityConfig {
     // 스프링 부트 애플리케이션에서 스프링 시큐리트를 이용한 로그인/로그아웃을 하려면
     // UserDetailsService 인터페이스를 구현하는 서비스 클래스와
     // UserDetails 인터페이스를 구현하는 엔터티 클래스가 있어야 함.
+    /*
     @Bean
     public UserDetailsService inMemoryUserDetailsService() {
         // 메모리에 임시 저장하는 사용자 객체를 생성
@@ -51,6 +52,7 @@ public class SecurityConfig {
         
         return new InMemoryUserDetailsManager(user1, user2, user3);
     }
+    */
     
     // 스프링 시큐리티 필터 체인 객체(bean):
     // 로그인/로그아웃 관련 설정.

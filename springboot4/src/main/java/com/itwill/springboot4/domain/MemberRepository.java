@@ -7,7 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    // select m from Member m where m.username = ?
+    // select m, r.roles 
+    // from Member m 
+    // left join Member_Roles r on m.id = r.member_id 
+    // where m.username = ?
     @EntityGraph(attributePaths = "roles")
     Optional<Member> findByUsername(String username);
     
