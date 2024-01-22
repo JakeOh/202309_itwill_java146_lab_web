@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head th:fragment="myhead">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,12 +38,18 @@
                         th:href="@{/post/list}">Post</a>
                     <a class="nav-link" 
                         th:href="@{/post/create}">New Post</a>
-                    <a class="nav-link" 
-                        th:href="@{/login}">로그인</a>
-                    <a class="nav-link disabled" 
-                        th:href="@{/signup}">회원가입</a>
-                    <a class="nav-link" 
-                        th:href="@{/logout}">나가기</a>
+                    <th:block sec:authorize="isAnonymous()">
+                        <a class="nav-link" 
+                            th:href="@{/login}">로그인</a>
+                        <a class="nav-link disabled" 
+                            th:href="@{/signup}">회원가입</a>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <a class="nav-link" th:href="@{/logout}">
+                            <span class="text-secondary" sec:authentication="name"></span>
+                            <span>나가기</span>
+                        </a>
+                    </th:block>
                 </div>
             </div>
         </div>
