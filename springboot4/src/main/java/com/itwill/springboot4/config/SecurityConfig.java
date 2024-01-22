@@ -14,7 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-//-> 스프링 컨테이너에 객체(bean)를 생성, 관리 - 필요한 곳에 의존성 주입.
+//-> 스프링 컨테이너에서 객체(bean)를 생성, 관리 - 필요한 곳에 의존성 주입.
 @EnableMethodSecurity // 컨트롤러 메서드 애너테이션을 사용한 권한 부여, 인증 활성화
 public class SecurityConfig {
     

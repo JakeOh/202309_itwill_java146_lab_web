@@ -38,7 +38,7 @@ public class PostController {
         log.info(model.toString());
     }
     
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')") // @PreAuthorize("authenticated()")
     @GetMapping("/create")
     public void create() {
         log.info("create() GET");
