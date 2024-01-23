@@ -40,9 +40,9 @@
                         th:href="@{/post/create}">New Post</a>
                     <th:block sec:authorize="isAnonymous()">
                         <a class="nav-link" 
-                            th:href="@{/login}">로그인</a>
+                            th:href="@{/member/login}">로그인</a>
                         <a class="nav-link disabled" 
-                            th:href="@{/signup}">회원가입</a>
+                            th:href="@{/member/signup}">회원가입</a>
                     </th:block>
                     <th:block sec:authorize="isAuthenticated()">
                         <a class="nav-link" th:href="@{/logout}">
