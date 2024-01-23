@@ -33,7 +33,9 @@
                             th:value="*{author}" readonly />
                     </div>
                 </form>
-                <div class="my-2 d-flex justify-content-end">
+                <!-- 포스트 작성자와 인증된(로그인한) 사용자가 같으면 -->
+                <div class="my-2 d-flex justify-content-end"
+                    th:if="${post.author eq #authentication.name}">
                     <button id="btnDelete" class="mx-2 btn btn-danger">삭제</button>
                     <button id="btnUpdate" class="mr-2 btn btn-primary">업데이트</button>
                 </div>

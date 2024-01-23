@@ -46,7 +46,8 @@
                             readonly />
                     </div>
                 </form>
-                <div class="my-2">
+                <!-- 포스트 작성자와 인증된(로그인한) 사용자가 같으면 -->
+                <div class="my-2" th:if="${post.author eq #authentication.name}">
                     <a class="btn btn-success form-control"
                         th:href="@{/post/modify(id=*{id})}">수정하기</a>
                 </div>
@@ -66,7 +67,8 @@
             <div class="row">
                 <div class="col-10">
                     <textarea class="form-control" id="cmtText" placeholder="댓글 입력"></textarea>
-                    <input class="d-none" id="cmtWriter" th:value="'admin'" readonly />
+                    <input class="d-none" id="cmtWriter" 
+                        th:value="${#authentication.name}" readonly />
                 </div>
                 <div class="col-2">
                     <button class="btn btn-outline-success form-control"
