@@ -117,6 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function makeCommentElements(data) {
         const cmtDiv = document.querySelector('div#cmtDiv'); // 댓글 목록을 추가할 div
+        const authUser = document.querySelector('input#cmtWriter').value; // 인증된(로그인한) 사용자
+        
         let htmlStr = ''; // div에 삽입할 html 코드
         for (let comment of data) { // 배열의 원소들을 순서대로 반복
             const modifiedTime = new Date(comment.modifiedTime).toLocaleString();
@@ -126,18 +128,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="fw-bold">${comment.writer}</span>
                     <span class="text-secondary">${modifiedTime}</span>
                 </div>
-                <div>
-                    <textarea data-id="${comment.id}" 
-                        class="cmtText form-control">${comment.text}</textarea>
-                </div>
-                <div class="my-1">
-                    <button data-id="${comment.id}" 
-                        class="btnDeleteCmt btn btn-outline-danger">삭제</button>
-                    <button data-id="${comment.id}" 
-                        class="btnUpdateCmt btn btn-outline-primary">업데이트</button>
-                </div>
-            </div>
             `;
+            if (authUser === comment.writer) { // 인증된 사용자와 댓글 작성자가 같은 경우
+                htmlStr += `
+                    <div>
+                        <textarea data-id="${comment.id}" 
+                            class="cmtText form-control">${comment.text}</textarea>
+                    </div>
+                    <div class="my-1">
+                        <button data-id="${comment.id}" 
+                            class="btnDeleteCmt btn btn-outline-danger">삭제</button>
+                        <button data-id="${comment.id}" 
+                            class="btnUpdateCmt btn btn-outline-primary">업데이트</button>
+                    </div>
+                </div>
+                `;
+            } else { // 인증된 사용자와 댓글 작성자가 다른 경우
+                htmlStr += `
+                    <div>
+                        <textarea data-id="${comment.id}" 
+                            class="cmtText form-control" readonly>${comment.text}</textarea>
+                    </div>
+                </div>
+                `;
+            }
         }
         
         if (curPage === 0) {
