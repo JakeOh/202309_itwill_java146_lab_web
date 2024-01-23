@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+<body>
+<div class="container-fluid">
+    
+    <header th:replace="~{/layout/fragments :: myheader ('회원가입')}"></header>
+    
+    <main class="my-2 card card-body">
+        <form method="post">
+            <div class="my-2">
+                <label for="username" class="form-label">Username</label>
+                <input id="username" type="text" class="form-control" 
+                    name="username" autofocus required />
+            </div>
+            <div>
+                <label for="password" class="form-label">Password</label>
+                <input id="password" type="password" class="form-control"
+                    name="password" required />
+            </div>
+            <div>
+                <label for="email" class="form-label">Email</label>
+                <input id="email" type="email" class="form-control"
+                    name="email" required/>
+            </div>
+            <div class="my-2">
+                <input type="submit" class="form-control btn btn-success" 
+                    value="작성완료" />
+            </div>
+        </form>
+    </main>
+    
+</div>
+
+<script th:replace="~{/layout/fragments :: bootstrap_js}"></script>
+</body>
+</html>

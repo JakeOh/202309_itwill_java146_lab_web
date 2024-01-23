@@ -15,5 +15,10 @@ public class MemberController {
     public void login() {
         log.info("GET - login()");
     }
+    
+    @GetMapping("/signup")
+    public void signup() {
+        log.info("GET - signup()");
+    }
 
 }

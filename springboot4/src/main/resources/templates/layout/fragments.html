@@ -41,7 +41,7 @@
                     <th:block sec:authorize="isAnonymous()">
                         <a class="nav-link" 
                             th:href="@{/member/login}">로그인</a>
-                        <a class="nav-link disabled" 
+                        <a class="nav-link" 
                             th:href="@{/member/signup}">회원가입</a>
                     </th:block>
                     <th:block sec:authorize="isAuthenticated()">
